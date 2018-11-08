@@ -14,3 +14,29 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+.bold{
+  font-weight: bold !important;
+}
+
+.font-125{
+  font-size: 125% !important;
+}
+
+.width-100{
+  width: 100% !important;
+}
+
+/*
+  Ionic Variables
+*/
+
+.list-md .item-input{
+  border-bottom: 1px solid #dedede;
+  padding-left: 0;
+  box-shadow: 0 !important
+}
+
+.card-md{
+  width: calc(100% - 20px) !important;
+}

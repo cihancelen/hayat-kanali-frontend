@@ -1,0 +1,157 @@
+<ion-header></ion-header>
+
+<ion-content padding class="bg-light">
+
+  <ion-card col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 no-padding>
+    <ion-card-header class="bg-primary">
+      <h3 text-center class="bold font-125 text-white">HAYAT KANALI</h3>
+    </ion-card-header>
+    <ion-card-content>
+
+      <ion-segment [(ngModel)]="login">
+        <ion-segment-button value="login">
+          Giriş Yap
+        </ion-segment-button>
+        <ion-segment-button value="signup">
+          Kayıt Ol
+        </ion-segment-button>
+      </ion-segment>
+
+      <div [ngSwitch]="login">
+        <div *ngSwitchCase="'login'">
+
+          <ion-list>
+            <ion-item item-start>
+              <ion-label floating>E-posta yada Kullanıcı Adı</ion-label>
+              <ion-input type="text" [(ngModel)]="username"></ion-input>
+            </ion-item>
+            
+            <ion-item>
+              <ion-label floating>Parola</ion-label>
+              <ion-input type="password" [(ngModel)]="password"></ion-input>
+            </ion-item>
+
+            <ion-row no-margin margin-top radio-group [(ngModel)]="loginType">
+              <ion-col>
+                <ion-item>
+                  <ion-label>Kullanıcı</ion-label>
+                  <ion-radio value="default-user"></ion-radio>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label>Hastane</ion-label>
+                  <ion-radio value="hospital"></ion-radio>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label>Personel</ion-label>
+                  <ion-radio value="personel"></ion-radio>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-list>
+
+          <button ion-button margin-top block>
+            Giriş Yap
+          </button>
+          
+        </div>
+        <div *ngSwitchCase="'signup'">
+
+          <ion-list>
+            <ion-row>
+              <ion-col ion-item class="margin-right-5">
+                <ion-label floating>Ad</ion-label>
+                <ion-input type="text"></ion-input>
+              </ion-col>
+              <ion-col ion-item>
+                <ion-label floating>Soyad</ion-label>
+                <ion-input type="text"></ion-input>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col ion-item class="margin-right-5">
+                  <ion-label floating>Mail</ion-label>
+                  <ion-input type="mail"></ion-input>
+              </ion-col>
+              <ion-col ion-item>
+                  <ion-label floating>Telefon</ion-label>
+                  <ion-input type="tel"></ion-input>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col ion-item class="margin-right-5">
+                  <ion-label floating>Parola</ion-label>
+                  <ion-input type="password"></ion-input>
+                </ion-col>
+                <ion-col ion-item>
+                  <ion-label floating>Parola(Tekrar)</ion-label>
+                  <ion-input type="password"></ion-input>
+                </ion-col>
+              </ion-row>
+
+            <ion-row>
+              <ion-col ion-item>
+                <ion-label floating>Tc Kimlik No</ion-label>
+                <ion-input type="text"></ion-input>
+              </ion-col>
+              
+              <ion-col ion-item>
+                <ion-label floating>Doğum Tarihi</ion-label>
+                <ion-datetime #datetime cancelText="İptal" doneText="Tamam" displayFormat="DD MMMM YYYY" class="border-bottom"></ion-datetime>
+              </ion-col>
+            </ion-row>
+            
+            <ion-row>
+              <ion-col ion-item no-padding>
+                <ion-label floating>İl</ion-label>
+                <ion-select class="border-bottom" cancelText="İptal" okText="Tamam" [(ngModel)]="city">
+                  <ion-option selected value="0" disabled>Lütfen bir il seçiniz.</ion-option>
+                  <ion-option>İstanbul</ion-option>
+                  <ion-option>Ankara</ion-option>
+                </ion-select>
+              </ion-col>
+
+              <ion-col ion-item no-padding>
+                <ion-label floating>İlçe</ion-label>
+                <ion-select class="border-bottom" cancelText="İptal" okText="Tamam" [(ngModel)]="district">
+                  <ion-option selected>Kadıköy</ion-option>
+                  <ion-option>Ataşehir</ion-option>
+                </ion-select>
+              </ion-col>
+            </ion-row>
+            
+            <ion-row>
+              <ion-col ion-item no-padding>
+                <ion-label floating>Kan Grubu</ion-label>
+                <ion-select class="border-bottom" cancelText="İptal" okText="Tamam" [(ngModel)]="bloodGroup">
+                  <ion-option selected>Arh +</ion-option>
+                  <ion-option>Arh -</ion-option>
+                  <ion-option>Brh +</ion-option>
+                  <ion-option>Brh -</ion-option>
+                </ion-select>
+              </ion-col>
+              <ion-col ion-item no-padding>
+                <ion-label floating>Kalıtsal Rahatsızlık</ion-label>
+                <ion-select multiple="true" class="border-bottom" cancelText="İptal" okText="Tamam" [(ngModel)]="bloodGroup">
+                  <ion-option selected>Hemofili</ion-option>
+                  <ion-option>Albino</ion-option>
+                </ion-select>
+              </ion-col>
+            </ion-row>
+            
+          </ion-list>
+          
+          <button ion-button block margin-top>Kayıt Ol</button>
+          
+        </div>
+      </div>
+          
+    </ion-card-content>
+  </ion-card>
+  
+</ion-content>
