@@ -7,11 +7,13 @@ import { HomePage } from "../pages/home/home";
 import { LoginPage } from "../pages/login/login";
 import { AddStaffPage } from "../pages/add-staff/add-staff";
 import { AddBloodRequestPage } from "../pages/add-blood-request/add-blood-request";
+import { DefaultUserDashboardPage } from "../pages/default-user-dashboard/default-user-dashboard";
+
 @Component({
   templateUrl: "app.html"
 })
 export class MyApp {
-  rootPage: any = HomePage;
+  rootPage: any = LoginPage;
 
   constructor(
     platform: Platform,
