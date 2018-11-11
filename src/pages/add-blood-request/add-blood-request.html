@@ -1,12 +1,56 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Kan İstek Tanımlama</ion-title>
+    <ion-title>Kan Talep</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="bg-light">
+
+  <ion-card col-12 col-lg-6 offset-lg-3>
+    <ion-card-content>
+
+      <ion-list>
+        <ion-row>
+          <ion-col>
+            <h3 text-center class="font-125">Kan Talep Formu</h3>
+          </ion-col>
+        </ion-row>
+
+        <ion-item no-padding>
+          <ion-label floating>Hasta</ion-label>
+          <ion-select class="border-bottom" cancelText="İptal" okText="Tamam">
+            <ion-option selected value="0" disabled>Lütfen hastayı seçiniz.</ion-option>
+            <ion-option>Cihan</ion-option>
+            <ion-option>İlayda</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>Arh +</ion-label>
+          <ion-input disabled></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>Ünite Sayısı</ion-label>
+          <ion-input type="number" min="1"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>Açıklama</ion-label>
+          <ion-textarea></ion-textarea>
+        </ion-item>
+
+      </ion-list>
+
+      <button ion-button float-right icon-only padding margin-top>
+        <ion-icon name="add" margin-right></ion-icon>
+        Talebi Oluştur
+      </button>
+
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
-import { IonicPage } from "ionic-angular";
+import { IonicPage, NavController } from "ionic-angular";
+import { HomePage } from "../home/home";
 
 @IonicPage()
 @Component({
@@ -7,9 +8,14 @@ import { IonicPage } from "ionic-angular";
   templateUrl: "login.html"
 })
 export class LoginPage {
-  constructor() {}
+  constructor(
+    private navCtrl:NavController
+  ) {}
 
-  login: string = 'signup';
+  segment: string = 'login';
   loginType:string = 'default-user';
   
+  login(){
+    this.navCtrl.setRoot(HomePage);
+  }
 }

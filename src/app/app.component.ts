@@ -11,7 +11,7 @@ import { AddBloodRequestPage } from "../pages/add-blood-request/add-blood-reques
   templateUrl: "app.html"
 })
 export class MyApp {
-  rootPage: any = AddBloodRequestPage;
+  rootPage: any = HomePage;
 
   constructor(
     platform: Platform,

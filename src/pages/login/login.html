@@ -8,7 +8,7 @@
     </ion-card-header>
     <ion-card-content>
 
-      <ion-segment [(ngModel)]="login">
+      <ion-segment [(ngModel)]="segment">
         <ion-segment-button value="login">
           Giriş Yap
         </ion-segment-button>
@@ -17,7 +17,7 @@
         </ion-segment-button>
       </ion-segment>
 
-      <div [ngSwitch]="login">
+      <div [ngSwitch]="segment">
         <div *ngSwitchCase="'login'">
 
           <ion-list>
@@ -53,7 +53,7 @@
             </ion-row>
           </ion-list>
 
-          <button ion-button margin-top block>
+          <button ion-button margin-top block (click)="login()">
             Giriş Yap
           </button>
           
