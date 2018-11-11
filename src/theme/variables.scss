@@ -57,6 +57,22 @@ $colors: (
   background: color($colors, dark) !important;
 }
 
+.text-primary{
+  color: color($colors,primary)
+}
+.text-secondary{
+  color: color($colors, secondary) !important;
+}
+.text-danger{
+  color: color($colors, danger) !important;
+}
+.text-light{
+  color: color($colors, light) !important;
+}
+.text-dark{
+  color: color($colors, dark) !important;
+}
+
 .margin-right-5{
   margin-right: 7px !important;
 }
@@ -67,6 +83,10 @@ $colors: (
 
 .border-bottom{
   border-bottom: 1px solid #dedede;
+}
+
+.border-1{
+  border: 1px solid #d5d5d5;
 }
 
 // App iOS Variables

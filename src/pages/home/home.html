@@ -4,4 +4,25 @@
 
 <general-menu></general-menu>
 
-<ion-content> </ion-content>
+<ion-content padding>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6>
+        <h3 class="text-danger">Aktif Kan Talepleri</h3>
+      </ion-col>
+      <ion-col col-6>
+        <h3 class="text-danger">Pasif Kan Talepleri</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6 [ngStyle]="{'height.px': windowHeight - 145}" style="overflow:auto">
+        <request-item></request-item>
+      </ion-col>
+      <ion-col col-6 [ngStyle]="{'height.px': windowHeight - 145}" style="overflow:auto">
+        <request-item></request-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

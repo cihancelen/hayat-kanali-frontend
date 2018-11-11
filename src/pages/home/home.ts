@@ -1,10 +1,17 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { MenuController } from "ionic-angular";
 
 @Component({
   selector: "page-home",
   templateUrl: "home.html"
 })
-export class HomePage {
-  constructor(){}
+export class HomePage implements OnInit {
+  windowHeight: number = window.innerHeight;
+
+  constructor() { }
+
+  ngOnInit() {
+    console.log(this.windowHeight);
+  }
+
 }

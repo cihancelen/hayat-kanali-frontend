@@ -11,6 +11,7 @@ import { GeneralMenuComponent } from '../components/general-menu/general-menu';
 import { AddStaffPage } from '../pages/add-staff/add-staff';
 import { GeneralToolbarComponent } from '../components/general-toolbar/general-toolbar';
 import { AddBloodRequestPage } from '../pages/add-blood-request/add-blood-request';
+import { RequestItemComponent } from '../components/request-item/request-item';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AddBloodRequestPage } from '../pages/add-blood-request/add-blood-reques
     AddStaffPage,
     AddBloodRequestPage,
     GeneralMenuComponent,
-    GeneralToolbarComponent
+    GeneralToolbarComponent,
+    RequestItemComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,8 @@ import { AddBloodRequestPage } from '../pages/add-blood-request/add-blood-reques
     AddStaffPage,
     AddBloodRequestPage,
     GeneralMenuComponent,
-    GeneralToolbarComponent
+    GeneralToolbarComponent,
+    RequestItemComponent
   ],
   providers: [
     StatusBar,
