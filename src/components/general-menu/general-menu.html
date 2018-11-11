@@ -1,0 +1,31 @@
+<ion-menu [content]="content" id="generalMenu" >
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menü</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <button ion-item no-padding (click)="goAddRequestPage()">
+        <ion-icon name="create" margin-left margin-right></ion-icon>
+        Duyuru Ekle
+      </button>
+
+      <button ion-item no-padding (click)="goAddStaff()">
+        <ion-icon name="person" margin-left margin-right></ion-icon>
+        Personel Ekle
+      </button>
+    </ion-list>
+  </ion-content>
+
+  <ion-footer>
+    <ion-list no-margin class="no-border">
+      <button ion-item color="primary">
+        <ion-icon name="log-out" margin-right></ion-icon>
+        Çıkış Yap
+      </button>
+    </ion-list>
+  </ion-footer>
+</ion-menu>
+
+<ion-nav id="nav" #content [root]="rootPage"></ion-nav>

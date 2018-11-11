@@ -1,0 +1,68 @@
+<ion-header>
+
+  <!-- <general-toolbar [pageName]="'Personel Ekle'"></general-toolbar> -->
+
+  <ion-navbar>
+    <ion-title>Personel Ekle</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<general-menu></general-menu>
+
+<ion-content padding>
+
+  <ion-card col-12 col-lg-6 offset-lg-3>
+    <ion-card-content>
+
+      <ion-list>
+        <ion-row>
+          <ion-col>
+            <h3 text-center class="font-125">Personel Kayıt Formu</h3>
+          </ion-col>
+        </ion-row>
+        
+        <ion-row>
+          <ion-col ion-item>
+            <ion-label floating>Ad</ion-label>
+            <ion-input></ion-input>
+          </ion-col>
+          <ion-col ion-item>
+            <ion-label floating>Soyad</ion-label>
+            <ion-input></ion-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-item>
+          <ion-label floating>Mail</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label floating>Kullanıcı Adı</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+
+       <ion-row>
+          <ion-col ion-item class="no-border">
+              <ion-label floating>Parola</ion-label>
+              <ion-input></ion-input>
+            </ion-col>
+            
+            <ion-col ion-item class="no-border">
+              <ion-label floating>Parola(Tekrar)</ion-label>
+              <ion-input></ion-input>
+            </ion-col>
+       </ion-row>
+        
+      </ion-list>
+
+      <button ion-button float-right icon-only padding margin-top>
+        <ion-icon name="add" margin-right></ion-icon>
+        Personeli Ekle
+      </button>
+      
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

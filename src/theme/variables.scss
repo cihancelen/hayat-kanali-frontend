@@ -35,7 +35,7 @@ $app-direction: ltr;
 
 $colors: (
   primary:    #d32f2f,
-  secondary:  #32db64,
+  secondary:  #e57373,
   danger:     #f53d3d,
   light:      #F5F5F5,
   dark:       #222
@@ -44,8 +44,17 @@ $colors: (
 .bg-primary{
   background: color($colors, primary) !important;
 }
+.bg-secondary{
+  background: color($colors, secondary) !important;
+}
+.bg-danger{
+  background: color($colors, danger) !important;
+}
 .bg-light{
   background: color($colors, light) !important;
+}
+.bg-dark{
+  background: color($colors, dark) !important;
 }
 
 .margin-right-5{
@@ -110,3 +119,10 @@ $colors: (
 *{
   font-family: 'Open Sans', sans-serif;
 }
+
+$toolbar-ios-text-color: white;
+$toolbar-ios-button-color: white;
+$toolbar-ios-title-text-color: white;
+$toolbar-md-text-color: white;
+$toolbar-md-button-color: white;
+$toolbar-md-title-text-color: white;

@@ -27,6 +27,10 @@
   width: 100% !important;
 }
 
+.no-border{
+  border: none !important;
+}
+
 /*
   Ionic Variables
 */
@@ -35,6 +39,10 @@
   border-bottom: 1px solid #dedede;
   padding-left: 0;
   box-shadow: 0 !important
+}
+
+.list-md{
+  border-bottom: 1px solid #dedede;
 }
 
 .card-md{
