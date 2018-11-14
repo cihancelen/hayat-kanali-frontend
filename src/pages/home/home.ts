@@ -7,11 +7,10 @@ import { MenuController } from "ionic-angular";
 })
 export class HomePage implements OnInit {
   windowHeight: number = window.innerHeight;
+  segmentType: string = 'active';
 
   constructor() { }
 
-  ngOnInit() {
-    console.log(this.windowHeight);
-  }
+  ngOnInit() { }
 
 }

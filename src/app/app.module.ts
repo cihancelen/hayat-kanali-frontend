@@ -13,7 +13,6 @@ import { GeneralToolbarComponent } from '../components/general-toolbar/general-t
 import { AddBloodRequestPage } from '../pages/add-blood-request/add-blood-request';
 import { RequestItemComponent } from '../components/request-item/request-item';
 import { DefaultUserDashboardPage } from '../pages/default-user-dashboard/default-user-dashboard';
-import { RequestDetailPage } from '../pages/request-detail/request-detail';
 
 @NgModule({
   declarations: [
@@ -23,7 +22,6 @@ import { RequestDetailPage } from '../pages/request-detail/request-detail';
     AddStaffPage,
     AddBloodRequestPage,
     DefaultUserDashboardPage,
-    RequestDetailPage,
     GeneralMenuComponent,
     GeneralToolbarComponent,
     RequestItemComponent
@@ -43,7 +41,6 @@ import { RequestDetailPage } from '../pages/request-detail/request-detail';
     AddStaffPage,
     AddBloodRequestPage,
     DefaultUserDashboardPage,
-    RequestDetailPage,
     GeneralMenuComponent,
     GeneralToolbarComponent,
     RequestItemComponent

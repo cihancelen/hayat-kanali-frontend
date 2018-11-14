@@ -4,36 +4,108 @@
 
 <general-menu></general-menu>
 
-<ion-content padding>
+<ion-content class="bg-light">
 
-  <ion-row>
-      <ion-grid col-12 col-lg-6>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 col-lg-3 style="margin-top:25px;">
+        <ion-grid>
           <ion-row>
-            <ion-col col-12>
-              <h3 class="text-danger">Aktif Kan Talepleri</h3>
+            <ion-col no-padding col-12>
+              <ion-card no-padding>
+                <ion-card-content no-margin no-padding style="height:75px">
+                  <ion-row class="height-100 line-height-75">
+                    <ion-col col-3 text-center class="bg-primary">
+                      <ion-icon name="water" class="text-white" style="font-size: 200%"></ion-icon>
+                    </ion-col>
+                    <ion-col>
+                      <h1>356</h1>
+                      <p style="font-size:14px">Günlük talep edilen ünite sayısı</p>
+                    </ion-col>
+                  </ion-row>
+                </ion-card-content>
+              </ion-card>
             </ion-col>
-          </ion-row>
-          
-          <ion-row>
-            <ion-col col-12 [ngStyle]="{'height.px': windowHeight - 145}" style="overflow:auto">
-              <request-item></request-item>
+            <ion-col no-padding col-12>
+              <ion-card no-padding>
+                <ion-card-content no-margin no-padding style="height:75px">
+                  <ion-row class="height-100 line-height-75">
+                    <ion-col col-3 text-center class="bg-tourquaz">
+                      <ion-icon name="person" class="text-white" style="font-size: 200%"></ion-icon>
+                    </ion-col>
+                    <ion-col>
+                      <h1>1002</h1>
+                      <p style="font-size:13px">Aylık donör sayısı</p>
+                    </ion-col>
+                  </ion-row>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col no-padding col-12>
+              <ion-card no-padding>
+                <ion-card-content no-margin no-padding style="height:75px">
+                  <ion-row class="height-100 line-height-75">
+                    <ion-col col-3 text-center class="bg-orange">
+                      <ion-icon name="archive" class="text-white" style="font-size: 200%"></ion-icon>
+                    </ion-col>
+                    <ion-col>
+                      <h1>2034</h1>
+                      <p style="font-size:13px">Hasta sayısı</p>
+                    </ion-col>
+                  </ion-row>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col no-padding col-12>
+              <ion-card no-padding>
+                <ion-card-content no-margin no-padding style="height:75px">
+                  <ion-row class="height-100 line-height-75">
+                    <ion-col col-3 text-center class="bg-green">
+                      <ion-icon name="home" class="text-white" style="font-size: 200%"></ion-icon>
+                    </ion-col>
+                    <ion-col>
+                      <h1>244</h1>
+                      <p style="font-size:13px">Aylık bağış bekleyen hasta sayısı</p>
+                    </ion-col>
+                  </ion-row>
+                </ion-card-content>
+              </ion-card>
             </ion-col>
           </ion-row>
         </ion-grid>
-      
-        <ion-grid col-12 col-md-6>
-          <ion-row>
-            <ion-col col-12>
-              <h3 class="text-danger">Pasif Kan Talepleri</h3>
-            </ion-col>
-          </ion-row>
-      
-          <ion-row>
-            <ion-col col-12 [ngStyle]="{'height.px': windowHeight - 145}" style="overflow:auto">
-              <request-item></request-item>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-  </ion-row>
+      </ion-col>
+
+      <ion-col [ngStyle]="{'height.px': windowHeight - 100}" style="overflow: scroll">
+        <ion-segment [(ngModel)]="segmentType">
+          <ion-segment-button value="active">
+            Aktif Kan Talepleri
+          </ion-segment-button>
+          <ion-segment-button value="deactive">
+            Pasif Kan Talepleri
+          </ion-segment-button>
+        </ion-segment>
+
+        <div [ngSwitch]="segmentType">
+          <div *ngSwitchCase="'active'">
+            <request-item></request-item>
+          </div>
+
+          <div *ngSwitchCase="'deactive'">
+            <p padding margin>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores consectetur nisi ipsa aperiam. Culpa
+              dignissimos alias quod nulla quae eaque cupiditate cumque iste eos reiciendis pariatur, ducimus id nisi
+              modi!
+            </p>
+            <!-- <request-item></request-item> -->
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+
+
 
 </ion-content>

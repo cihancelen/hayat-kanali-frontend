@@ -13,7 +13,7 @@ import { DefaultUserDashboardPage } from "../pages/default-user-dashboard/defaul
   templateUrl: "app.html"
 })
 export class MyApp {
-  rootPage: any = LoginPage;
+  rootPage: any = HomePage;
 
   constructor(
     platform: Platform,
