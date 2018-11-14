@@ -3,6 +3,7 @@ import { NavController, MenuController } from "ionic-angular";
 import { AddStaffPage } from "../../pages/add-staff/add-staff";
 import { AddBloodRequestPage } from "../../pages/add-blood-request/add-blood-request";
 import { LoginPage } from "../../pages/login/login";
+import { UserSettingsPage } from "../../pages/user-settings/user-settings";
 
 @Component({
   selector: "general-menu",
@@ -28,4 +29,10 @@ export class GeneralMenuComponent {
     this.menuCtrl.close('generalMenu');
     this.navCtrl.setRoot(LoginPage);
   }
+
+  updateSettings(){
+    this.menuCtrl.close('generalMenu');
+    this.navCtrl.push(UserSettingsPage);
+  }
+  
 }

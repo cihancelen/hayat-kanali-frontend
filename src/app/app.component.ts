@@ -8,12 +8,13 @@ import { LoginPage } from "../pages/login/login";
 import { AddStaffPage } from "../pages/add-staff/add-staff";
 import { AddBloodRequestPage } from "../pages/add-blood-request/add-blood-request";
 import { DefaultUserDashboardPage } from "../pages/default-user-dashboard/default-user-dashboard";
+import { UserSettingsPage } from "../pages/user-settings/user-settings";
 
 @Component({
   templateUrl: "app.html"
 })
 export class MyApp {
-  rootPage: any = HomePage;
+  rootPage: any = UserSettingsPage;
 
   constructor(
     platform: Platform,
