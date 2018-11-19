@@ -7,8 +7,100 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
-  
-  
+  <ion-card no-padding col-12 col-md-10 col-lg-6 offset-0 offset-md-1 offset-lg-3>
+    <ion-card-header>
+      <ion-segment [(ngModel)]="segment">
+        <ion-segment-button value="general-info">
+          Genel Bilgiler
+        </ion-segment-button>
+        <ion-segment-button value="update-password">
+          Parolayı Güncelle
+        </ion-segment-button>
+      </ion-segment>
+    </ion-card-header>
+    <ion-card-content>
+
+      <div [ngSwitch]="segment">
+        <div *ngSwitchCase="'general-info'">
+          <ion-list class="no-border">
+            <ion-row>
+              <ion-col ion-item>
+                <ion-label floating>Ad</ion-label>
+                <ion-input></ion-input>
+              </ion-col>
+
+              <ion-col ion-item>
+                <ion-label floating>Soyad</ion-label>
+                <ion-input></ion-input>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col ion-item>
+                <ion-label floating>Telefon Numarası</ion-label>
+                <ion-input></ion-input>
+              </ion-col>
+
+              <ion-col ion-item>
+                <ion-label floating>Mail Adresi</ion-label>
+                <ion-input></ion-input>
+              </ion-col>
+
+              <ion-col ion-item>
+                <ion-label floating>Kan Grubu</ion-label>
+                <ion-input disabled value="Arh +"></ion-input>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col ion-item no-padding>
+                <ion-label floating>Doğum Tarihi</ion-label>
+                <ion-datetime #datetime cancelText="İptal" doneText="Tamam" displayFormat="DD MMMM YYYY" class="border-bottom"></ion-datetime>
+              </ion-col>
+
+              <ion-col ion-item>
+                <ion-label floating>En Son Kan Verme Tarihi</ion-label>
+                <ion-datetime #endDonateBloog cancelText="İptal" doneText="Tamam" displayFormat="DD MMMM YYYY" class="border-bottom"></ion-datetime>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col ion-item no-padding>
+                <ion-label floating>Kalıtsal Rahatsızlık</ion-label>
+                <ion-select multiple="true" class="border-bottom" cancelText="İptal" okText="Tamam">
+                  <ion-option selected>Hemofili</ion-option>
+                  <ion-option>Albino</ion-option>
+                </ion-select>
+              </ion-col>
+            </ion-row>
+          </ion-list>
+
+          <button ion-button float-right margin-top margin-bottom>Güncelle</button>
+        </div>
+        <div *ngSwitchCase="'update-password'">
+          <ion-list>
+            <ion-item>
+              <ion-label floating>Eski Parola</ion-label>
+              <ion-input type="password"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label floating>Yeni Parola</ion-label>
+              <ion-input type="password"></ion-input>
+            </ion-item>
+
+            <ion-item class="no-border">
+              <ion-label floating>Yeni Parola(Tekrar)</ion-label>
+              <ion-input type="password"></ion-input>
+            </ion-item>
+          </ion-list>
+          <button ion-button margin-top margin-bottom float-right>Parolayı Güncelle</button>
+        </div>
+      </div>
+
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

@@ -4,6 +4,7 @@ import { AddStaffPage } from "../../pages/add-staff/add-staff";
 import { AddBloodRequestPage } from "../../pages/add-blood-request/add-blood-request";
 import { LoginPage } from "../../pages/login/login";
 import { UserSettingsPage } from "../../pages/user-settings/user-settings";
+import { AddClinicPage } from "../../pages/add-clinic/add-clinic";
 
 @Component({
   selector: "general-menu",
@@ -30,9 +31,14 @@ export class GeneralMenuComponent {
     this.navCtrl.setRoot(LoginPage);
   }
 
-  updateSettings(){
+  updateSettings() {
     this.menuCtrl.close('generalMenu');
     this.navCtrl.push(UserSettingsPage);
   }
-  
+
+  goAddClinic() {
+    this.menuCtrl.close('generalMenu');
+    this.navCtrl.push(AddClinicPage);
+  }
+
 }

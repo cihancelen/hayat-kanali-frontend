@@ -15,6 +15,7 @@ import { RequestItemComponent } from '../components/request-item/request-item';
 import { DefaultUserDashboardPage } from '../pages/default-user-dashboard/default-user-dashboard';
 import { UserSettingsPage } from '../pages/user-settings/user-settings';
 import { HospitalSettingsPage } from '../pages/hospital-settings/hospital-settings';
+import { AddClinicPage } from '../pages/add-clinic/add-clinic';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { HospitalSettingsPage } from '../pages/hospital-settings/hospital-settin
     DefaultUserDashboardPage,
     UserSettingsPage,
     HospitalSettingsPage,
+    AddClinicPage,
     GeneralMenuComponent,
     GeneralToolbarComponent,
     RequestItemComponent
@@ -47,6 +49,7 @@ import { HospitalSettingsPage } from '../pages/hospital-settings/hospital-settin
     DefaultUserDashboardPage,
     UserSettingsPage,
     HospitalSettingsPage,
+    AddClinicPage,
     GeneralMenuComponent,
     GeneralToolbarComponent,
     RequestItemComponent

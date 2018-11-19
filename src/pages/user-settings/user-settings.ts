@@ -8,6 +8,8 @@ import { IonicPage } from 'ionic-angular';
 })
 export class UserSettingsPage {
 
+  segment:string = 'general-info';
+
   constructor(){}
 
 }
