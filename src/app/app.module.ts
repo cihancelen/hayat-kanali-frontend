@@ -16,6 +16,8 @@ import { DefaultUserDashboardPage } from '../pages/default-user-dashboard/defaul
 import { UserSettingsPage } from '../pages/user-settings/user-settings';
 import { HospitalSettingsPage } from '../pages/hospital-settings/hospital-settings';
 import { AddClinicPage } from '../pages/add-clinic/add-clinic';
+import { NotificationService } from '../services/notification.service';
+import { HttpModule } from "@angular/http";
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { AddClinicPage } from '../pages/add-clinic/add-clinic';
     IonicModule.forRoot(MyApp, {
       monthNames: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'],
       monthShortNames: ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara']
-    })
+    }),
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -57,7 +60,8 @@ import { AddClinicPage } from '../pages/add-clinic/add-clinic';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    NotificationService
   ]
 })
 export class AppModule { }
