@@ -16,7 +16,7 @@ import { AddClinicPage } from "../pages/add-clinic/add-clinic";
   templateUrl: "app.html"
 })
 export class MyApp {
-  rootPage: any = DefaultUserDashboardPage;
+  rootPage: any = LoginPage;
 
   constructor(
     platform: Platform,

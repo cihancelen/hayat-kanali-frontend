@@ -18,6 +18,8 @@ import { HospitalSettingsPage } from '../pages/hospital-settings/hospital-settin
 import { AddClinicPage } from '../pages/add-clinic/add-clinic';
 import { NotificationService } from '../services/notification.service';
 import { HttpModule } from "@angular/http";
+import { OpenDataService } from '../services/open.data.service';
+import { HttpService } from '../services/http.service';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { HttpModule } from "@angular/http";
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    NotificationService
+    NotificationService,
+    HttpService,
+    OpenDataService
   ]
 })
 export class AppModule { }

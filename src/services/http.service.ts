@@ -12,6 +12,7 @@ export class HttpService {
   ) { }
 
   url: string = StaticInfo.url;
+  
 
   get(url: string): Observable<any> {
     return this.http.get(this.url + url)

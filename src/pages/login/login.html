@@ -64,63 +64,64 @@
             <ion-row>
               <ion-col ion-item class="margin-right-5">
                 <ion-label floating>Ad</ion-label>
-                <ion-input type="text"></ion-input>
+                <ion-input type="text" [(ngModel)]="user.name"></ion-input>
               </ion-col>
               <ion-col ion-item>
                 <ion-label floating>Soyad</ion-label>
-                <ion-input type="text"></ion-input>
+                <ion-input type="text" [(ngModel)]="user.surname" required></ion-input>
               </ion-col>
             </ion-row>
 
             <ion-row>
               <ion-col ion-item class="margin-right-5">
                   <ion-label floating>Mail</ion-label>
-                  <ion-input type="mail"></ion-input>
+                  <ion-input type="mail" [(ngModel)]="user.email" required></ion-input>
               </ion-col>
               <ion-col ion-item>
                   <ion-label floating>Telefon</ion-label>
-                  <ion-input type="tel"></ion-input>
+                  <ion-input type="tel" [(ngModel)]="user.phone" required></ion-input>
               </ion-col>
             </ion-row>
 
             <ion-row>
                 <ion-col ion-item class="margin-right-5">
                   <ion-label floating>Parola</ion-label>
-                  <ion-input type="password"></ion-input>
+                  <ion-input type="password" [(ngModel)]="user.password" required></ion-input>
                 </ion-col>
                 <ion-col ion-item>
                   <ion-label floating>Parola(Tekrar)</ion-label>
-                  <ion-input type="password"></ion-input>
+                  <ion-input type="password" [(ngModel)]="user.repassword" required></ion-input>
                 </ion-col>
               </ion-row>
 
             <ion-row>
               <ion-col ion-item>
                 <ion-label floating>Tc Kimlik No</ion-label>
-                <ion-input type="text"></ion-input>
+                <ion-input type="text" [(ngModel)]="user.tcKimlik" required></ion-input>
               </ion-col>
               
               <ion-col ion-item>
                 <ion-label floating>Doğum Tarihi</ion-label>
-                <ion-datetime #datetime cancelText="İptal" doneText="Tamam" displayFormat="DD MMMM YYYY" class="border-bottom"></ion-datetime>
+                <ion-datetime [(ngModel)]="user.birthday" required #datetime cancelText="İptal" doneText="Tamam" displayFormat="DD MMMM YYYY" class="border-bottom"></ion-datetime>
               </ion-col>
             </ion-row>
             
             <ion-row>
               <ion-col ion-item no-padding>
                 <ion-label floating>İl</ion-label>
-                <ion-select class="border-bottom" cancelText="İptal" okText="Tamam" [(ngModel)]="city">
+                <ion-select [(ngModel)]="user.city" (ionChange)="findDistrict(user.city)" required class="border-bottom" cancelText="İptal" okText="Tamam">
                   <ion-option selected value="0" disabled>Lütfen bir il seçiniz.</ion-option>
-                  <ion-option>İstanbul</ion-option>
-                  <ion-option>Ankara</ion-option>
+                  <ion-option *ngFor="let item of citiesAndDistricts" value="{{ item.plaka }}">{{ item.il }}</ion-option>
                 </ion-select>
               </ion-col>
 
+              {{user.city}}
+              
               <ion-col ion-item no-padding>
                 <ion-label floating>İlçe</ion-label>
-                <ion-select class="border-bottom" cancelText="İptal" okText="Tamam" [(ngModel)]="district">
-                  <ion-option selected>Kadıköy</ion-option>
-                  <ion-option>Ataşehir</ion-option>
+                <ion-select [(ngModel)]="user.district" [disabled]="!user.city" required class="border-bottom" cancelText="İptal" okText="Tamam">
+                  <ion-option selected value="0" disabled>Lütfen bir ilçe seçiniz.</ion-option>
+                  <ion-option *ngFor="let item of districtByCity?.ilceleri" value="{{ item }}">{{ item }}</ion-option>
                 </ion-select>
               </ion-col>
             </ion-row>
@@ -128,25 +129,23 @@
             <ion-row>
               <ion-col ion-item no-padding>
                 <ion-label floating>Kan Grubu</ion-label>
-                <ion-select class="border-bottom" cancelText="İptal" okText="Tamam" [(ngModel)]="bloodGroup">
-                  <ion-option selected>Arh +</ion-option>
-                  <ion-option>Arh -</ion-option>
-                  <ion-option>Brh +</ion-option>
-                  <ion-option>Brh -</ion-option>
+                <ion-select [(ngModel)]="user.bloodGroup" required class="border-bottom" cancelText="İptal" okText="Tamam">
+                  <ion-option selected value="0">Lütfen bir kan grubu seçiniz.</ion-option>
+                  <ion-option *ngFor="let item of bloodGroups" value="{{ item.id }}">{{ item.name }}</ion-option>
                 </ion-select>
               </ion-col>
               <ion-col ion-item no-padding>
                 <ion-label floating>Kalıtsal Rahatsızlık</ion-label>
-                <ion-select multiple="true" class="border-bottom" cancelText="İptal" okText="Tamam">
-                  <ion-option selected>Hemofili</ion-option>
-                  <ion-option>Albino</ion-option>
+                <ion-select [(ngModel)]="user.disease" required multiple="true" class="border-bottom" cancelText="İptal" okText="Tamam">
+                  <ion-option selected value="0"></ion-option>
+                  <ion-option *ngFor="let item of diseases" value="{{ item.id }}">{{ item.name }}</ion-option>
                 </ion-select>
               </ion-col>
             </ion-row>
             
           </ion-list>
           
-          <button ion-button block margin-top>Kayıt Ol</button>
+          <button ion-button block margin-top (click)="register()">Kayıt Ol</button>
           
         </div>
       </div>
