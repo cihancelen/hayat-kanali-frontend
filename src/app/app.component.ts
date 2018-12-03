@@ -28,13 +28,13 @@ export class MyApp {
       splashScreen.hide();
     });
 
-    if (localStorage.getItem('user-data')) {
+    if (localStorage.getItem('user-info')) {
       this.rootPage = DefaultUserDashboardPage;
     }
-    else if (localStorage.getItem('hospital')) {
+    else if (localStorage.getItem('hospital-info')) {
       this.rootPage = HomePage;
     }
-    else if (localStorage.getItem('employee')) {
+    else if (localStorage.getItem('employee-info')) {
       this.rootPage = HomePage;
     }
     else {

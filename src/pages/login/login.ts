@@ -6,6 +6,7 @@ import { HttpService } from "../../services/http.service";
 import { DefaultUserDashboardPage } from "../default-user-dashboard/default-user-dashboard";
 import { UserService } from "../../services/user.service";
 import { HospitalService } from "../../services/hospital.service";
+import { EmployeeService } from "../../services/employee.service";
 
 @IonicPage()
 @Component({
@@ -18,7 +19,8 @@ export class LoginPage implements OnInit {
     private openDataService: OpenDataService,
     private httpService: HttpService,
     private userService: UserService,
-    private hospitalService: HospitalService
+    private hospitalService: HospitalService,
+    private employeeService: EmployeeService
   ) {
 
     if (localStorage.getItem('user-data'))
@@ -1549,9 +1551,15 @@ export class LoginPage implements OnInit {
           this.navCtrl.setRoot(DefaultUserDashboardPage);
         });
       }
-      else if (this.loginType == 'hospital' || this.loginType == 'employee') {
+      else if (this.loginType == 'hospital') {
         this.hospitalService.getHospitalInfo({email: this.login_model.email}).subscribe(x => {
           localStorage.setItem('hospital-info', JSON.stringify(x));
+          this.navCtrl.setRoot(HomePage);
+        });
+      }
+      else if(this.loginType == 'employee'){
+        this.employeeService.employeeInfo({email: this.login_model.email}).subscribe(x =>{
+          localStorage.setItem('employee-info', JSON.stringify(x));
           this.navCtrl.setRoot(HomePage);
         });
       }

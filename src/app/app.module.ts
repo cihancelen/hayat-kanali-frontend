@@ -23,6 +23,7 @@ import { HttpService } from '../services/http.service';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 import { HospitalService } from '../services/hospital.service';
+import { EmployeeService } from '../services/employee.service';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { HospitalService } from '../services/hospital.service';
     OpenDataService,
     AuthService,
     UserService,
-    HospitalService
+    HospitalService,
+    EmployeeService
   ]
 })
 export class AppModule { }
