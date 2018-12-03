@@ -9,8 +9,8 @@ export class UserService {
     private httpService: HttpService
   ) { }
 
-  getUserInfo(user_id: number) {
-    return this.httpService.post('user/getuserinfo/', user_id);
+  getUserInfo(user: any) {
+    return this.httpService.post('user/UserInfo/', user);
   }
 
 }

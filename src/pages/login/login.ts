@@ -5,6 +5,7 @@ import { OpenDataService } from "../../services/open.data.service";
 import { HttpService } from "../../services/http.service";
 import { DefaultUserDashboardPage } from "../default-user-dashboard/default-user-dashboard";
 import { UserService } from "../../services/user.service";
+import { HospitalService } from "../../services/hospital.service";
 
 @IonicPage()
 @Component({
@@ -16,12 +17,13 @@ export class LoginPage implements OnInit {
     private navCtrl: NavController,
     private openDataService: OpenDataService,
     private httpService: HttpService,
-    private userService:UserService
+    private userService: UserService,
+    private hospitalService: HospitalService
   ) {
 
-    if(localStorage.getItem('user-data'))
+    if (localStorage.getItem('user-data'))
       this.navCtrl.setRoot(DefaultUserDashboardPage);
-   }
+  }
 
   segment: string = 'login';
   loginType: string = 'default-user';
@@ -1537,18 +1539,21 @@ export class LoginPage implements OnInit {
   }
 
   login() {
-    this.httpService.login(this.login_model.email, this.login_model.password, this.loginType).subscribe(data =>{
+    this.httpService.login(this.login_model.email, this.login_model.password, this.loginType).subscribe(data => {
       this.httpService.header.append('Authorization', 'Bearer ' + data.access_token);
       localStorage.setItem('token', 'Bearer ' + data.access_token);
 
-      if(this.loginType == 'default-user'){
-        this.userService.getUserInfo(data.id).subscribe(data =>{
-          localStorage.setItem('user-info', JSON.stringify(data));
+      if (this.loginType == 'default-user') {
+        this.userService.getUserInfo({ email: this.login_model.email }).subscribe(x => {
+          localStorage.setItem('user-info', JSON.stringify(x));
           this.navCtrl.setRoot(DefaultUserDashboardPage);
         });
       }
-      else if(this.loginType == 'hospital' || this.loginType == 'employee'){
-        this.navCtrl.setRoot(HomePage);
+      else if (this.loginType == 'hospital' || this.loginType == 'employee') {
+        this.hospitalService.getHospitalInfo({email: this.login_model.email}).subscribe(x => {
+          localStorage.setItem('hospital-info', JSON.stringify(x));
+          this.navCtrl.setRoot(HomePage);
+        });
       }
     });
   }
