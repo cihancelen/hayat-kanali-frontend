@@ -9,7 +9,11 @@ export class HttpService {
 
   constructor(
     private http: Http
-  ) { }
+  ) {
+    if(localStorage.getItem('token')){
+      this.header.append('Authorization', localStorage.getItem('token'))
+    }
+   }
 
   url: string = StaticInfo.api_url;
   public header: Headers = new Headers();
@@ -40,7 +44,7 @@ export class HttpService {
   }
 
   register(data: any): Observable<any> {
-    return this.http.post(this.url + 'user/registerUser', data)
+    return this.http.post(this.url + 'auth/registerUser', data)
       .pipe(
         map(x => x.json())
       );

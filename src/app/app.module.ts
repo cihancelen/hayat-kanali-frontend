@@ -21,6 +21,7 @@ import { HttpModule } from "@angular/http";
 import { OpenDataService } from '../services/open.data.service';
 import { HttpService } from '../services/http.service';
 import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user.service';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { AuthService } from '../services/auth.service';
     NotificationService,
     HttpService,
     OpenDataService,
-    AuthService
+    AuthService,
+    UserService
   ]
 })
 export class AppModule { }

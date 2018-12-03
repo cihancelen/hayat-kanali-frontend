@@ -4,6 +4,7 @@ import { HomePage } from "../home/home";
 import { OpenDataService } from "../../services/open.data.service";
 import { HttpService } from "../../services/http.service";
 import { DefaultUserDashboardPage } from "../default-user-dashboard/default-user-dashboard";
+import { UserService } from "../../services/user.service";
 
 @IonicPage()
 @Component({
@@ -14,7 +15,8 @@ export class LoginPage implements OnInit {
   constructor(
     private navCtrl: NavController,
     private openDataService: OpenDataService,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private userService:UserService
   ) {
 
     if(localStorage.getItem('user-data'))
@@ -1526,7 +1528,7 @@ export class LoginPage implements OnInit {
 
     this.httpService.register(this.user).subscribe(data => {
       this.httpService.login(data.email, this.user.password, "default-user").subscribe(user => {
-        localStorage.setItem('user-data', data);
+        localStorage.setItem('user-data', user);
         localStorage.setItem('token', 'Bearer ' + user.access_token);
 
         this.navCtrl.setRoot(DefaultUserDashboardPage);
@@ -1539,7 +1541,15 @@ export class LoginPage implements OnInit {
       this.httpService.header.append('Authorization', 'Bearer ' + data.access_token);
       localStorage.setItem('token', 'Bearer ' + data.access_token);
 
-      this.navCtrl.setRoot(DefaultUserDashboardPage);
+      if(this.loginType == 'default-user'){
+        this.userService.getUserInfo(data.id).subscribe(data =>{
+          localStorage.setItem('user-info', JSON.stringify(data));
+          this.navCtrl.setRoot(DefaultUserDashboardPage);
+        });
+      }
+      else if(this.loginType == 'hospital' || this.loginType == 'employee'){
+        this.navCtrl.setRoot(HomePage);
+      }
     });
   }
 
