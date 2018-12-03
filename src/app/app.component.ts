@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { Platform } from "ionic-angular";
+import { Platform, NavController } from "ionic-angular";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 
@@ -16,16 +16,29 @@ import { AddClinicPage } from "../pages/add-clinic/add-clinic";
   templateUrl: "app.html"
 })
 export class MyApp {
-  rootPage: any = LoginPage;
+  rootPage: any;
 
   constructor(
     platform: Platform,
     statusBar: StatusBar,
-    splashScreen: SplashScreen
+    splashScreen: SplashScreen,
   ) {
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
     });
+
+    if (localStorage.getItem('user-data')) {
+      this.rootPage = DefaultUserDashboardPage;
+    }
+    else if (localStorage.getItem('hospital')) {
+      this.rootPage = HomePage;
+    }
+    else if (localStorage.getItem('employee')) {
+      this.rootPage = HomePage;
+    }
+    else {
+      this.rootPage = LoginPage;
+    }
   }
 }

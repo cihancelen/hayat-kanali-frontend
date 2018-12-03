@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { IonicPage, NavController } from "ionic-angular";
 import { HomePage } from "../home/home";
 import { OpenDataService } from "../../services/open.data.service";
+import { HttpService } from "../../services/http.service";
+import { DefaultUserDashboardPage } from "../default-user-dashboard/default-user-dashboard";
 
 @IonicPage()
 @Component({
@@ -11,10 +13,15 @@ import { OpenDataService } from "../../services/open.data.service";
 export class LoginPage implements OnInit {
   constructor(
     private navCtrl: NavController,
-    private openDataService: OpenDataService
-  ) { }
+    private openDataService: OpenDataService,
+    private httpService: HttpService
+  ) {
 
-  segment: string = 'signup';
+    if(localStorage.getItem('user-data'))
+      this.navCtrl.setRoot(DefaultUserDashboardPage);
+   }
+
+  segment: string = 'login';
   loginType: string = 'default-user';
   citiesAndDistricts: Array<any> = [
     {
@@ -1490,13 +1497,20 @@ export class LoginPage implements OnInit {
     email: '',
     phone: '',
     password: '',
-    tcKimlik: '',
+    identificationNo: '',
     birthday: '',
-    city: 0,
+    cityId: 0,
     district: '',
-    bloodGroup: 0,
-    disease: ''
+    bloodGroupId: 0,
+    diseases: [],
+    usingSmokingAndAlcohol: false,
+    lastBloodDonation: ''
   };
+
+  login_model: any = {
+    email: '',
+    password: ''
+  }
 
   ngOnInit() {
     this.openDataService.getBloodGroups().subscribe(data => this.bloodGroups = data);
@@ -1505,6 +1519,28 @@ export class LoginPage implements OnInit {
 
   findDistrict(city): any {
     this.districtByCity = this.citiesAndDistricts.find(x => x.plaka == city);
+  }
+
+  register() {
+    delete this.user['repassword'];
+
+    this.httpService.register(this.user).subscribe(data => {
+      this.httpService.login(data.email, this.user.password, "default-user").subscribe(user => {
+        localStorage.setItem('user-data', data);
+        localStorage.setItem('token', 'Bearer ' + user.access_token);
+
+        this.navCtrl.setRoot(DefaultUserDashboardPage);
+      })
+    });
+  }
+
+  login() {
+    this.httpService.login(this.login_model.email, this.login_model.password, this.loginType).subscribe(data =>{
+      this.httpService.header.append('Authorization', 'Bearer ' + data.access_token);
+      localStorage.setItem('token', 'Bearer ' + data.access_token);
+
+      this.navCtrl.setRoot(DefaultUserDashboardPage);
+    });
   }
 
 }

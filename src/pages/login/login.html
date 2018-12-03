@@ -23,12 +23,12 @@
           <ion-list>
             <ion-item item-start>
               <ion-label floating>E-posta yada Kullanıcı Adı</ion-label>
-              <ion-input type="text" [(ngModel)]="username"></ion-input>
+              <ion-input type="text" [(ngModel)]="login_model.email" required></ion-input>
             </ion-item>
-            
+
             <ion-item>
               <ion-label floating>Parola</ion-label>
-              <ion-input type="password" [(ngModel)]="password"></ion-input>
+              <ion-input type="password" [(ngModel)]="login_model.password" required></ion-input>
             </ion-item>
 
             <ion-row no-margin margin-top radio-group [(ngModel)]="loginType">
@@ -47,7 +47,7 @@
               <ion-col>
                 <ion-item>
                   <ion-label>Personel</ion-label>
-                  <ion-radio value="personel"></ion-radio>
+                  <ion-radio value="employee"></ion-radio>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -56,7 +56,7 @@
           <button ion-button margin-top block (click)="login()">
             Giriş Yap
           </button>
-          
+
         </div>
         <div *ngSwitchCase="'signup'">
 
@@ -74,83 +74,94 @@
 
             <ion-row>
               <ion-col ion-item class="margin-right-5">
-                  <ion-label floating>Mail</ion-label>
-                  <ion-input type="mail" [(ngModel)]="user.email" required></ion-input>
+                <ion-label floating>Mail</ion-label>
+                <ion-input type="mail" [(ngModel)]="user.email" required></ion-input>
               </ion-col>
               <ion-col ion-item>
-                  <ion-label floating>Telefon</ion-label>
-                  <ion-input type="tel" [(ngModel)]="user.phone" required></ion-input>
+                <ion-label floating>Telefon</ion-label>
+                <ion-input type="tel" [(ngModel)]="user.phone" required></ion-input>
               </ion-col>
             </ion-row>
 
             <ion-row>
-                <ion-col ion-item class="margin-right-5">
-                  <ion-label floating>Parola</ion-label>
-                  <ion-input type="password" [(ngModel)]="user.password" required></ion-input>
-                </ion-col>
-                <ion-col ion-item>
-                  <ion-label floating>Parola(Tekrar)</ion-label>
-                  <ion-input type="password" [(ngModel)]="user.repassword" required></ion-input>
-                </ion-col>
-              </ion-row>
+              <ion-col ion-item class="margin-right-5">
+                <ion-label floating>Parola</ion-label>
+                <ion-input type="password" minlength="6" [(ngModel)]="user.password" required></ion-input>
+              </ion-col>
+              <ion-col ion-item>
+                <ion-label floating>Parola(Tekrar)</ion-label>
+                <ion-input type="password" minlength="6" [(ngModel)]="user.repassword" required></ion-input>
+              </ion-col>
+            </ion-row>
 
             <ion-row>
               <ion-col ion-item>
                 <ion-label floating>Tc Kimlik No</ion-label>
-                <ion-input type="text" [(ngModel)]="user.tcKimlik" required></ion-input>
+                <ion-input type="text" maxlength="11" [(ngModel)]="user.identificationNo" required></ion-input>
               </ion-col>
-              
+
               <ion-col ion-item>
                 <ion-label floating>Doğum Tarihi</ion-label>
-                <ion-datetime [(ngModel)]="user.birthday" required #datetime cancelText="İptal" doneText="Tamam" displayFormat="DD MMMM YYYY" class="border-bottom"></ion-datetime>
+                <ion-datetime [(ngModel)]="user.birthday" required #datetime cancelText="İptal" doneText="Tamam"
+                  displayFormat="DD MMMM YYYY" class="border-bottom"></ion-datetime>
               </ion-col>
             </ion-row>
-            
+
             <ion-row>
               <ion-col ion-item no-padding>
                 <ion-label floating>İl</ion-label>
-                <ion-select [(ngModel)]="user.city" (ionChange)="findDistrict(user.city)" required class="border-bottom" cancelText="İptal" okText="Tamam">
+                <ion-select [(ngModel)]="user.cityId" (ionChange)="findDistrict(user.cityId)" required class="border-bottom"
+                  cancelText="İptal" okText="Tamam">
                   <ion-option selected value="0" disabled>Lütfen bir il seçiniz.</ion-option>
                   <ion-option *ngFor="let item of citiesAndDistricts" value="{{ item.plaka }}">{{ item.il }}</ion-option>
                 </ion-select>
               </ion-col>
 
-              {{user.city}}
-              
               <ion-col ion-item no-padding>
                 <ion-label floating>İlçe</ion-label>
-                <ion-select [(ngModel)]="user.district" [disabled]="!user.city" required class="border-bottom" cancelText="İptal" okText="Tamam">
+                <ion-select [(ngModel)]="user.district" [disabled]="!user.cityId" required class="border-bottom"
+                  cancelText="İptal" okText="Tamam">
                   <ion-option selected value="0" disabled>Lütfen bir ilçe seçiniz.</ion-option>
                   <ion-option *ngFor="let item of districtByCity?.ilceleri" value="{{ item }}">{{ item }}</ion-option>
                 </ion-select>
               </ion-col>
             </ion-row>
-            
+
             <ion-row>
               <ion-col ion-item no-padding>
                 <ion-label floating>Kan Grubu</ion-label>
-                <ion-select [(ngModel)]="user.bloodGroup" required class="border-bottom" cancelText="İptal" okText="Tamam">
+                <ion-select [(ngModel)]="user.bloodGroupId" required class="border-bottom" cancelText="İptal" okText="Tamam">
                   <ion-option selected value="0">Lütfen bir kan grubu seçiniz.</ion-option>
                   <ion-option *ngFor="let item of bloodGroups" value="{{ item.id }}">{{ item.name }}</ion-option>
                 </ion-select>
               </ion-col>
               <ion-col ion-item no-padding>
                 <ion-label floating>Kalıtsal Rahatsızlık</ion-label>
-                <ion-select [(ngModel)]="user.disease" required multiple="true" class="border-bottom" cancelText="İptal" okText="Tamam">
-                  <ion-option selected value="0"></ion-option>
+                <ion-select [(ngModel)]="user.diseases" required multiple="true" class="border-bottom" cancelText="İptal" okText="Tamam">
                   <ion-option *ngFor="let item of diseases" value="{{ item.id }}">{{ item.name }}</ion-option>
                 </ion-select>
               </ion-col>
             </ion-row>
-            
+
+            <ion-row>
+              <ion-col ion-item>
+                <ion-label>Sigara Alkol Kullanımı</ion-label>
+                <ion-checkbox [(ngModel)]="user.usingSmokingAndAlcohol"></ion-checkbox>
+              </ion-col>
+              <ion-col ion-item>
+                  <ion-label floating>Son kan verme tarihi</ion-label>
+                  <ion-datetime [(ngModel)]="user.lastBloodDonation" required #datetimes cancelText="İptal" doneText="Tamam" displayFormat="DD MMMM YYYY"></ion-datetime>
+                </ion-col>
+            </ion-row>
+
           </ion-list>
-          
+
           <button ion-button block margin-top (click)="register()">Kayıt Ol</button>
-          
+
         </div>
       </div>
-          
+
     </ion-card-content>
   </ion-card>
-  
+
 </ion-content>

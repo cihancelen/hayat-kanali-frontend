@@ -20,6 +20,7 @@ import { NotificationService } from '../services/notification.service';
 import { HttpModule } from "@angular/http";
 import { OpenDataService } from '../services/open.data.service';
 import { HttpService } from '../services/http.service';
+import { AuthService } from '../services/auth.service';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { HttpService } from '../services/http.service';
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     NotificationService,
     HttpService,
-    OpenDataService
+    OpenDataService,
+    AuthService
   ]
 })
 export class AppModule { }

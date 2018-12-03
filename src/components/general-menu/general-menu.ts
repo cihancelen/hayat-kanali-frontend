@@ -27,6 +27,8 @@ export class GeneralMenuComponent {
   }
 
   logout() {
+    localStorage.clear();
+
     this.menuCtrl.close('generalMenu');
     this.navCtrl.setRoot(LoginPage);
   }
