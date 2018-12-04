@@ -25,6 +25,13 @@ import { UserService } from '../services/user.service';
 import { HospitalService } from '../services/hospital.service';
 import { EmployeeService } from '../services/employee.service';
 
+//Firebase
+
+import { AngularFireModule } from "@angular/fire";
+import { AngularFireDatabaseModule } from "@angular/fire/database";
+import { Enviroment } from './enviroment';
+import { BloodService } from '../services/blood.service';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -46,7 +53,9 @@ import { EmployeeService } from '../services/employee.service';
       monthNames: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'],
       monthShortNames: ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara']
     }),
-    HttpModule
+    HttpModule,
+    AngularFireModule.initializeApp(Enviroment.firebase),
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -73,7 +82,8 @@ import { EmployeeService } from '../services/employee.service';
     AuthService,
     UserService,
     HospitalService,
-    EmployeeService
+    EmployeeService,
+    BloodService
   ]
 })
 export class AppModule { }

@@ -21,31 +21,30 @@
 
         <ion-item no-padding>
           <ion-label floating>Hasta</ion-label>
-          <ion-select class="border-bottom" cancelText="İptal" okText="Tamam">
+          <ion-select (ionChange)="selectPatient(p)" [(ngModel)]="p" class="border-bottom" cancelText="İptal" okText="Tamam" >
             <ion-option selected value="0" disabled>Lütfen hastayı seçiniz.</ion-option>
-            <ion-option>Cihan</ion-option>
-            <ion-option>İlayda</ion-option>
+            <ion-option *ngFor="let patient of patients" value="{{ patient.id }}">{{ patient.name }}</ion-option>
           </ion-select>
         </ion-item>
 
         <ion-item>
-          <ion-label floating>Arh +</ion-label>
+          <ion-label floating>{{ selectedPatient?.bloodGroup }}</ion-label>
           <ion-input disabled></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label floating>Ünite Sayısı</ion-label>
-          <ion-input type="number" min="1"></ion-input>
+          <ion-input type="number" min="1" [(ngModel)]="unitQuantity"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label floating>Açıklama</ion-label>
-          <ion-textarea></ion-textarea>
+          <ion-textarea [(ngModel)]="requestDescription"></ion-textarea>
         </ion-item>
 
       </ion-list>
 
-      <button ion-button float-right icon-only padding margin-top>
+      <button ion-button float-right icon-only padding margin-top (click)="addBloodRequest()">
         <ion-icon name="add" margin-right></ion-icon>
         Talebi Oluştur
       </button>
