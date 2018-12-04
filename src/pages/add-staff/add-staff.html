@@ -23,28 +23,28 @@
         <ion-row>
           <ion-col ion-item>
             <ion-label floating>Ad</ion-label>
-            <ion-input></ion-input>
+            <ion-input [(ngModel)]="employee.name"></ion-input>
           </ion-col>
           <ion-col ion-item>
             <ion-label floating>Soyad</ion-label>
-            <ion-input></ion-input>
+            <ion-input [(ngModel)]="employee.surname"></ion-input>
           </ion-col>
         </ion-row>
 
         <ion-item>
           <ion-label floating>Mail</ion-label>
-          <ion-input></ion-input>
+          <ion-input [(ngModel)]="employee.email"></ion-input>
         </ion-item>
         
         <ion-item>
           <ion-label floating>Kullanıcı Adı</ion-label>
-          <ion-input></ion-input>
+          <ion-input [(ngModel)]="employee.username"></ion-input>
         </ion-item>
 
        <ion-row>
           <ion-col ion-item class="no-border">
               <ion-label floating>Parola</ion-label>
-              <ion-input></ion-input>
+              <ion-input [(ngModel)]="employee.password"></ion-input>
             </ion-col>
             
             <ion-col ion-item class="no-border">
@@ -55,7 +55,7 @@
         
       </ion-list>
 
-      <button ion-button float-right icon-only padding margin-top>
+      <button ion-button float-right icon-only padding margin-top (click)="addEmployee()">
         <ion-icon name="add" margin-right></ion-icon>
         Personeli Ekle
       </button>

@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { NavController, MenuController } from "ionic-angular";
 import { AddStaffPage } from "../../pages/add-staff/add-staff";
 import { AddBloodRequestPage } from "../../pages/add-blood-request/add-blood-request";
@@ -10,11 +10,23 @@ import { AddClinicPage } from "../../pages/add-clinic/add-clinic";
   selector: "general-menu",
   templateUrl: "general-menu.html"
 })
-export class GeneralMenuComponent {
+export class GeneralMenuComponent implements OnInit{
   constructor(
     private navCtrl: NavController,
     private menuCtrl: MenuController
   ) { }
+
+  isAdmin: boolean = false;
+  isEmployee: boolean = false;
+  
+  ngOnInit(){
+    if(localStorage.getItem('hospital-info')){
+      this.isAdmin = true;
+    }
+    if(localStorage.getItem('employee-info')){
+      this.isEmployee = true;
+    }
+  }
 
   goAddStaff() {
     this.menuCtrl.close('generalMenu');

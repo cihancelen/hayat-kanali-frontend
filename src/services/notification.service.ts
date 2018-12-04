@@ -13,7 +13,8 @@ export class NotificationService {
       message: message,
       duration: duration,
       position: position,
+      showCloseButton: true,
       closeButtonText: 'X'
-    });
+    }).present();
   };
 }

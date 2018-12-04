@@ -6,17 +6,17 @@
   </ion-header>
   <ion-content>
     <ion-list>
-      <button ion-item no-padding (click)="goAddRequestPage()">
+      <button ion-item no-padding (click)="goAddRequestPage()" *ngIf="isAdmin || isEmployee">
         <ion-icon name="create" margin-left margin-right></ion-icon>
         Kan Talep Ekle
       </button>
 
-      <button ion-item no-padding (click)="goAddStaff()">
+      <button ion-item no-padding (click)="goAddStaff()" *ngIf="isAdmin">
         <ion-icon name="person" margin-left margin-right></ion-icon>
         Personel Ekle
       </button>
       
-      <button ion-item no-padding (click)="goAddClinic()">
+      <button ion-item no-padding (click)="goAddClinic()" *ngIf="isAdmin">
         <ion-icon name="home" margin-left margin-right></ion-icon>
         Klinik Ekle
       </button>

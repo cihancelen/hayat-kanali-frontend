@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the AddClinicPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { HospitalService } from '../../services/hospital.service';
+import { NotificationService } from '../../services/notification.service';
+import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
@@ -15,11 +11,25 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AddClinicPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    private hospitalService: HospitalService,
+    private notificationService: NotificationService,
+    private navCtrl: NavController
+  ) { }
+
+  clinic: any = {
+    name:'',
+    description: ''
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AddClinicPage');
+  addClinic() {
+    this.hospitalService.addClinic(this.clinic).subscribe(data =>{
+      this.notificationService.notification('Klinik başarıyla eklenmiştir.');
+
+      this.navCtrl.setRoot(HomePage);
+    }, err =>{
+      console.log(err);
+    });
   }
 
 }
