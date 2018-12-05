@@ -3,8 +3,6 @@ import { HttpService } from './http.service';
 import { Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 
-
-
 @Injectable()
 export class BloodService {
 
