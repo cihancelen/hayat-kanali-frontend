@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class HospitalService {
@@ -18,5 +19,21 @@ export class HospitalService {
 
     addEmployee(employee){
         return this.httpService.post('employee/addEmployee', employee);
+    }
+
+    getPatientsByHospital(hospitalId): Observable<any> {
+        return this.httpService.get('patient/' + hospitalId);
+    }
+
+    getDoctorByHospital(hospitalId): Observable<any> {
+        return this.httpService.get('hospital/' + hospitalId);
+    }
+
+    addPatient(patient): Observable<any>{
+        return this.httpService.post('patient/addPatient', patient);
+    }
+
+    addRelative(relative): Observable<any>{
+        return this.httpService.post('patient/addRelative', relative);
     }
 }

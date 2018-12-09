@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { BloodService } from '../../services/blood.service';
+import { NotificationService } from '../../services/notification.service';
+import { HomePage } from '../home/home';
+import { HospitalService } from '../../services/hospital.service';
 
 @IonicPage()
 @Component({
@@ -10,35 +13,51 @@ import { BloodService } from '../../services/blood.service';
 export class AddBloodRequestPage implements OnInit {
 
   constructor(
-    private bloodService: BloodService
+    private bloodService: BloodService,
+    private notificationService: NotificationService,
+    private navCtrl: NavController,
+    private hospitalService: HospitalService
   ) { }
 
   patients: Array<any> = [];
   selectedPatient: any = {};
-  p:number;
+  p: number;
   unitQuantity: string;
   requestDescription: string;
 
   ngOnInit() {
-    this.bloodService.getPatients().subscribe(data => {
-      this.patients = data;
-    });
+    var patients = localStorage.getItem('patients');
+
+    if (patients) {
+      this.patients = JSON.parse(patients);
+    }
+    else {
+      var hospitalId = JSON.parse(localStorage.getItem('hospital-info')).id;
+
+      this.hospitalService.getPatientsByHospital(hospitalId).subscribe(data => {
+        this.patients = data;
+      });
+    }
+
   }
 
-  selectPatient(){
+  selectPatient() {
     this.selectedPatient = this.patients.find(x => x.id == this.p);
     console.log(this.selectedPatient);
   }
 
-  addBloodRequest(){
+  addBloodRequest() {
     var data = {
       patient: this.selectedPatient,
       unitQuantity: this.unitQuantity,
-      description: this.requestDescription
+      description: this.requestDescription,
+      requestData: new Date()
     };
 
-    this.bloodService.addBloodRequest(data).then(data =>{
-      console.log(data);
+    this.bloodService.addBloodRequest(data).then(() => {
+      this.notificationService.notification('Kan talebi başarıyla eklenmiştir.');
+
+      this.navCtrl.setRoot(HomePage);
     });
   }
 

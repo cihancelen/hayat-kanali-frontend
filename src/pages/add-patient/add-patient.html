@@ -1,0 +1,142 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Hasta Ekle</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="bg-light">
+
+  <ion-card>
+    <ion-card-header class="bg-primary text-white">
+      <h1 text-center class="text-white">Hasta Ekle</h1>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <ion-list *ngIf="show == 1">
+
+        <ion-item margin-top>
+          <ion-label floating>TC Kimlik</ion-label>
+          <ion-input type="text" [(ngModel)]="patient.identificationNo" maxlength="11"></ion-input>
+        </ion-item>
+
+        <ion-row>
+          <ion-col ion-item>
+            <ion-label floating>Ad</ion-label>
+            <ion-input type="text" [(ngModel)]="patient.name"></ion-input>
+          </ion-col>
+
+          <ion-col ion-item>
+            <ion-label floating>Soyad</ion-label>
+            <ion-input type="text" [(ngModel)]="patient.surname"></ion-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col ion-item>
+            <ion-label floating>Telefon</ion-label>
+            <ion-input type="tel" [(ngModel)]="patient.phone"></ion-input>
+          </ion-col>
+
+          <ion-col ion-item>
+            <ion-label floating>Email</ion-label>
+            <ion-input type="email" [(ngModel)]="patient.email"></ion-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col ion-item no-padding>
+            <ion-label floating>Cinsiyet</ion-label>
+            <ion-select class="border-bottom" [(ngModel)]="patient.gender" cancelText="İptal" okText="Tamam">
+              <ion-option value="Erkek">Erkek</ion-option>
+              <ion-option value="Kadın">Kadın</ion-option>
+            </ion-select>
+          </ion-col>
+
+          <ion-col ion-item no-padding>
+            <ion-label floating>Doğum Tarihi</ion-label>
+            <ion-datetime class="border-bottom" [(ngModel)]="patient.birthday" required #datetime cancelText="İptal"
+              doneText="Tamam" displayFormat="DD MMMM YYYY"></ion-datetime>
+          </ion-col>
+        </ion-row>
+
+        <ion-item no-padding>
+          <ion-label floating>Kan Grubu</ion-label>
+          <ion-select class="border-bottom" [(ngModel)]="patient.bloodGroupId" cancelText="İptal" okText="Tamam">
+            <ion-option *ngFor="let item of bloodGroups" value="{{item.id}}">{{ item.name }}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>Hastalık</ion-label>
+          <ion-input type="text" [(ngModel)]="patient.disease"></ion-input>
+        </ion-item>
+        
+        <ion-item no-padding>
+          <ion-label floating>Doktor</ion-label>
+          <ion-select [(ngModel)]="patient.doctorId" cancelText="İptal" okText="Tamam">
+            <ion-option *ngFor="let item of doctors" value="{{ item.id }}">{{ item.name }}</ion-option>
+          </ion-select>
+        </ion-item>
+
+      </ion-list>
+
+      <ion-list *ngIf="show == 2">
+
+        <ion-item margin-top>
+          <ion-label floating>TC Kimlik</ion-label>
+          <ion-input type="text" [(ngModel)]="relative.identificationNo" maxlength="11"></ion-input>
+        </ion-item>
+
+        <ion-row>
+          <ion-col ion-item>
+            <ion-label floating>Ad</ion-label>
+            <ion-input type="text" [(ngModel)]="relative.name"></ion-input>
+          </ion-col>
+
+          <ion-col ion-item>
+            <ion-label floating>Soyad</ion-label>
+            <ion-input type="text" [(ngModel)]="relative.surname"></ion-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col ion-item>
+            <ion-label floating>Telefon</ion-label>
+            <ion-input type="tel" [(ngModel)]="relative.phone"></ion-input>
+          </ion-col>
+
+          <ion-col ion-item>
+            <ion-label floating>Email</ion-label>
+            <ion-input type="email" [(ngModel)]="relative.email"></ion-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col ion-item no-padding>
+            <ion-label floating>Cinsiyet</ion-label>
+            <ion-select class="border-bottom" [(ngModel)]="relative.gender" cancelText="İptal" okText="Tamam">
+              <ion-option value="Erkek">Erkek</ion-option>
+              <ion-option value="Kadın">Kadın</ion-option>
+            </ion-select>
+          </ion-col>
+
+          <ion-col ion-item no-padding>
+            <ion-label floating>Doğum Tarihi</ion-label>
+            <ion-datetime class="border-bottom" [(ngModel)]="relative.birthday" required #datetime cancelText="İptal"
+              doneText="Tamam" displayFormat="DD MMMM YYYY"></ion-datetime>
+          </ion-col>
+        </ion-row>
+      </ion-list>
+
+      <button ion-button margin-top margin-bottom float-left (click)="prev()" *ngIf="show == 2">Geri</button>
+      <button ion-button margin-top margin-bottom float-right (click)="next()" *ngIf="show == 1">İleri</button>
+      <button ion-button margin-top margin-bottom float-right (click)="save()" *ngIf="show == 2">Kaydet</button>
+
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

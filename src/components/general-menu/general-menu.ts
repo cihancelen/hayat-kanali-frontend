@@ -5,12 +5,13 @@ import { AddBloodRequestPage } from "../../pages/add-blood-request/add-blood-req
 import { LoginPage } from "../../pages/login/login";
 import { UserSettingsPage } from "../../pages/user-settings/user-settings";
 import { AddClinicPage } from "../../pages/add-clinic/add-clinic";
+import { AddPatientPage } from "../../pages/add-patient/add-patient";
 
 @Component({
   selector: "general-menu",
   templateUrl: "general-menu.html"
 })
-export class GeneralMenuComponent implements OnInit{
+export class GeneralMenuComponent implements OnInit {
   constructor(
     private navCtrl: NavController,
     private menuCtrl: MenuController
@@ -18,12 +19,12 @@ export class GeneralMenuComponent implements OnInit{
 
   isAdmin: boolean = false;
   isEmployee: boolean = false;
-  
-  ngOnInit(){
-    if(localStorage.getItem('hospital-info')){
+
+  ngOnInit() {
+    if (localStorage.getItem('hospital-info')) {
       this.isAdmin = true;
     }
-    if(localStorage.getItem('employee-info')){
+    if (localStorage.getItem('employee-info')) {
       this.isEmployee = true;
     }
   }
@@ -53,6 +54,11 @@ export class GeneralMenuComponent implements OnInit{
   goAddClinic() {
     this.menuCtrl.close('generalMenu');
     this.navCtrl.push(AddClinicPage);
+  }
+
+  goAddPatient() {
+    this.menuCtrl.close('generalMenu');
+    this.navCtrl.push(AddPatientPage);
   }
 
 }

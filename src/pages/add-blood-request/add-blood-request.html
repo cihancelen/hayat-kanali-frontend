@@ -27,7 +27,7 @@
           </ion-select>
         </ion-item>
 
-        <ion-item>
+        <ion-item *ngIf="selectedPatient?.bloodGroup">
           <ion-label floating>{{ selectedPatient?.bloodGroup }}</ion-label>
           <ion-input disabled></ion-input>
         </ion-item>

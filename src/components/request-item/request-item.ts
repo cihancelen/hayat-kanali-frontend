@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Component({
   selector: 'request-item',
@@ -8,137 +9,38 @@ export class RequestItemComponent implements OnInit {
 
   patients: Array<any> = [];
 
-  constructor() { }
+  zz: number;
+
+  constructor(
+    private database: AngularFireDatabase
+  ) {
+    let hospitalId = JSON.parse(localStorage.getItem('hospital-info')).id;
+
+    this.database.list('blood-requests/').valueChanges().subscribe(data => {
+      data.forEach((element: any) => {
+        if (element.patient.hospitalId == hospitalId) {
+          this.patients.push(element);
+        }
+      });
+
+      this.zz = this.patients.length;
+    });
+
+  }
 
   ngOnInit() {
-    this.patients = [
-      {
-        id: 0, name: 'Murat', surname: 'Seçkin', phone: '545 666 1144', mail: 'seckinmurat@mail.net', patient: 'Böbrek nakli', relativesOfPatient: {
-          name: 'Ahmet', surname: 'Basan', phone: '555 444 2132', mail: 'ahmet.basan@gmail.com'
-        },
-        bloodGroup: 'Arh +', emergency: true
-      }, 
-      {
-        id: 1, name: 'Mehmet', surname: 'Demirci', phone: '542 556 3324', mail: 'mehmet-demirci@gmail.com', patient: 'Bypass Ameliyatı', relativesOfPatient: {
-          name: 'Merve', surname: 'Demirci', phone: '535 665 4451', mail: 'demirci.merve@hotmail.com'
-        },
-        bloodGroup: '0rh +', emergency: false
-      },
-      {
-        id: 2, name: 'Sude', surname: 'Kaya', phone: '532 445 2326', mail: 'sudee221@yahoo.com', patient: 'Kalp Kapakçığı Değişim', relativesOfPatient: {
-          name: 'Mert', surname: 'Şeker', phone: '553 444 3322', mail: 'mertseker@gmail.com'
-        },
-        bloodGroup: 'Arh -', emergency:true
-      },
-      {
-        id: 0, name: 'Murat', surname: 'Seçkin', phone: '545 666 1144', mail: 'seckinmurat@mail.net', patient: 'Böbrek nakli', relativesOfPatient: {
-          name: 'Ahmet', surname: 'Basan', phone: '555 444 2132', mail: 'ahmet.basan@gmail.com'
-        },
-        bloodGroup: 'Arh +', emergency: true
-      }, 
-      {
-        id: 1, name: 'Mehmet', surname: 'Demirci', phone: '542 556 3324', mail: 'mehmet-demirci@gmail.com', patient: 'Bypass Ameliyatı', relativesOfPatient: {
-          name: 'Merve', surname: 'Demirci', phone: '535 665 4451', mail: 'demirci.merve@hotmail.com'
-        },
-        bloodGroup: '0rh +', emergency: false
-      },
-      {
-        id: 2, name: 'Sude', surname: 'Kaya', phone: '532 445 2326', mail: 'sudee221@yahoo.com', patient: 'Kalp Kapakçığı Değişim', relativesOfPatient: {
-          name: 'Mert', surname: 'Şeker', phone: '553 444 3322', mail: 'mertseker@gmail.com'
-        },
-        bloodGroup: 'Arh -', emergency:true
-      },
-      {
-        id: 0, name: 'Murat', surname: 'Seçkin', phone: '545 666 1144', mail: 'seckinmurat@mail.net', patient: 'Böbrek nakli', relativesOfPatient: {
-          name: 'Ahmet', surname: 'Basan', phone: '555 444 2132', mail: 'ahmet.basan@gmail.com'
-        },
-        bloodGroup: 'Arh +', emergency: true
-      }, 
-      {
-        id: 1, name: 'Mehmet', surname: 'Demirci', phone: '542 556 3324', mail: 'mehmet-demirci@gmail.com', patient: 'Bypass Ameliyatı', relativesOfPatient: {
-          name: 'Merve', surname: 'Demirci', phone: '535 665 4451', mail: 'demirci.merve@hotmail.com'
-        },
-        bloodGroup: '0rh +', emergency: false
-      },
-      {
-        id: 2, name: 'Sude', surname: 'Kaya', phone: '532 445 2326', mail: 'sudee221@yahoo.com', patient: 'Kalp Kapakçığı Değişim', relativesOfPatient: {
-          name: 'Mert', surname: 'Şeker', phone: '553 444 3322', mail: 'mertseker@gmail.com'
-        },
-        bloodGroup: 'Arh -', emergency:true
-      },
-      {
-        id: 0, name: 'Murat', surname: 'Seçkin', phone: '545 666 1144', mail: 'seckinmurat@mail.net', patient: 'Böbrek nakli', relativesOfPatient: {
-          name: 'Ahmet', surname: 'Basan', phone: '555 444 2132', mail: 'ahmet.basan@gmail.com'
-        },
-        bloodGroup: 'Arh +', emergency: true
-      }, 
-      {
-        id: 1, name: 'Mehmet', surname: 'Demirci', phone: '542 556 3324', mail: 'mehmet-demirci@gmail.com', patient: 'Bypass Ameliyatı', relativesOfPatient: {
-          name: 'Merve', surname: 'Demirci', phone: '535 665 4451', mail: 'demirci.merve@hotmail.com'
-        },
-        bloodGroup: '0rh +', emergency: false
-      },
-      {
-        id: 2, name: 'Sude', surname: 'Kaya', phone: '532 445 2326', mail: 'sudee221@yahoo.com', patient: 'Kalp Kapakçığı Değişim', relativesOfPatient: {
-          name: 'Mert', surname: 'Şeker', phone: '553 444 3322', mail: 'mertseker@gmail.com'
-        },
-        bloodGroup: 'Arh -', emergency:true
-      },
-      {
-        id: 0, name: 'Murat', surname: 'Seçkin', phone: '545 666 1144', mail: 'seckinmurat@mail.net', patient: 'Böbrek nakli', relativesOfPatient: {
-          name: 'Ahmet', surname: 'Basan', phone: '555 444 2132', mail: 'ahmet.basan@gmail.com'
-        },
-        bloodGroup: 'Arh +', emergency: true
-      }, 
-      {
-        id: 1, name: 'Mehmet', surname: 'Demirci', phone: '542 556 3324', mail: 'mehmet-demirci@gmail.com', patient: 'Bypass Ameliyatı', relativesOfPatient: {
-          name: 'Merve', surname: 'Demirci', phone: '535 665 4451', mail: 'demirci.merve@hotmail.com'
-        },
-        bloodGroup: '0rh +', emergency: false
-      },
-      {
-        id: 2, name: 'Sude', surname: 'Kaya', phone: '532 445 2326', mail: 'sudee221@yahoo.com', patient: 'Kalp Kapakçığı Değişim', relativesOfPatient: {
-          name: 'Mert', surname: 'Şeker', phone: '553 444 3322', mail: 'mertseker@gmail.com'
-        },
-        bloodGroup: 'Arh -', emergency:true
-      },
-      {
-        id: 0, name: 'Murat', surname: 'Seçkin', phone: '545 666 1144', mail: 'seckinmurat@mail.net', patient: 'Böbrek nakli', relativesOfPatient: {
-          name: 'Ahmet', surname: 'Basan', phone: '555 444 2132', mail: 'ahmet.basan@gmail.com'
-        },
-        bloodGroup: 'Arh +', emergency: true
-      }, 
-      {
-        id: 1, name: 'Mehmet', surname: 'Demirci', phone: '542 556 3324', mail: 'mehmet-demirci@gmail.com', patient: 'Bypass Ameliyatı', relativesOfPatient: {
-          name: 'Merve', surname: 'Demirci', phone: '535 665 4451', mail: 'demirci.merve@hotmail.com'
-        },
-        bloodGroup: '0rh +', emergency: false
-      },
-      {
-        id: 2, name: 'Sude', surname: 'Kaya', phone: '532 445 2326', mail: 'sudee221@yahoo.com', patient: 'Kalp Kapakçığı Değişim', relativesOfPatient: {
-          name: 'Mert', surname: 'Şeker', phone: '553 444 3322', mail: 'mertseker@gmail.com'
-        },
-        bloodGroup: 'Arh -', emergency:true
-      },
-      {
-        id: 0, name: 'Murat', surname: 'Seçkin', phone: '545 666 1144', mail: 'seckinmurat@mail.net', patient: 'Böbrek nakli', relativesOfPatient: {
-          name: 'Ahmet', surname: 'Basan', phone: '555 444 2132', mail: 'ahmet.basan@gmail.com'
-        },
-        bloodGroup: 'Arh +', emergency: true
-      }, 
-      {
-        id: 1, name: 'Mehmet', surname: 'Demirci', phone: '542 556 3324', mail: 'mehmet-demirci@gmail.com', patient: 'Bypass Ameliyatı', relativesOfPatient: {
-          name: 'Merve', surname: 'Demirci', phone: '535 665 4451', mail: 'demirci.merve@hotmail.com'
-        },
-        bloodGroup: '0rh +', emergency: false
-      },
-      {
-        id: 2, name: 'Sude', surname: 'Kaya', phone: '532 445 2326', mail: 'sudee221@yahoo.com', patient: 'Kalp Kapakçığı Değişim', relativesOfPatient: {
-          name: 'Mert', surname: 'Şeker', phone: '553 444 3322', mail: 'mertseker@gmail.com'
-        },
-        bloodGroup: 'Arh -', emergency:true
-      },
-    ];
+
+    this.database.database.ref('blood-requests/').on('child_added', function (data){
+      // console.log(data);
+    })
+
+    // this.database.list('blood-requests/').stateChanges().subscribe(data => {
+    //   console.log(data);
+    // })
+
+    // if (this.patients.length != this.zz) {
+    //   console.log('yeni talep geldi.');
+    // }
 
   }
 

@@ -20,6 +20,11 @@
         <ion-icon name="home" margin-left margin-right></ion-icon>
         Klinik Ekle
       </button>
+
+      <button ion-item no-padding (click)="goAddPatient()" *ngIf="isAdmin || isEmployee">
+        <ion-icon name="person" margin-left margin-right></ion-icon>
+        Hasta Ekle
+      </button>
     </ion-list>
   </ion-content>
 

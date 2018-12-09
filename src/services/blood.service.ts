@@ -11,11 +11,17 @@ export class BloodService {
         private database: AngularFireDatabase
     ) { }
 
-    getPatients(): Observable<any> {
-        return this.httpService.get('patient/getPatients');
-    }
+    
 
     addBloodRequest(data: any) {
+        let x_data = {
+            patientId : data.patient.id,
+            bloodGroupId : data.patient.bloodGroupId,
+            description: data.description,
+            unitQuantity: parseInt(data.unitQuantity)
+        };
+        
+        this.httpService.post('blood/addBloodRequest', x_data).subscribe(() => { });
         return this.database.list('blood-requests/').push(data);
     }
 }

@@ -1548,12 +1548,19 @@ export class LoginPage implements OnInit {
       if (this.loginType == 'default-user') {
         this.userService.getUserInfo({ email: this.login_model.email }).subscribe(x => {
           localStorage.setItem('user-info', JSON.stringify(x));
+          
+          
           this.navCtrl.setRoot(DefaultUserDashboardPage);
         });
       }
       else if (this.loginType == 'hospital') {
         this.hospitalService.getHospitalInfo({email: this.login_model.email}).subscribe(x => {
           localStorage.setItem('hospital-info', JSON.stringify(x));
+
+          this.hospitalService.getPatientsByHospital(x.id).subscribe(patients =>{
+            localStorage.setItem('patients', JSON.stringify(patients));
+          });
+          
           this.navCtrl.setRoot(HomePage);
         });
       }

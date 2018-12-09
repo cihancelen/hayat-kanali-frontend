@@ -1,22 +1,22 @@
 <ion-list class="border-1">
-  <button ion-item *ngFor="let patient of patients" no-padding>
+  <button ion-item *ngFor="let item of patients" no-padding>
     <ion-row padding-left>
 
       <ion-col>
-        <span>#{{patient.id}} {{ patient.name }} <b>{{ patient.surname }}</b></span>
+        <span>#{{item.id}} {{ item.patient.name }} <b>{{ item.patient.surname }}</b></span>
       </ion-col>
 
       <!-- <ion-col col-1></ion-col> -->
       <ion-col col-1>
-        <b>{{ patient.bloodGroup }}</b>
+        <b>{{ item.patient.bloodGroup }}</b>
       </ion-col>
 
       <ion-col>
-        <span> {{ patient.patient }} </span>
+        <span> {{ item.patient.disease }} </span>
       </ion-col>
 
       <ion-col text-right>
-        <b class="text-danger" *ngIf="patient.emergency">Acil</b>
+        <b class="text-danger" *ngIf="item.emergency">Acil</b>
       </ion-col>
 
     </ion-row>
