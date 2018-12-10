@@ -14,13 +14,22 @@ export class DefaultUserDashboardPage implements OnInit {
     private database: AngularFireDatabase
   ) { }
 
-  requestsLength: number = 0;
-  
+  requests: Array<any> = [];
+  user_info: any = localStorage.getItem('user-info') ? JSON.parse(localStorage.getItem('user-info')) : null;
+
   ngOnInit() {
-    this.database.list('blood-requests/').valueChanges().subscribe(data =>{
-      this.requestsLength = data.length;
-      
-      
+    this.user_info = localStorage.getItem('user-info') ? JSON.parse(localStorage.getItem('user-info')) : null;
+
+    this.database.list('blood-requests/').snapshotChanges().subscribe(data => {
+      data.forEach(element => {
+        var key = element.key;
+        var json = element.payload.toJSON();
+        json['key'] = key;
+        
+        // if (element.hospital.district == this.user_info.district) {
+        //   this.requests.push(element);
+        // }
+      });
     })
   }
 

@@ -21,7 +21,7 @@ export class BloodService {
             unitQuantity: parseInt(data.unitQuantity)
         };
         
-        this.httpService.post('blood/addBloodRequest', x_data).subscribe(() => { });
-        return this.database.list('blood-requests/').push(data);
+        this.httpService.post('blood/addBloodRequest', x_data);
+        return this.database.list('blood-requests/');
     }
 }

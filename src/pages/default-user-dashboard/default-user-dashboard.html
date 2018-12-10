@@ -12,16 +12,16 @@
     <ion-row>
       <ion-col col-12 col-md-8 offset-md-2>
 
-        <ion-card *ngFor="let item of [1,2,3,4,5,6,7,8,9]">
+        <ion-card *ngFor="let item of requests">
           <ion-card-header class="bg-primary text-white">
-            <div class="font-125" float-left>Mehmet Süngü</div>
-            <div class="font-125" float-right>{{item}} Ünite <span class="bold">Arh +</span></div>
+            <div class="font-125" float-left>{{ item.patient.name }} {{  item.patient.surname }}</div>
+            <div class="font-125" float-right>{{ item.unitQuantity }} Ünite <span class="bold">{{ item.patient.bloodGroup }}</span></div>
           </ion-card-header>
           <ion-card-content padding>
             <p class="font-125" margin-bottom>
-              Hastane Adı: <b>Fatih Sultan Mehmet Eğitim ve Araştırma Hastanesi</b>
+              Hastane Adı: <b>{{ item.hospital.name }}</b>
             </p>
-            <span>İletişim Numarası: <b>0 535 788 6700</b></span>
+            <span>İletişim Numarası: <b>{{ item.hospital.phone }}</b></span>
           </ion-card-content>
         </ion-card>
 

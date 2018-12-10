@@ -24,6 +24,7 @@ export class AddBloodRequestPage implements OnInit {
   p: number;
   unitQuantity: string;
   requestDescription: string;
+  hospital: any = JSON.parse(localStorage.getItem('hospital-info'));
 
   ngOnInit() {
     var patients = localStorage.getItem('patients');
@@ -32,7 +33,7 @@ export class AddBloodRequestPage implements OnInit {
       this.patients = JSON.parse(patients);
     }
     else {
-      var hospitalId = JSON.parse(localStorage.getItem('hospital-info')).id;
+      var hospitalId = this.hospital.id;
 
       this.hospitalService.getPatientsByHospital(hospitalId).subscribe(data => {
         this.patients = data;
@@ -43,7 +44,6 @@ export class AddBloodRequestPage implements OnInit {
 
   selectPatient() {
     this.selectedPatient = this.patients.find(x => x.id == this.p);
-    console.log(this.selectedPatient);
   }
 
   addBloodRequest() {
@@ -51,10 +51,11 @@ export class AddBloodRequestPage implements OnInit {
       patient: this.selectedPatient,
       unitQuantity: this.unitQuantity,
       description: this.requestDescription,
-      requestData: new Date()
+      requestData: new Date(),
+      hospital: this.hospital
     };
 
-    this.bloodService.addBloodRequest(data).then(() => {
+    this.bloodService.addBloodRequest(data).push(data).then(() => {
       this.notificationService.notification('Kan talebi başarıyla eklenmiştir.');
 
       this.navCtrl.setRoot(HomePage);
