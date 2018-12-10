@@ -20,16 +20,9 @@ export class DefaultUserDashboardPage implements OnInit {
   ngOnInit() {
     this.user_info = localStorage.getItem('user-info') ? JSON.parse(localStorage.getItem('user-info')) : null;
 
-    this.database.list('blood-requests/').snapshotChanges().subscribe(data => {
-      data.forEach(element => {
-        var key = element.key;
-        var json = element.payload.toJSON();
-        json['key'] = key;
-        
-        // if (element.hospital.district == this.user_info.district) {
-        //   this.requests.push(element);
-        // }
-      });
+    this.database.list('blood-requests/').valueChanges().subscribe(data => {
+      this.requests = data;
+
     })
   }
 

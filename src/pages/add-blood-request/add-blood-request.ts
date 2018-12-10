@@ -50,9 +50,13 @@ export class AddBloodRequestPage implements OnInit {
     var data = {
       patient: this.selectedPatient,
       unitQuantity: this.unitQuantity,
+      waitingUnit: 0,
+      suppliedUnit: 0,
       description: this.requestDescription,
       requestData: new Date(),
-      hospital: this.hospital
+      hospital: this.hospital,
+      isActive: true,
+      requestUsers: []
     };
 
     this.bloodService.addBloodRequest(data).push(data).then(() => {

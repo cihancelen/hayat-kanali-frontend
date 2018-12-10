@@ -6,6 +6,7 @@ import { LoginPage } from "../../pages/login/login";
 import { UserSettingsPage } from "../../pages/user-settings/user-settings";
 import { AddClinicPage } from "../../pages/add-clinic/add-clinic";
 import { AddPatientPage } from "../../pages/add-patient/add-patient";
+import { PatientListPage } from "../../pages/patient-list/patient-list";
 
 @Component({
   selector: "general-menu",
@@ -61,4 +62,9 @@ export class GeneralMenuComponent implements OnInit {
     this.navCtrl.push(AddPatientPage);
   }
 
+  goPatientList(){
+    this.menuCtrl.close('generalMenu');
+    this.navCtrl.push(PatientListPage);
+  }
+  
 }

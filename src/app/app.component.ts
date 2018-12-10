@@ -12,6 +12,7 @@ import { UserSettingsPage } from "../pages/user-settings/user-settings";
 import { HospitalSettingsPage } from "../pages/hospital-settings/hospital-settings";
 import { AddClinicPage } from "../pages/add-clinic/add-clinic";
 import { AddPatientPage } from "../pages/add-patient/add-patient";
+import { PatientListPage } from "../pages/patient-list/patient-list";
 
 @Component({
   templateUrl: "app.html"
@@ -33,7 +34,7 @@ export class MyApp {
       this.rootPage = DefaultUserDashboardPage;
     }
     else if (localStorage.getItem('hospital-info')) {
-      this.rootPage = HomePage;
+      this.rootPage = PatientListPage;
     }
     else if (localStorage.getItem('employee-info')) {
       this.rootPage = HomePage;

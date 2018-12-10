@@ -32,6 +32,7 @@ import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { Enviroment } from './enviroment';
 import { BloodService } from '../services/blood.service';
 import { AddPatientPage } from '../pages/add-patient/add-patient';
+import { PatientListPage } from '../pages/patient-list/patient-list';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { AddPatientPage } from '../pages/add-patient/add-patient';
     HospitalSettingsPage,
     AddClinicPage,
     AddPatientPage,
+    PatientListPage,
     GeneralMenuComponent,
     GeneralToolbarComponent,
     RequestItemComponent
@@ -71,6 +73,7 @@ import { AddPatientPage } from '../pages/add-patient/add-patient';
     HospitalSettingsPage,
     AddClinicPage,
     AddPatientPage,
+    PatientListPage,
     GeneralMenuComponent,
     GeneralToolbarComponent,
     RequestItemComponent

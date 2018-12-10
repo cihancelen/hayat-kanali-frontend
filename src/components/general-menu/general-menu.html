@@ -22,8 +22,13 @@
       </button>
 
       <button ion-item no-padding (click)="goAddPatient()" *ngIf="isAdmin || isEmployee">
-        <ion-icon name="person" margin-left margin-right></ion-icon>
+        <ion-icon name="person-add" margin-left margin-right></ion-icon>
         Hasta Ekle
+      </button>
+
+      <button ion-item no-padding (click)="goPatientList()">
+        <ion-icon name="people" margin-left margin-right></ion-icon>
+        Hasta Listesi
       </button>
     </ion-list>
   </ion-content>

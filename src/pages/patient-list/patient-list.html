@@ -1,0 +1,35 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Hastalar Listesi</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding class="bg-light">
+
+  <ion-card>
+    <ion-card-content no-padding>
+      <ion-list>
+
+        <button ion-item *ngFor="let item of patients">
+          <ion-row>
+
+            <ion-col>
+              <span><b>#{{item.id}}</b>  {{ item.name }} {{ item.surname }}</span>
+            </ion-col>
+
+            <ion-col></ion-col>
+
+            <ion-col>
+              <span>{{ item.disease }}</span>
+            </ion-col>
+
+          </ion-row>
+        </button>
+
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

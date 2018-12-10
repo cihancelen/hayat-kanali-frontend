@@ -18,7 +18,9 @@ export class BloodService {
             patientId : data.patient.id,
             bloodGroupId : data.patient.bloodGroupId,
             description: data.description,
-            unitQuantity: parseInt(data.unitQuantity)
+            unitQuantity: parseInt(data.unitQuantity),
+            waitingUnit: 0,
+            suppliedUnit: 0
         };
         
         this.httpService.post('blood/addBloodRequest', x_data);
