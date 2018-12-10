@@ -33,6 +33,7 @@ import { Enviroment } from './enviroment';
 import { BloodService } from '../services/blood.service';
 import { AddPatientPage } from '../pages/add-patient/add-patient';
 import { PatientListPage } from '../pages/patient-list/patient-list';
+import { PatientDetailPage } from '../pages/patient-detail/patient-detail';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { PatientListPage } from '../pages/patient-list/patient-list';
     AddClinicPage,
     AddPatientPage,
     PatientListPage,
+    PatientDetailPage,
     GeneralMenuComponent,
     GeneralToolbarComponent,
     RequestItemComponent
@@ -74,6 +76,7 @@ import { PatientListPage } from '../pages/patient-list/patient-list';
     AddClinicPage,
     AddPatientPage,
     PatientListPage,
+    PatientDetailPage,
     GeneralMenuComponent,
     GeneralToolbarComponent,
     RequestItemComponent

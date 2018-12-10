@@ -4,6 +4,7 @@ import { BloodService } from '../../services/blood.service';
 import { NotificationService } from '../../services/notification.service';
 import { HomePage } from '../home/home';
 import { HospitalService } from '../../services/hospital.service';
+import { PatientListPage } from '../patient-list/patient-list';
 
 @IonicPage()
 @Component({
@@ -62,7 +63,7 @@ export class AddBloodRequestPage implements OnInit {
     this.bloodService.addBloodRequest(data).push(data).then(() => {
       this.notificationService.notification('Kan talebi başarıyla eklenmiştir.');
 
-      this.navCtrl.setRoot(HomePage);
+      this.navCtrl.setRoot(PatientListPage);
     });
   }
 

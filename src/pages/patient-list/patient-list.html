@@ -12,7 +12,7 @@
     <ion-card-content no-padding>
       <ion-list>
 
-        <button ion-item *ngFor="let item of patients">
+        <button ion-item *ngFor="let item of patients" (click)="goDetailPatient(item.id)">
           <ion-row>
 
             <ion-col>
