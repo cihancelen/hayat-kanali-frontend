@@ -4,6 +4,7 @@ import { OpenDataService } from '../../services/open.data.service';
 import { HospitalService } from '../../services/hospital.service';
 import { NotificationService } from '../../services/notification.service';
 import { HomePage } from '../home/home';
+import { PatientListPage } from '../patient-list/patient-list';
 
 @IonicPage()
 @Component({
@@ -80,7 +81,9 @@ export class AddPatientPage implements OnInit {
         
         this.notificationService.notification('Hasta başarıyla eklenmiştir.');
 
-        this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot(HomePage).then(() =>{
+          this.navCtrl.push(PatientListPage);
+        });
         
       })
     })

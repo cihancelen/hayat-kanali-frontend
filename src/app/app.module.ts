@@ -34,6 +34,9 @@ import { BloodService } from '../services/blood.service';
 import { AddPatientPage } from '../pages/add-patient/add-patient';
 import { PatientListPage } from '../pages/patient-list/patient-list';
 import { PatientDetailPage } from '../pages/patient-detail/patient-detail';
+import { BloodRequestListPage } from '../pages/blood-request-list/blood-request-list';
+import { BloodRequestDetailPage } from '../pages/blood-request-detail/blood-request-detail';
+import { ActivePipe } from '../pipes/active.pipe';
 
 @NgModule({
   declarations: [
@@ -49,9 +52,12 @@ import { PatientDetailPage } from '../pages/patient-detail/patient-detail';
     AddPatientPage,
     PatientListPage,
     PatientDetailPage,
+    BloodRequestListPage,
+    BloodRequestDetailPage,
     GeneralMenuComponent,
     GeneralToolbarComponent,
-    RequestItemComponent
+    RequestItemComponent,
+    ActivePipe
   ],
   imports: [
     BrowserModule,
@@ -77,6 +83,8 @@ import { PatientDetailPage } from '../pages/patient-detail/patient-detail';
     AddPatientPage,
     PatientListPage,
     PatientDetailPage,
+    BloodRequestListPage,
+    BloodRequestDetailPage,
     GeneralMenuComponent,
     GeneralToolbarComponent,
     RequestItemComponent
@@ -92,7 +100,8 @@ import { PatientDetailPage } from '../pages/patient-detail/patient-detail';
     UserService,
     HospitalService,
     EmployeeService,
-    BloodService
+    BloodService,
+    ActivePipe
   ]
 })
 export class AppModule { }

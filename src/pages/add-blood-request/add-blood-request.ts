@@ -23,7 +23,7 @@ export class AddBloodRequestPage implements OnInit {
   patients: Array<any> = [];
   selectedPatient: any = {};
   p: number;
-  unitQuantity: string;
+  unitQuantity: number;
   requestDescription: string;
   hospital: any = JSON.parse(localStorage.getItem('hospital-info'));
 
@@ -56,14 +56,13 @@ export class AddBloodRequestPage implements OnInit {
       description: this.requestDescription,
       requestData: new Date(),
       hospital: this.hospital,
-      isActive: true,
-      requestUsers: []
+      isActive: true
     };
 
     this.bloodService.addBloodRequest(data).push(data).then(() => {
       this.notificationService.notification('Kan talebi başarıyla eklenmiştir.');
 
-      this.navCtrl.setRoot(PatientListPage);
+      this.navCtrl.setRoot(HomePage);
     });
   }
 

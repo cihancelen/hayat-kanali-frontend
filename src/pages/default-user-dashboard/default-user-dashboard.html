@@ -14,14 +14,27 @@
 
         <ion-card *ngFor="let item of requests">
           <ion-card-header class="bg-primary text-white">
-            <div class="font-125" float-left>{{ item.patient.name }} {{  item.patient.surname }}</div>
-            <div class="font-125" float-right>{{ item.unitQuantity }} Ünite <span class="bold">{{ item.patient.bloodGroup }}</span></div>
+            <div class="font-125" float-left>{{ item.patient.name }} {{ item.patient.surname }}</div>
+            <div class="font-125" float-right>{{ item.unitQuantity }} Ünite <span class="bold">{{
+                item.patient.bloodGroup }}</span></div>
           </ion-card-header>
           <ion-card-content padding>
-            <p class="font-125" margin-bottom>
-              Hastane Adı: <b>{{ item.hospital.name }}</b>
-            </p>
-            <span>İletişim Numarası: <b>{{ item.hospital.phone }}</b></span>
+            <ion-row>
+              <ion-col>
+                <p class="font-125" margin-bottom>
+                  Hastane Adı: <b>{{ item.hospital.name }}</b>
+                </p>
+                <span>İletişim Numarası: <b>{{ item.hospital.phone }}</b></span>
+              </ion-col>
+
+              <ion-col>
+                <button float-right ion-button outline round (click)="coming(item)">
+                  Geliyorum
+                  <ion-icon margin-left name="checkmark"></ion-icon>
+                </button>
+              </ion-col>
+            </ion-row>
+
           </ion-card-content>
         </ion-card>
 

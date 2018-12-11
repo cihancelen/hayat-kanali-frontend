@@ -26,9 +26,14 @@
         Hasta Ekle
       </button>
 
-      <button ion-item no-padding (click)="goPatientList()">
+      <button ion-item no-padding (click)="goPatientList()" *ngIf="isAdmin || isEmployee">
         <ion-icon name="people" margin-left margin-right></ion-icon>
         Hasta Listesi
+      </button>
+
+      <button ion-item no-padding (click)="goBloodRequestList()" *ngIf="isAdmin || isEmployee">
+        <ion-icon name="mail" margin-left margin-right></ion-icon>
+        Kan Talep Listesi
       </button>
     </ion-list>
   </ion-content>
