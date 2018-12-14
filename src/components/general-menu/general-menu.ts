@@ -7,6 +7,7 @@ import { UserSettingsPage } from "../../pages/user-settings/user-settings";
 import { AddClinicPage } from "../../pages/add-clinic/add-clinic";
 import { AddPatientPage } from "../../pages/add-patient/add-patient";
 import { PatientListPage } from "../../pages/patient-list/patient-list";
+import { BloodRequestListPage } from "../../pages/blood-request-list/blood-request-list";
 
 @Component({
   selector: "general-menu",
@@ -62,9 +63,14 @@ export class GeneralMenuComponent implements OnInit {
     this.navCtrl.push(AddPatientPage);
   }
 
-  goPatientList(){
+  goPatientList() {
     this.menuCtrl.close('generalMenu');
     this.navCtrl.push(PatientListPage);
   }
-  
+
+  goBloodRequestList() {
+    this.menuCtrl.close('generalMenu');
+    this.navCtrl.push(BloodRequestListPage);
+  }
+
 }

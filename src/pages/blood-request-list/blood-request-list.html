@@ -1,0 +1,40 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Kan Talepleri Listesi</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding class="bg-light">
+
+  <ion-card no-padding>
+    <ion-card-header class="bg-primary">
+      <p class="font-125 text-white" text-center no-padding no-margin>Kan Talepleri</p>
+    </ion-card-header>
+    <ion-card-content no-padding>
+
+      <ion-list class="border-1">
+        <button ion-item *ngFor="let request of requests  | activePipe: {isActive: true}">
+
+          <ion-row>
+            <ion-col>
+              <span>{{ request.patient.name }} {{ request.patient.surname }}</span>
+            </ion-col>
+
+            <ion-col>
+              {{ request.description }}
+            </ion-col>
+
+            <ion-col text-right>
+              <ion-icon class="text-primary" name="arrow-forward"></ion-icon>
+            </ion-col>
+          </ion-row>
+
+        </button>
+      </ion-list>
+
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
