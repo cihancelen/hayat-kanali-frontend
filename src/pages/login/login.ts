@@ -8,7 +8,6 @@ import { UserService } from "../../services/user.service";
 import { HospitalService } from "../../services/hospital.service";
 import { EmployeeService } from "../../services/employee.service";
 
-@IonicPage()
 @Component({
   selector: "page-login",
   templateUrl: "login.html"
@@ -1532,7 +1531,7 @@ export class LoginPage implements OnInit {
 
     this.httpService.register(this.user).subscribe(data => {
       this.httpService.login(data.email, this.user.password, "default-user").subscribe(user => {
-        localStorage.setItem('user-data', user);
+        localStorage.setItem('user-data', JSON.stringify(user));
         localStorage.setItem('token', 'Bearer ' + user.access_token);
 
         this.navCtrl.setRoot(DefaultUserDashboardPage);

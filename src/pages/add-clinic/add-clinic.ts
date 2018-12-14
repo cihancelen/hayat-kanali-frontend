@@ -4,7 +4,6 @@ import { HospitalService } from '../../services/hospital.service';
 import { NotificationService } from '../../services/notification.service';
 import { HomePage } from '../home/home';
 
-@IonicPage()
 @Component({
   selector: 'page-add-clinic',
   templateUrl: 'add-clinic.html',

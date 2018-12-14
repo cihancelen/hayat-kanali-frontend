@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { OpenDataService } from '../../services/open.data.service';
 import { HospitalService } from '../../services/hospital.service';
 
-@IonicPage()
 @Component({
   selector: 'page-patient-detail',
   templateUrl: 'patient-detail.html',

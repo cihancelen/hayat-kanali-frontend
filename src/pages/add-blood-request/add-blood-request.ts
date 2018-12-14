@@ -6,7 +6,6 @@ import { HomePage } from '../home/home';
 import { HospitalService } from '../../services/hospital.service';
 import { PatientListPage } from '../patient-list/patient-list';
 
-@IonicPage()
 @Component({
   selector: 'page-add-blood-request',
   templateUrl: 'add-blood-request.html',

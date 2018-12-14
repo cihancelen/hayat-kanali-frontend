@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { AngularFireDatabase } from '@angular/fire/database';
 
-@IonicPage()
 @Component({
   selector: 'page-default-user-dashboard',
   templateUrl: 'default-user-dashboard.html',
