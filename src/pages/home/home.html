@@ -87,16 +87,29 @@
 
         <div [ngSwitch]="segmentType">
           <div *ngSwitchCase="'active'">
-            <request-item></request-item>
+            <ion-list class="border-1" *ngIf="activeRequests.length > 0">
+              <request-item *ngFor="let request of activeRequests" [request]="request" (click)="goDetail(request)"></request-item>
+            </ion-list>
+
+            <ion-card *ngIf="activeRequests.length == 0" no-margin class="width-100">
+              <ion-card-content>
+
+                Aktif kan talebi bulunmamaktadır.
+              </ion-card-content>
+            </ion-card>
           </div>
 
           <div *ngSwitchCase="'deactive'">
-            <p padding margin>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores consectetur nisi ipsa aperiam. Culpa
-              dignissimos alias quod nulla quae eaque cupiditate cumque iste eos reiciendis pariatur, ducimus id nisi
-              modi!
-            </p>
-            <!-- <request-item></request-item> -->
+            <ion-list class="border-1" *ngIf="deactiveRequests.length > 0">
+              <request-item *ngFor="let request of deactiveRequests" [request]="request" (click)="goDetail(request)"></request-item>
+            </ion-list>
+
+            <ion-card *ngIf="deactiveRequests.length == 0" no-margin class="width-100">
+              <ion-card-content>
+
+                Pasif kan talebi bulunmamaktadır.
+              </ion-card-content>
+            </ion-card>
           </div>
         </div>
       </ion-col>

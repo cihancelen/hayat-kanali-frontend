@@ -45,6 +45,9 @@ export class DefaultUserDashboardPage implements OnInit {
         this.database.list('blood-requests/' + patient.key + '/userRequests').valueChanges().subscribe(data => {
 
           this.database.object('blood-requests/' + patient.key).update({ waitingUnit: data.length });
+
+          
+          
         });
 
         this.notificationService.notification('Gideceginiz hastane ' + patient.hospital.name + ' dir.');
