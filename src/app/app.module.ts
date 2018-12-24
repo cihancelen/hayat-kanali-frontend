@@ -38,6 +38,11 @@ import { BloodRequestListPage } from '../pages/blood-request-list/blood-request-
 import { BloodRequestDetailPage } from '../pages/blood-request-detail/blood-request-detail';
 import { ActivePipe } from '../pipes/active.pipe';
 
+import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFireFunctionsModule } from "@angular/fire/functions";
+import { AngularFirestoreModule } from "@angular/fire/firestore";
+import { LocalNotifications } from "@ionic-native/local-notifications";
+
 @NgModule({
   declarations: [
     MyApp,
@@ -67,7 +72,10 @@ import { ActivePipe } from '../pipes/active.pipe';
     }),
     HttpModule,
     AngularFireModule.initializeApp(Enviroment.firebase),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    AngularFireFunctionsModule,
+    AngularFirestoreModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -101,7 +109,8 @@ import { ActivePipe } from '../pipes/active.pipe';
     HospitalService,
     EmployeeService,
     BloodService,
-    ActivePipe
+    ActivePipe,
+    LocalNotifications
   ]
 })
 export class AppModule { }

@@ -8,8 +8,8 @@ export class NotificationService {
     private toastCtrl: ToastController
   ) { }
 
-  notification(message: string, position: string = 'top', duration: number = 3000): void {
-    this.toastCtrl.create({
+  notification(message: string, position: string = 'top', duration: number = 3000) {
+    return this.toastCtrl.create({
       message: message,
       duration: duration,
       position: position,

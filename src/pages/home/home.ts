@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { MenuController, NavController } from "ionic-angular";
 import { AngularFireDatabase } from "@angular/fire/database";
 import { BloodRequestDetailPage } from "../blood-request-detail/blood-request-detail";
+import * as ff from "firebase-functions";
+import * as admin from "firebase-admin";
 
 @Component({
   selector: "page-home",
@@ -22,7 +24,7 @@ export class HomePage implements OnInit {
   ngOnInit() {
     let hospitalId = JSON.parse(localStorage.getItem('hospital-info')).id;
 
-    this.firebase.list('blood-requests/').snapshotChanges().subscribe(data => {
+    this.firebase.list('blood-requests/').snapshotChanges(['child_added']).forEach(data => {
       this.activeRequests = [];
 
       data.forEach((elem: any) => {
@@ -38,8 +40,9 @@ export class HomePage implements OnInit {
           this.deactiveRequests.push(el);
         }
 
-      })
+      });
     });
+
   }
 
   goDetail(request: any) {

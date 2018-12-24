@@ -11,7 +11,7 @@ export class BloodService {
         private database: AngularFireDatabase
     ) { }
 
-    
+    requests: Array<any> = [];
 
     addBloodRequest(data: any) {
         let x_data = {
