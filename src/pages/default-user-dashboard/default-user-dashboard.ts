@@ -8,6 +8,7 @@ import * as ff from "firebase-functions";
 import * as admin from "firebase-admin";
 import { Enviroment } from '../../app/enviroment';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { BackgroundMode } from "@ionic-native/background-mode";
 
 @Component({
   selector: 'page-default-user-dashboard',
@@ -19,7 +20,8 @@ export class DefaultUserDashboardPage implements OnInit {
     private database: AngularFireDatabase,
     private notificationService: NotificationService,
     private firebase: AngularFireDatabase,
-    private localNotifications: LocalNotifications
+    private localNotifications: LocalNotifications,
+    private backgroundMode: BackgroundMode
   ) { }
 
   requests: Array<any> = [];
@@ -28,21 +30,21 @@ export class DefaultUserDashboardPage implements OnInit {
   ngOnInit() {
     this.user_info = localStorage.getItem('user-info') ? JSON.parse(localStorage.getItem('user-info')) : null;
 
-    // this.database.list('blood-requests/').snapshotChanges().subscribe(data => {
-    //   this.requests = [];
+    this.backgroundMode.enable();
 
-    //   data.forEach(elem => {
-    //     var el = elem.payload.toJSON();
-    //     el['key'] = elem.key;
-
-    //     this.requests.push(el);
-    //   })
-    // });
+    this.backgroundMode.wakeUp();
+    this.backgroundMode.unlock();
+    this.backgroundMode.overrideBackButton();
 
     this.firebase.list('blood-requests/').snapshotChanges().subscribe(data => {
+      this.requests = [];
 
       data.forEach(elem => {
-        console.log(elem.payload.val());
+
+        var el = elem.payload.val();
+        el['key'] = elem.key;
+
+        this.requests.push(el);
 
         if (elem.payload.val()['sendedUsers']) {
           var zz = elem.payload.val();
@@ -56,36 +58,19 @@ export class DefaultUserDashboardPage implements OnInit {
           var aa = arr.some(x => x == this.user_info.id);
 
           if (!aa) {
-            this.notificationService.notification(elem.payload.val()['description']).then(() => {
-              this.firebase.list('blood-requests/' + elem.key + '/sendedUsers').push(this.user_info.id);
-            })
+            this.localNotifications.schedule({
+              id: (new Date().getDate()),
+              title: 'Hayat Kanalı - Kan Talebi',
+              text: zz['description'],
+              vibrate: true,
+              color: 'd32f2f',
+              lockscreen: true,
+            });
+
+            this.firebase.list('blood-requests/' + elem.key + '/sendedUsers').push(this.user_info.id);
+
           }
-
-          // arr.forEach(element => {
-          //   console.log(element);
-
-          //   if (element != this.user_info.id) {
-          //     this.notificationService.notification(elem.payload.val()['description']).then(() => {
-          //       this.firebase.list('blood-requests/' + elem.key + '/sendedUsers').push(this.user_info.id);
-
-          //       // console.log('testtt');
-          //     })
-
-          //     // this.localNotifications.schedule({
-          //     //   id: 1,
-          //     //   text: elem['description'],
-          //     //   vibrate: true,
-          //     // });
-
-          //     // this.localNotifications.on('click').subscribe(() => {
-          //     //   this.firebase.object('blood-requests/' + elem.key + '/sendedUsers').set(this.user_info.id);
-          //     // });
-          //   }
-
-          // });
         }
-
-
       });
 
     });

@@ -42,6 +42,7 @@ import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFireFunctionsModule } from "@angular/fire/functions";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { LocalNotifications } from "@ionic-native/local-notifications";
+import { BackgroundMode } from '@ionic-native/background-mode';
 
 @NgModule({
   declarations: [
@@ -110,7 +111,8 @@ import { LocalNotifications } from "@ionic-native/local-notifications";
     EmployeeService,
     BloodService,
     ActivePipe,
-    LocalNotifications
+    LocalNotifications,
+    BackgroundMode
   ]
 })
 export class AppModule { }
