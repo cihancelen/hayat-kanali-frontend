@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
-import { Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 
 @Injectable()

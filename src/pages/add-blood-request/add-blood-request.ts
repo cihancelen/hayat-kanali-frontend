@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { BloodService } from '../../services/blood.service';
 import { NotificationService } from '../../services/notification.service';
 import { HomePage } from '../home/home';
 import { HospitalService } from '../../services/hospital.service';
-import { PatientListPage } from '../patient-list/patient-list';
 
 @Component({
   selector: 'page-add-blood-request',

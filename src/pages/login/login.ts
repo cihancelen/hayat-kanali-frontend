@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { IonicPage, NavController } from "ionic-angular";
+import { NavController } from "ionic-angular";
 import { HomePage } from "../home/home";
 import { OpenDataService } from "../../services/open.data.service";
 import { HttpService } from "../../services/http.service";
@@ -1540,36 +1540,38 @@ export class LoginPage implements OnInit {
   }
 
   login() {
-    this.httpService.login(this.login_model.email, this.login_model.password, this.loginType).subscribe(data => {
-      this.httpService.header.append('Authorization', 'Bearer ' + data.access_token);
-      localStorage.setItem('token', 'Bearer ' + data.access_token);
+    if (this.login_model.email.toString().trim() != '' || this.login_model.password.toString() != '') {
+      this.httpService.login(this.login_model.email, this.login_model.password, this.loginType).subscribe(data => {
+        this.httpService.header.append('Authorization', 'Bearer ' + data.access_token);
+        localStorage.setItem('token', 'Bearer ' + data.access_token);
 
-      if (this.loginType == 'default-user') {
-        this.userService.getUserInfo({ email: this.login_model.email }).subscribe(x => {
-          localStorage.setItem('user-info', JSON.stringify(x));
-          
-          
-          this.navCtrl.setRoot(DefaultUserDashboardPage);
-        });
-      }
-      else if (this.loginType == 'hospital') {
-        this.hospitalService.getHospitalInfo({email: this.login_model.email}).subscribe(x => {
-          localStorage.setItem('hospital-info', JSON.stringify(x));
+        if (this.loginType == 'default-user') {
+          this.userService.getUserInfo({ email: this.login_model.email }).subscribe(x => {
+            localStorage.setItem('user-info', JSON.stringify(x));
 
-          this.hospitalService.getPatientsByHospital(x.id).subscribe(patients =>{
-            localStorage.setItem('patients', JSON.stringify(patients));
+
+            this.navCtrl.setRoot(DefaultUserDashboardPage);
           });
-          
-          this.navCtrl.setRoot(HomePage);
-        });
-      }
-      else if(this.loginType == 'employee'){
-        this.employeeService.employeeInfo({email: this.login_model.email}).subscribe(x =>{
-          localStorage.setItem('employee-info', JSON.stringify(x));
-          this.navCtrl.setRoot(HomePage);
-        });
-      }
-    });
+        }
+        else if (this.loginType == 'hospital') {
+          this.hospitalService.getHospitalInfo({ email: this.login_model.email }).subscribe(x => {
+            localStorage.setItem('hospital-info', JSON.stringify(x));
+
+            this.hospitalService.getPatientsByHospital(x.id).subscribe(patients => {
+              localStorage.setItem('patients', JSON.stringify(patients));
+            });
+
+            this.navCtrl.setRoot(HomePage);
+          });
+        }
+        else if (this.loginType == 'employee') {
+          this.employeeService.employeeInfo({ email: this.login_model.email }).subscribe(x => {
+            localStorage.setItem('employee-info', JSON.stringify(x));
+            this.navCtrl.setRoot(HomePage);
+          });
+        }
+      });
+    }
   }
 
 }

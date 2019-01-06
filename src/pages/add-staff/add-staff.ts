@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { HospitalService } from '../../services/hospital.service';
 import { NotificationService } from '../../services/notification.service';
 import { HomePage } from '../home/home';

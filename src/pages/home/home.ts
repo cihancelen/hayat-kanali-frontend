@@ -1,9 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { MenuController, NavController } from "ionic-angular";
+import { NavController } from "ionic-angular";
 import { AngularFireDatabase } from "@angular/fire/database";
 import { BloodRequestDetailPage } from "../blood-request-detail/blood-request-detail";
-import * as ff from "firebase-functions";
-import * as admin from "firebase-admin";
 
 @Component({
   selector: "page-home",

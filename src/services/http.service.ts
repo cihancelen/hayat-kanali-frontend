@@ -3,17 +3,20 @@ import { Http, Headers } from "@angular/http";
 import { Observable } from 'rxjs';
 import { map } from "rxjs/operators/map";
 import { StaticInfo } from '../classes/static-info';
+import { catchError } from 'rxjs/operators';
+import { NotificationService } from './notification.service';
 
 @Injectable()
 export class HttpService {
 
   constructor(
-    private http: Http
+    private http: Http,
+    private notificationService: NotificationService
   ) {
-    if(localStorage.getItem('token')){
-      this.header.append('Authorization', localStorage.getItem('token'))
+    if (localStorage.getItem('token')) {
+      this.header.append('Authorization', 'Bearer' + localStorage.getItem('token'))
     }
-   }
+  }
 
   url: string = StaticInfo.api_url;
   public header: Headers = new Headers();
@@ -37,10 +40,16 @@ export class HttpService {
   login(email: string, password: string, login_type = ''): Observable<any> {
     let user = 'grant_type=password&username=' + email + '&password=' + password + '&login_type=' + login_type;
 
-    return this.http.post(StaticInfo.base_url + 'token', user)
+    let result = this.http.post(StaticInfo.base_url + 'token', user)
       .pipe(
-        map(x => x.json())
+        map(x => x.json()),
+        catchError(err => {
+          this.print_error(err.json())
+          return new Observable;
+        })
       );
+
+    return result;
   }
 
   register(data: any): Observable<any> {
@@ -48,5 +57,16 @@ export class HttpService {
       .pipe(
         map(x => x.json())
       );
+  }
+
+  print_error(err) {
+    if (err.error == 'Wrong Pass')
+      this.notificationService.notification(err.error_description);
+    if (err.error == 'Not Found User')
+      this.notificationService.notification(err.error_description);
+    if (err.error == 'Not Found Hospital')
+      this.notificationService.notification(err.error_description);
+    if (err.error == 'Not Found Employee')
+      this.notificationService.notification(err.error_description);
   }
 }

@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { isArray } from 'ionic-angular/util/util';
 import { NotificationService } from '../../services/notification.service';
-import { FirebaseFunctions } from '@angular/fire';
-import * as ff from "firebase-functions";
-import * as admin from "firebase-admin";
-import { Enviroment } from '../../app/enviroment';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { BackgroundMode } from "@ionic-native/background-mode";
 
