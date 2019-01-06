@@ -35,27 +35,26 @@ export class DefaultUserDashboardPage implements OnInit {
 
       data.forEach(elem => {
 
-        var el = elem.payload.val();
-        el['key'] = elem.key;
+        var current_value = elem.payload.val();
+        current_value['key'] = elem.key;
 
-        this.requests.push(el);
+        this.requests.push(current_value);
 
         if (elem.payload.val()['sendedUsers']) {
-          var zz = elem.payload.val();
 
-          var sen = zz['sendedUsers'];
+          var sended = current_value['sendedUsers'];
 
-          var arr = Object.keys(sen).map(key => sen[key]);
-          var a = arr.findIndex(x => x == 'gecersiz');
-          arr.splice(a, 1);
+          var converted_arr = Object.keys(sended).map(key => sended[key]);
+          var splice = converted_arr.findIndex(x => x == 'gecersiz');
+          converted_arr.splice(splice, 1);
 
-          var aa = arr.some(x => x == this.user_info.id);
+          var isHaveUser = converted_arr.some(x => x == this.user_info.id);
 
-          if (!aa) {
+          if (!isHaveUser) {
             this.localNotifications.schedule({
               id: (new Date().getDate()),
               title: 'Hayat Kanalı - Kan Talebi',
-              text: zz['description'],
+              text: current_value['description'],
               vibrate: true,
               color: 'd32f2f',
               lockscreen: true,
