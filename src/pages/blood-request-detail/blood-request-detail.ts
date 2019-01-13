@@ -4,7 +4,6 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { OpenDataService } from '../../services/open.data.service';
 import { HospitalService } from '../../services/hospital.service';
 
-@IonicPage()
 @Component({
   selector: 'page-blood-request-detail',
   templateUrl: 'blood-request-detail.html',

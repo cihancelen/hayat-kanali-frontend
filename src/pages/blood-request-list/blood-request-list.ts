@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { IonicPage } from 'ionic-angular';
 import { AngularFireDatabase } from '@angular/fire/database';
 
-@IonicPage()
 @Component({
   selector: 'page-blood-request-list',
   templateUrl: 'blood-request-list.html',
