@@ -6,6 +6,8 @@ import { SplashScreen } from "@ionic-native/splash-screen";
 import { DefaultUserDashboardPage } from "../pages/default-user-dashboard/default-user-dashboard";
 import { HomePage } from "../pages/home/home";
 import { LoginPage } from "../pages/login/login";
+import { HttpService } from "../services/http.service";
+import { LoaderService } from "../services/loader.service";
 
 @Component({
   templateUrl: "app.html"
@@ -17,12 +19,13 @@ export class MyApp {
     platform: Platform,
     statusBar: StatusBar,
     splashScreen: SplashScreen,
+    private loaderService: LoaderService
   ) {
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
     });
-
+    
     if (localStorage.getItem('user-info')) {
       this.rootPage = DefaultUserDashboardPage;
     }

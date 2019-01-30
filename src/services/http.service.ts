@@ -3,15 +3,19 @@ import { Http, Headers } from "@angular/http";
 import { Observable } from 'rxjs';
 import { map } from "rxjs/operators/map";
 import { StaticInfo } from '../classes/static-info';
-import { catchError } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { NotificationService } from './notification.service';
+import 'rxjs/add/operator/finally';
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+import { LoaderService } from './loader.service';
 
 @Injectable()
 export class HttpService {
 
   constructor(
     private http: Http,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private loaderService: LoaderService
   ) {
     if (localStorage.getItem('token')) {
       this.header.append('Authorization', 'Bearer' + localStorage.getItem('token'))
@@ -22,18 +26,32 @@ export class HttpService {
   public header: Headers = new Headers();
 
   get(url: string): Observable<any> {
+    this.loaderService.setShowLoader(true);
+
     return this.http.get(this.url + url,
       { headers: this.header })
+
       .pipe(
-        map(data => data.json())
+        map(data => data.json()),
+        catchError(err => {
+          return new ErrorObservable(err);
+        }),
+        finalize(() => {
+          this.loaderService.setShowLoader(false);
+        })
       );
   }
 
   post(url: string, obj: any): Observable<any> {
+    this.loaderService.setShowLoader(true);
+
     return this.http.post(this.url + url, obj,
       { headers: this.header })
       .pipe(
-        map(data => data.json())
+        map(data => data.json()),
+        finalize(() => {
+          this.loaderService.setShowLoader(false);
+        })
       );
   }
 

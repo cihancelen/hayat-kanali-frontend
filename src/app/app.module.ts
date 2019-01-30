@@ -43,6 +43,8 @@ import { AngularFireFunctionsModule } from "@angular/fire/functions";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { LocalNotifications } from "@ionic-native/local-notifications";
 import { BackgroundMode } from '@ionic-native/background-mode';
+import { PageLoaderComponent } from '../components/page-loader/page-loader.component';
+import { LoaderService } from '../services/loader.service';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,8 @@ import { BackgroundMode } from '@ionic-native/background-mode';
     GeneralMenuComponent,
     GeneralToolbarComponent,
     RequestItemComponent,
-    ActivePipe
+    ActivePipe,
+    PageLoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -96,7 +99,8 @@ import { BackgroundMode } from '@ionic-native/background-mode';
     BloodRequestDetailPage,
     GeneralMenuComponent,
     GeneralToolbarComponent,
-    RequestItemComponent
+    RequestItemComponent,
+    PageLoaderComponent
   ],
   providers: [
     StatusBar,
@@ -112,7 +116,8 @@ import { BackgroundMode } from '@ionic-native/background-mode';
     BloodService,
     ActivePipe,
     LocalNotifications,
-    BackgroundMode
+    BackgroundMode,
+    LoaderService
   ]
 })
 export class AppModule { }
