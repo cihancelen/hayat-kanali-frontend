@@ -7,6 +7,8 @@ import { DefaultUserDashboardPage } from "../default-user-dashboard/default-user
 import { UserService } from "../../services/user.service";
 import { HospitalService } from "../../services/hospital.service";
 import { EmployeeService } from "../../services/employee.service";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { patterns } from "../../classes/regex-pattern";
 
 @Component({
   selector: "page-login",
@@ -19,7 +21,8 @@ export class LoginPage implements OnInit {
     private httpService: HttpService,
     private userService: UserService,
     private hospitalService: HospitalService,
-    private employeeService: EmployeeService
+    private employeeService: EmployeeService,
+    public formBuilder: FormBuilder
   ) {
 
     if (localStorage.getItem('user-data'))
@@ -27,7 +30,6 @@ export class LoginPage implements OnInit {
   }
 
   segment: string = 'login';
-  loginType: string = 'default-user';
   citiesAndDistricts: Array<any> = [
     {
       "il": "Adana",
@@ -1512,12 +1514,23 @@ export class LoginPage implements OnInit {
     lastBloodDonation: ''
   };
 
+  loginType: string = 'default-user';
   login_model: any = {
     email: '',
     password: ''
-  }
+  };
+
+  loginForm: FormGroup;
+  isLoginSubmit: boolean = false;
+
 
   ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      'email': [this.login_model.email, [Validators.required, Validators.email, Validators.pattern(patterns.emailPattern)]],
+      'password': [this.login_model.password, [Validators.required, Validators.minLength(3)]],
+      'loginType': []
+    });
+
     this.openDataService.getBloodGroups().subscribe(data => this.bloodGroups = data);
     this.openDataService.getDiseases().subscribe(data => this.diseases = data);
   }
@@ -1540,7 +1553,10 @@ export class LoginPage implements OnInit {
   }
 
   login() {
-    if (this.login_model.email.toString().trim() != '' || this.login_model.password.toString() != '') {
+    this.isLoginSubmit = true;
+    console.log(this.loginForm.controls);
+
+    if (this.loginForm.valid) {
       this.httpService.login(this.login_model.email, this.login_model.password, this.loginType).subscribe(data => {
         this.httpService.header.append('Authorization', 'Bearer ' + data.access_token);
         localStorage.setItem('token', 'Bearer ' + data.access_token);
@@ -1573,5 +1589,7 @@ export class LoginPage implements OnInit {
       });
     }
   }
+
+  get lf() { return this.loginForm.controls }
 
 }

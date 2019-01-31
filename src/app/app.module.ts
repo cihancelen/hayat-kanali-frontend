@@ -45,6 +45,7 @@ import { LocalNotifications } from "@ionic-native/local-notifications";
 import { BackgroundMode } from '@ionic-native/background-mode';
 import { PageLoaderComponent } from '../components/page-loader/page-loader.component';
 import { LoaderService } from '../services/loader.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,9 @@ import { LoaderService } from '../services/loader.service';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFireFunctionsModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

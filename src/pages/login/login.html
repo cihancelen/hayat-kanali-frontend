@@ -20,42 +20,68 @@
       <div [ngSwitch]="segment">
         <div *ngSwitchCase="'login'">
 
-          <ion-list>
-            <ion-item item-start>
-              <ion-label floating>E-posta yada Kullanıcı Adı</ion-label>
-              <ion-input type="text" [(ngModel)]="login_model.email" required></ion-input>
-            </ion-item>
+          <!-- <form [formGroup]="loginForm" (submit)="login()">
+            Email:<input type="text" formControlName="email" required>
 
-            <ion-item>
-              <ion-label floating>Parola</ion-label>
-              <ion-input type="password" [(ngModel)]="login_model.password" required></ion-input>
-            </ion-item>
+            <div *ngIf="!lf.email.valid && isLoginSubmit">
+              <div class="error" *ngIf="lf.email.errors.required">Eposta gerekli</div>
+              <div class="error" *ngIf="lf.email.errors.pattern">Eposta adresi yanlış formatta.</div>
+            </div>
 
-            <ion-row no-margin margin-top radio-group [(ngModel)]="loginType">
-              <ion-col>
-                <ion-item>
-                  <ion-label>Kullanıcı</ion-label>
-                  <ion-radio value="default-user"></ion-radio>
-                </ion-item>
-              </ion-col>
-              <ion-col>
-                <ion-item>
-                  <ion-label>Hastane</ion-label>
-                  <ion-radio value="hospital"></ion-radio>
-                </ion-item>
-              </ion-col>
-              <ion-col>
-                <ion-item>
-                  <ion-label>Personel</ion-label>
-                  <ion-radio value="employee"></ion-radio>
-                </ion-item>
-              </ion-col>
-            </ion-row>
-          </ion-list>
+            Parola: <input type="password" formControlName="password">
 
-          <button ion-button margin-top block (click)="login()">
-            Giriş Yap
-          </button>
+            <button type="submit">submit</button>
+          </form> -->
+
+          <form [formGroup]="loginForm">
+            <ion-list>
+              <ion-item item-start>
+                <ion-label floating>E-posta</ion-label>
+                <ion-input type="text" formControlName="email" [(ngModel)]="login_model.email"></ion-input>
+              </ion-item>
+
+              <div *ngIf="!lf.email.valid && isLoginSubmit">
+                <div class="error" *ngIf="lf.email.errors.required">Eposta gerekli</div>
+                <div class="error" *ngIf="lf.email.errors.pattern">Eposta adresi yanlış formatta.</div>
+              </div>
+
+              <ion-item>
+                <ion-label floating>Parola</ion-label>
+                <ion-input type="password" formControlName="password" [(ngModel)]="login_model.password"></ion-input>
+              </ion-item>
+
+              <div *ngIf="!lf.password.valid && isLoginSubmit">
+                <div class="error" *ngIf="lf.password.errors.required">Parola gerekli</div>
+                <div class="error" *ngIf="lf.password.errors.minlength">En az 3 karakter olmalı</div>
+              </div>
+
+              <ion-row no-margin margin-top radio-group formControlName="loginType" [(ngModel)]="loginType">
+                <ion-col>
+                  <ion-item>
+                    <ion-label>Kullanıcı</ion-label>
+                    <ion-radio value="default-user"></ion-radio>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <ion-label>Hastane</ion-label>
+                    <ion-radio value="hospital"></ion-radio>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <ion-label>Personel</ion-label>
+                    <ion-radio value="employee"></ion-radio>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-list>
+
+            <button ion-button margin-top block (click)="login()">
+              Giriş Yap
+            </button>
+
+          </form>
 
         </div>
         <div *ngSwitchCase="'signup'">
@@ -137,7 +163,8 @@
               </ion-col>
               <ion-col ion-item no-padding>
                 <ion-label floating>Kalıtsal Rahatsızlık</ion-label>
-                <ion-select [(ngModel)]="user.diseases" required multiple="true" class="border-bottom" cancelText="İptal" okText="Tamam">
+                <ion-select [(ngModel)]="user.diseases" required multiple="true" class="border-bottom" cancelText="İptal"
+                  okText="Tamam">
                   <ion-option *ngFor="let item of diseases" value="{{ item.id }}">{{ item.name }}</ion-option>
                 </ion-select>
               </ion-col>
@@ -149,9 +176,10 @@
                 <ion-checkbox [(ngModel)]="user.usingSmokingAndAlcohol"></ion-checkbox>
               </ion-col>
               <ion-col ion-item>
-                  <ion-label floating>Son kan verme tarihi</ion-label>
-                  <ion-datetime [(ngModel)]="user.lastBloodDonation" required #datetimes cancelText="İptal" doneText="Tamam" displayFormat="DD MMMM YYYY"></ion-datetime>
-                </ion-col>
+                <ion-label floating>Son kan verme tarihi</ion-label>
+                <ion-datetime [(ngModel)]="user.lastBloodDonation" required #datetimes cancelText="İptal" doneText="Tamam"
+                  displayFormat="DD MMMM YYYY"></ion-datetime>
+              </ion-col>
             </ion-row>
 
           </ion-list>
