@@ -20,19 +20,6 @@
       <div [ngSwitch]="segment">
         <div *ngSwitchCase="'login'">
 
-          <!-- <form [formGroup]="loginForm" (submit)="login()">
-            Email:<input type="text" formControlName="email" required>
-
-            <div *ngIf="!lf.email.valid && isLoginSubmit">
-              <div class="error" *ngIf="lf.email.errors.required">Eposta gerekli</div>
-              <div class="error" *ngIf="lf.email.errors.pattern">Eposta adresi yanlış formatta.</div>
-            </div>
-
-            Parola: <input type="password" formControlName="password">
-
-            <button type="submit">submit</button>
-          </form> -->
-
           <form [formGroup]="loginForm">
             <ion-list>
               <ion-item item-start>

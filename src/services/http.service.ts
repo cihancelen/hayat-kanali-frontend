@@ -17,9 +17,7 @@ export class HttpService {
     private notificationService: NotificationService,
     private loaderService: LoaderService
   ) {
-    if (localStorage.getItem('token')) {
-      this.header.append('Authorization', 'Bearer' + localStorage.getItem('token'))
-    }
+    this.changeHeader();
   }
 
   url: string = StaticInfo.api_url;
@@ -27,6 +25,7 @@ export class HttpService {
 
   get(url: string): Observable<any> {
     this.loaderService.setShowLoader(true);
+    this.changeHeader();
 
     return this.http.get(this.url + url,
       { headers: this.header })
@@ -44,6 +43,7 @@ export class HttpService {
 
   post(url: string, obj: any): Observable<any> {
     this.loaderService.setShowLoader(true);
+    this.changeHeader();
 
     return this.http.post(this.url + url, obj,
       { headers: this.header })
@@ -57,6 +57,7 @@ export class HttpService {
 
   login(email: string, password: string, login_type = ''): Observable<any> {
     let user = 'grant_type=password&username=' + email + '&password=' + password + '&login_type=' + login_type;
+    this.changeHeader();
 
     let result = this.http.post(StaticInfo.base_url + 'token', user)
       .pipe(
@@ -86,5 +87,12 @@ export class HttpService {
       this.notificationService.notification(err.error_description);
     if (err.error == 'Not Found Employee')
       this.notificationService.notification(err.error_description);
+  }
+
+  changeHeader(): void {
+    if (localStorage.getItem('token')) {
+      this.header.delete('Authorization');
+      this.header.append('Authorization', localStorage.getItem('token'))
+    }
   }
 }
