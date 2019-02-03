@@ -45,7 +45,7 @@ export class GeneralMenuComponent implements OnInit {
     localStorage.clear();
 
     this.menuCtrl.close('generalMenu');
-    this.navCtrl.setRoot(LoginPage);
+    this.navCtrl.setRoot(BloodRequestListPage);
   }
 
   updateSettings() {

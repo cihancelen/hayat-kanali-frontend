@@ -1,23 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-blood-request-list',
   templateUrl: 'blood-request-list.html',
 })
-export class BloodRequestListPage  implements OnInit{
+export class BloodRequestListPage implements OnInit {
 
   constructor(
-    private firebase: AngularFireDatabase
-  ){}
+    private firebase: AngularFireDatabase,
+    private navCtrl: NavController
+  ) { }
 
   requests: Array<any> = [];
-  
-  ngOnInit(){
-    this.firebase.list('blood-requests').valueChanges().subscribe(data =>{
+  isLogin: boolean = false;
+
+  ngOnInit() {
+    this.isLogin = localStorage.getItem('token') ? true : false;
+
+    this.firebase.list('blood-requests').valueChanges().subscribe(data => {
       this.requests = data;
     })
   }
 
+  goToLoginPage() {
+    this.navCtrl.setRoot(LoginPage);
+  }
 }

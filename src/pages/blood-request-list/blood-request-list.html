@@ -2,6 +2,12 @@
 
   <ion-navbar>
     <ion-title>Kan Talepleri Listesi</ion-title>
+    
+    <ion-buttons end *ngIf="!isLogin">
+      <button ion-button icon-only (click)="goToLoginPage()">
+        <ion-icon name="log-in"></ion-icon> Giriş Yap yada Kayıt Ol
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>

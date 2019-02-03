@@ -17,7 +17,11 @@ export class HttpService {
     private notificationService: NotificationService,
     private loaderService: LoaderService
   ) {
-    this.changeHeader();
+    let token = localStorage.getItem('token');
+    
+    if(token){
+      this.changeHeader(token);
+    }
   }
 
   url: string = StaticInfo.api_url;
@@ -25,7 +29,7 @@ export class HttpService {
 
   get(url: string): Observable<any> {
     this.loaderService.setShowLoader(true);
-    this.changeHeader();
+    // this.changeHeader();
 
     return this.http.get(this.url + url,
       { headers: this.header })
@@ -43,7 +47,7 @@ export class HttpService {
 
   post(url: string, obj: any): Observable<any> {
     this.loaderService.setShowLoader(true);
-    this.changeHeader();
+    // this.changeHeader();
 
     return this.http.post(this.url + url, obj,
       { headers: this.header })
@@ -90,8 +94,8 @@ export class HttpService {
   }
 
   changeHeader(token = null): void {
-      
-      this.header.delete('Authorization');
-      this.header.append('Authorization', localStorage.getItem('token'))
+    this.header.delete('Authorization');
+    this.header.append('Authorization', 'Bearer ' + token);
+    localStorage.setItem('token', token);
   }
 }
