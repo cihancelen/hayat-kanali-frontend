@@ -13,53 +13,85 @@
   <ion-card col-12 col-lg-6 offset-lg-3>
     <ion-card-content>
 
-      <ion-list>
-        <ion-row>
-          <ion-col>
-            <h3 text-center class="font-125">Personel Kayıt Formu</h3>
-          </ion-col>
-        </ion-row>
-        
-        <ion-row>
-          <ion-col ion-item>
-            <ion-label floating>Ad</ion-label>
-            <ion-input [(ngModel)]="employee.name"></ion-input>
-          </ion-col>
-          <ion-col ion-item>
-            <ion-label floating>Soyad</ion-label>
-            <ion-input [(ngModel)]="employee.surname"></ion-input>
-          </ion-col>
-        </ion-row>
-
-        <ion-item>
-          <ion-label floating>Mail</ion-label>
-          <ion-input [(ngModel)]="employee.email"></ion-input>
-        </ion-item>
-        
-        <ion-item>
-          <ion-label floating>Kullanıcı Adı</ion-label>
-          <ion-input [(ngModel)]="employee.username"></ion-input>
-        </ion-item>
-
-       <ion-row>
-          <ion-col ion-item class="no-border">
-              <ion-label floating>Parola</ion-label>
-              <ion-input [(ngModel)]="employee.password"></ion-input>
+      <form [formGroup]="employeeForm">
+        <ion-list>
+          <ion-row>
+            <ion-col>
+              <h3 text-center class="font-125">Personel Kayıt Formu</h3>
             </ion-col>
-            
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-6 ion-item>
+              <ion-label floating>Ad</ion-label>
+              <ion-input formControlName="name" [(ngModel)]="employee.name"></ion-input>
+            </ion-col>
+
+
+
+            <ion-col col-6 ion-item>
+              <ion-label floating>Soyad</ion-label>
+              <ion-input formControlName="surname" [(ngModel)]="employee.surname"></ion-input>
+            </ion-col>
+
+            <ion-col col-6>
+              <div *ngIf="!f.name.valid && isSubmit">
+                <div class="error" *ngIf="f.name.errors.required">Ad gerekli</div>
+              </div>
+            </ion-col>
+
+            <ion-col col-6>
+              <div *ngIf="!f.surname.valid && isSubmit">
+                <div class="error" *ngIf="f.surname.errors.required">Soyad gerekli</div>
+              </div>
+            </ion-col>
+
+
+          </ion-row>
+
+          <ion-item>
+            <ion-label floating>Mail</ion-label>
+            <ion-input formControlName="email" [(ngModel)]="employee.email"></ion-input>
+          </ion-item>
+
+          <div *ngIf="!f.email.valid && isSubmit">
+            <div class="error" *ngIf="f.email.errors.required">Eposta gerekli</div>
+            <div class="error" *ngIf="f.email.errors.pattern">Eposta adresi yanlış formatta</div>
+          </div>
+
+          <ion-item>
+            <ion-label floating>Kullanıcı Adı</ion-label>
+            <ion-input formControlName="username" [(ngModel)]="employee.username"></ion-input>
+          </ion-item>
+
+          <div *ngIf="!f.username.valid && isSubmit">
+            <div class="error" *ngIf="f.username.errors.required">Kullanıcı adı gerekli</div>
+          </div>
+
+          <ion-row>
+            <ion-col ion-item class="no-border">
+              <ion-label floating>Parola</ion-label>
+              <ion-input formControlName="password" [(ngModel)]="employee.password"></ion-input>
+            </ion-col>
+
             <ion-col ion-item class="no-border">
               <ion-label floating>Parola(Tekrar)</ion-label>
               <ion-input></ion-input>
             </ion-col>
-       </ion-row>
-        
-      </ion-list>
+          </ion-row>
 
-      <button ion-button float-right icon-only padding margin-top (click)="addEmployee()">
-        <ion-icon name="add" margin-right></ion-icon>
-        Personeli Ekle
-      </button>
-      
+        </ion-list>
+
+        <div *ngIf="!f.password.valid && isSubmit">
+          <div class="error" *ngIf="f.password.errors.required">Parola gerekli</div>
+        </div>
+
+        <button ion-button float-right icon-only padding margin-top (click)="addEmployee()">
+          <ion-icon name="add" margin-right></ion-icon>
+          Personeli Ekle
+        </button>
+      </form>
+
     </ion-card-content>
   </ion-card>
 
