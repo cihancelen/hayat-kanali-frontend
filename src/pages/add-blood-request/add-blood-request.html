@@ -12,42 +12,57 @@
   <ion-card col-12 col-lg-6 offset-lg-3>
     <ion-card-content>
 
-      <ion-list>
-        <ion-row>
-          <ion-col>
-            <h3 text-center class="font-125">Kan Talep Formu</h3>
-          </ion-col>
-        </ion-row>
+      <form [formGroup]="addBloodRequestForm">
+        <ion-list style="border-bottom: none">
+          <ion-row>
+            <ion-col>
+              <h3 text-center class="font-125">Kan Talep Formu</h3>
+            </ion-col>
+          </ion-row>
 
-        <ion-item no-padding>
-          <ion-label floating>Hasta</ion-label>
-          <ion-select (ionChange)="selectPatient(p)" [(ngModel)]="p" class="border-bottom" cancelText="İptal" okText="Tamam" >
-            <ion-option selected value="0" disabled>Lütfen hastayı seçiniz.</ion-option>
-            <ion-option *ngFor="let patient of patients" value="{{ patient.id }}">{{ patient.name }}</ion-option>
-          </ion-select>
-        </ion-item>
+          <ion-item no-padding>
+            <ion-label floating>Hasta</ion-label>
+            <ion-select formControlName="patient" (ionChange)="selectPatient(p)" [(ngModel)]="p" class="border-bottom" cancelText="İptal" okText="Tamam">
+              <ion-option selected value="0" disabled>Lütfen hastayı seçiniz.</ion-option>
+              <ion-option *ngFor="let patient of patients" value="{{ patient.id }}">{{ patient.name }}</ion-option>
+            </ion-select>
+          </ion-item>
 
-        <ion-item *ngIf="selectedPatient?.bloodGroup">
-          <ion-label floating>{{ selectedPatient?.bloodGroup }}</ion-label>
-          <ion-input disabled></ion-input>
-        </ion-item>
+          <div *ngIf="!f.patient.valid && isSubmit">
+              <div class="error" *ngIf="f.patient.errors.required">Hasta gerekli</div>
+          </div>
 
-        <ion-item>
-          <ion-label floating>Ünite Sayısı</ion-label>
-          <ion-input type="number" min="1" [(ngModel)]="unitQuantity"></ion-input>
-        </ion-item>
+          <ion-item *ngIf="selectedPatient?.bloodGroup">
+            <ion-label floating>{{ selectedPatient?.bloodGroup }}</ion-label>
+            <ion-input disabled></ion-input>
+          </ion-item>
 
-        <ion-item>
-          <ion-label floating>Açıklama</ion-label>
-          <ion-textarea [(ngModel)]="requestDescription"></ion-textarea>
-        </ion-item>
+          <ion-item>
+            <ion-label floating>Ünite Sayısı</ion-label>
+            <ion-input formControlName="unit" type="number" min="1" [(ngModel)]="unitQuantity"></ion-input>
+          </ion-item>
 
-      </ion-list>
+          <div *ngIf="!f.unit.valid && isSubmit">
+            <div class="error" *ngIf="f.unit.errors.required">Ünite sayısı gerekli</div>
+            <div class="error" *ngIf="f.unit.errors.min">Ünite sayısı en az 1 olmalı</div>
+          </div>
 
-      <button ion-button float-right icon-only padding margin-top (click)="addBloodRequest()">
-        <ion-icon name="add" margin-right></ion-icon>
-        Talebi Oluştur
-      </button>
+          <ion-item>
+            <ion-label floating>Açıklama</ion-label>
+            <ion-textarea formControlName="desc" [(ngModel)]="requestDescription"></ion-textarea>
+          </ion-item>
+
+          <div *ngIf="!f.desc.valid && isSubmit">
+            <div class="error" *ngIf="f.desc.errors.required">Açıklama gerekli</div>
+          </div>
+
+        </ion-list>
+
+        <button ion-button float-right icon-only padding margin-top (click)="addBloodRequest()">
+          <ion-icon name="add" margin-right></ion-icon>
+          Talebi Oluştur
+        </button>
+      </form>
 
     </ion-card-content>
   </ion-card>

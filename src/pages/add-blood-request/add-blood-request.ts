@@ -4,6 +4,7 @@ import { BloodService } from '../../services/blood.service';
 import { NotificationService } from '../../services/notification.service';
 import { HomePage } from '../home/home';
 import { HospitalService } from '../../services/hospital.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'page-add-blood-request',
@@ -15,7 +16,8 @@ export class AddBloodRequestPage implements OnInit {
     private bloodService: BloodService,
     private notificationService: NotificationService,
     private navCtrl: NavController,
-    private hospitalService: HospitalService
+    private hospitalService: HospitalService,
+    private formBuilder: FormBuilder
   ) { }
 
   patients: Array<any> = [];
@@ -25,7 +27,16 @@ export class AddBloodRequestPage implements OnInit {
   requestDescription: string;
   hospital: any = JSON.parse(localStorage.getItem('hospital-info'));
 
+  addBloodRequestForm: FormGroup;
+  isSubmit: boolean = false;
+
   ngOnInit() {
+    this.addBloodRequestForm = this.formBuilder.group({
+      'patient': ['', [Validators.required]],
+      'unit': ['', [Validators.required, Validators.min(1)]],
+      'desc': ['', [Validators.required]]
+    });
+
     var patients = localStorage.getItem('patients');
 
     if (patients) {
@@ -41,32 +52,38 @@ export class AddBloodRequestPage implements OnInit {
 
   }
 
+  get f() { return this.addBloodRequestForm.controls; }
+
   selectPatient() {
     this.selectedPatient = this.patients.find(x => x.id == this.p);
   }
 
   addBloodRequest() {
-    this.hospital.cityId_district = `${this.hospital.cityId}_${this.hospital.district}`;
+    this.isSubmit = true;
 
-    var data = {
-      patient: this.selectedPatient,
-      unitQuantity: this.unitQuantity,
-      waitingUnit: 0,
-      suppliedUnit: 0,
-      description: this.requestDescription,
-      requestData: new Date(),
-      hospital: this.hospital,
-      isActive: true,
-      sendedUsers: [
-        "gecersiz"
-      ]
-    };
+    if (this.addBloodRequestForm.valid) {
+      this.hospital.cityId_district = `${this.hospital.cityId}_${this.hospital.district}`;
 
-    this.bloodService.addBloodRequest(data).push(data).then(() => {
-      this.notificationService.notification('Kan talebi başarıyla eklenmiştir.');
+      var data = {
+        patient: this.selectedPatient,
+        unitQuantity: this.unitQuantity,
+        waitingUnit: 0,
+        suppliedUnit: 0,
+        description: this.requestDescription,
+        requestData: new Date(),
+        hospital: this.hospital,
+        isActive: true,
+        sendedUsers: [
+          "gecersiz"
+        ]
+      };
 
-      this.navCtrl.setRoot(HomePage);
-    });
+      this.bloodService.addBloodRequest(data).push(data).then(() => {
+        this.notificationService.notification('Kan talebi başarıyla eklenmiştir.');
+
+        this.navCtrl.setRoot(HomePage);
+      });
+    }
   }
 
 }
