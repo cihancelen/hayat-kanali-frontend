@@ -12,24 +12,35 @@
   <ion-card no-padding col-12 col-md-8 col-lg-6 offset-0 offset-md-2 offset-lg-3>
     <ion-card-content>
 
-      <ion-list no-margin>
-        <ion-row>
-          <ion-col ion-item>
-            <h3 text-center class="font-125">Klinik Ekleme Formu</h3>
-          </ion-col>
-        </ion-row>
+      <form [formGroup]="clinicForm">
+        <ion-list no-margin style="border-bottom: none">
+          <ion-row>
+            <ion-col ion-item>
+              <h3 text-center class="font-125">Klinik Ekleme Formu</h3>
+            </ion-col>
+          </ion-row>
 
-        <ion-item>
-          <ion-label floating>Klinik Adı</ion-label>
-          <ion-input [(ngModel)]="clinic.name"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label floating>Açıklama</ion-label>
-          <ion-textarea rows="5" [(ngModel)]="clinic.description"></ion-textarea>
-        </ion-item>
-      </ion-list>
+          <ion-item>
+            <ion-label floating>Klinik Adı</ion-label>
+            <ion-input formControlName="name" [(ngModel)]="clinic.name"></ion-input>
+          </ion-item>
 
-      <button ion-button class="bg-dark" float-right margin-top margin-bottom (click)="addClinic()">Klinik Ekle</button>
+          <div *ngIf="!f.name.valid && isSubmit">
+            <div class="error" *ngIf="f.name.errors.required">Klinik adı gerekli</div>
+          </div>
+
+          <ion-item>
+            <ion-label floating>Açıklama</ion-label>
+            <ion-textarea formControlName="desc" rows="5" [(ngModel)]="clinic.description"></ion-textarea>
+          </ion-item>
+
+          <div *ngIf="!f.desc.valid && isSubmit">
+            <div class="error" *ngIf="f.desc.errors.required">Klinik açıklaması gerekli</div>
+          </div>
+        </ion-list>
+
+        <button ion-button class="bg-dark" float-right margin-top margin-bottom (click)="addClinic()">Ekle</button>
+      </form>
 
     </ion-card-content>
   </ion-card>
