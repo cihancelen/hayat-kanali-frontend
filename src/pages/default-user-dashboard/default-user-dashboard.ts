@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { NotificationService } from '../../services/notification.service';
-import { LocalNotifications } from '@ionic-native/local-notifications';
 import { BackgroundMode } from "@ionic-native/background-mode";
+import { districtAndCities } from '../../classes/district-and-cities';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 @Component({
   selector: 'page-default-user-dashboard',
@@ -14,12 +15,17 @@ export class DefaultUserDashboardPage implements OnInit {
     private database: AngularFireDatabase,
     private notificationService: NotificationService,
     private firebase: AngularFireDatabase,
-    private localNotifications: LocalNotifications,
-    private backgroundMode: BackgroundMode
+    private backgroundMode: BackgroundMode,
+    private localNotifications: LocalNotifications
   ) { }
 
   requests: Array<any> = [];
   user_info: any = localStorage.getItem('user-info') ? JSON.parse(localStorage.getItem('user-info')) : null;
+
+  cities: Array<any> = districtAndCities.districtAndCities;
+
+  city: number = this.user_info.cityId;
+  district: string = 'Hepsi';
 
   ngOnInit() {
     this.user_info = localStorage.getItem('user-info') ? JSON.parse(localStorage.getItem('user-info')) : null;
@@ -30,17 +36,20 @@ export class DefaultUserDashboardPage implements OnInit {
     this.backgroundMode.unlock();
     this.backgroundMode.overrideBackButton();
 
-    this.firebase.list('blood-requests/').snapshotChanges().subscribe(data => {
+    this.getRequests();
+  }
+
+  getRequests() {
+    this.firebase.database.ref('blood-requests').orderByChild('hospital/cityId_district').equalTo(this.user_info.cityId + '_' + this.user_info.district).on('value', (result) => {
       this.requests = [];
-
-      data.forEach(elem => {
-
-        var current_value = elem.payload.val();
-        current_value['key'] = elem.key;
+      
+      result.forEach(request => {
+        var current_value = request.val();
+        current_value['key'] = request.key;
 
         this.requests.push(current_value);
 
-        if (elem.payload.val()['sendedUsers']) {
+        if (request.val()['sendedUsers']) {
 
           var sended = current_value['sendedUsers'];
 
@@ -60,17 +69,13 @@ export class DefaultUserDashboardPage implements OnInit {
               lockscreen: true,
             });
 
-            this.firebase.list('blood-requests/' + elem.key + '/sendedUsers').push(this.user_info.id);
+            this.firebase.list('blood-requests/' + request.key + '/sendedUsers').push(this.user_info.id);
 
           }
         }
       });
-
     });
-
   }
-
-  goToRequest(item) { }
 
   coming(patient) {
     this.user_info.isCome = false;
@@ -86,5 +91,14 @@ export class DefaultUserDashboardPage implements OnInit {
 
         this.notificationService.notification('Gideceginiz hastane ' + patient.hospital.name + ' dir.');
       });
+  }
+
+  get findDistricts() {
+    return this.cities.find(x => x.plaka == this.city).ilceleri;
+  }
+
+  selectionChange() {
+    console.log(this.requests);
+    this.getRequests();
   }
 }

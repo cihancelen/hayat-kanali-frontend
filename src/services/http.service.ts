@@ -89,10 +89,9 @@ export class HttpService {
       this.notificationService.notification(err.error_description);
   }
 
-  changeHeader(): void {
-    if (localStorage.getItem('token')) {
+  changeHeader(token = null): void {
+      
       this.header.delete('Authorization');
       this.header.append('Authorization', localStorage.getItem('token'))
-    }
   }
 }

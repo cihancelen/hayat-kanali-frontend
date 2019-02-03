@@ -9,13 +9,30 @@
 <ion-content>
 
   <ion-grid>
+    <ion-row ion-list>
+      <ion-col ion-item>
+        <ion-label floating>İl</ion-label>
+        <ion-select [(ngModel)]="city">
+          <ion-option *ngFor="let city of cities" [value]="city.plaka">{{ city.il }}</ion-option>
+        </ion-select>
+      </ion-col>
+      <ion-col ion-item>
+        <ion-label floating>İlçe</ion-label>
+        <ion-select [(ngModel)]="district" (ionChange)="selectionChange()">
+          <ion-option [value]="Hepsi" selected>Hepsi</ion-option>
+          <ion-option *ngFor="let ilce of findDistricts" [value]="ilce">{{ ilce }}</ion-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+
     <ion-row>
       <ion-col col-12 col-md-8 offset-md-2>
 
         <ion-card *ngFor="let item of requests">
           <ion-card-header class="bg-primary text-white">
             <div class="font-125" float-left>{{ item.patient.name }} {{ item.patient.surname }}</div>
-            <div class="font-125" float-right>{{ item.unitQuantity }} Ünite <span class="bold">{{ item.patient.bloodGroup }}</span></div>
+            <div class="font-125" float-right>{{ item.unitQuantity }} Ünite <span class="bold">{{
+                item.patient.bloodGroup }}</span></div>
           </ion-card-header>
           <ion-card-content padding>
             <ion-row>
@@ -27,7 +44,7 @@
               </ion-col>
 
               <ion-col col-12 col-lg-3 col-xl-2>
-                <button block ion-button outline round (click)="coming(item)" >
+                <button block ion-button outline round (click)="coming(item)">
                   Geliyorum
                   <ion-icon margin-left name="checkmark"></ion-icon>
                 </button>

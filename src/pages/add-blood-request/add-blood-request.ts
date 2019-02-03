@@ -46,6 +46,8 @@ export class AddBloodRequestPage implements OnInit {
   }
 
   addBloodRequest() {
+    this.hospital.cityId_district = `${this.hospital.cityId}_${this.hospital.district}`;
+
     var data = {
       patient: this.selectedPatient,
       unitQuantity: this.unitQuantity,
