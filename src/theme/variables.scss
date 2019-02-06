@@ -5,15 +5,12 @@
 // roboto, and noto sans fonts
 $font-path: "../assets/fonts";
 
-
 // The app direction is used to include
 // rtl styles in your app. For more info, please see:
 // http://ionicframework.com/docs/theming/rtl-support/
 $app-direction: ltr;
 
-
 @import "ionic.globals";
-
 
 // Shared Variables
 // --------------------------------------------------
@@ -21,9 +18,6 @@ $app-direction: ltr;
 // the Sass variables found in Ionic's source scss files.
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
-
-
-
 
 // Named Color Variables
 // --------------------------------------------------
@@ -34,109 +28,99 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #d32f2f,
-  secondary:  #e57373,
-  danger:     #f53d3d,
-  light:      #F5F5F5,
-  dark:       #222
+  primary: #d32f2f,
+  secondary: #e57373,
+  danger: #f53d3d,
+  light: #f5f5f5,
+  dark: #222
 );
 
-.bg-primary{
+.bg-primary {
   background: color($colors, primary) !important;
 }
-.bg-secondary{
+.bg-secondary {
   background: color($colors, secondary) !important;
 }
-.bg-danger{
+.bg-danger {
   background: color($colors, danger) !important;
 }
-.bg-light{
+.bg-light {
   background: color($colors, light) !important;
 }
-.bg-dark{
+.bg-dark {
   background: color($colors, dark) !important;
 }
 
-.bg-blue{
-  background: #3949AB;
+.bg-blue {
+  background: #3949ab;
 }
 
-.bg-tourquaz{
-  background: #00897B;
+.bg-tourquaz {
+  background: #00897b;
 }
 
-.bg-green{
-  background: #4CAF50;  
+.bg-green {
+  background: #4caf50;
 }
 
-.bg-orange{
-  background: #FB8C00;
+.bg-orange {
+  background: #fb8c00;
 }
 
-
-.text-primary{
-  color: color($colors,primary)
+.text-primary {
+  color: color($colors, primary);
 }
-.text-secondary{
+.text-secondary {
   color: color($colors, secondary) !important;
 }
-.text-danger{
+.text-danger {
   color: color($colors, danger) !important;
 }
-.text-light{
+.text-light {
   color: color($colors, light) !important;
 }
-.text-dark{
+.text-dark {
   color: color($colors, dark) !important;
 }
 
-.margin-right-5{
+.margin-right-5 {
   margin-right: 7px !important;
 }
 
-.text-white{
+.text-white {
   color: #ffffff !important;
 }
 
-.border-bottom{
+.border-bottom {
   border-bottom: 1px solid #dedede;
 }
 
-.border-1{
+.border-1 {
   border: 1px solid #d5d5d5;
 }
 
-.height-100{
+.height-100 {
   height: 100% !important;
 }
 
-.width-100{
+.width-100 {
   width: 100% !important;
 }
 
-.line-height-75{
+.line-height-75 {
   line-height: 75px;
 }
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
 
-
-
-
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 
-
-
-
 // App Windows Variables
 // --------------------------------------------------
 // Windows only Sass variables can go here
-
-
-
 
 // App Theme
 // --------------------------------------------------
@@ -147,7 +131,6 @@ $colors: (
 
 @import "ionic.theme.default";
 
-
 // Ionicons
 // --------------------------------------------------
 // The premium icon font for Ionic. For more info, please see:
@@ -155,17 +138,16 @@ $colors: (
 
 @import "ionic.ionicons";
 
-
 // Fonts
 // --------------------------------------------------
 
 @import "roboto";
 @import "noto-sans";
 
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin-ext');
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin-ext");
 
-*{
-  font-family: 'Open Sans', sans-serif;
+* {
+  font-family: "Open Sans", sans-serif;
 }
 
 $toolbar-ios-text-color: white;
@@ -175,14 +157,20 @@ $toolbar-md-text-color: white;
 $toolbar-md-button-color: white;
 $toolbar-md-title-text-color: white;
 
-ion-segment-button{
-  font-size: 105% !important
+ion-segment-button {
+  font-size: 105% !important;
 }
 
 .toolbar-background {
-  background-color: color($colors,primary);
+  background-color: color($colors, primary);
 }
 
-.error{
+.error {
   color: #f53d3d;
 }
+
+@media (max-width: 500px) {
+  .hidden-500{
+    display: none;
+  }
+} 
