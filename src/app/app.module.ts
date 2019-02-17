@@ -46,6 +46,7 @@ import { BackgroundMode } from '@ionic-native/background-mode';
 import { PageLoaderComponent } from '../components/page-loader/page-loader.component';
 import { LoaderService } from '../services/loader.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HKLoginPage } from '../pages/hk-login/hk-login.page';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     GeneralToolbarComponent,
     RequestItemComponent,
     ActivePipe,
-    PageLoaderComponent
+    PageLoaderComponent,
+    HKLoginPage
   ],
   imports: [
     BrowserModule,
@@ -103,7 +105,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     GeneralMenuComponent,
     GeneralToolbarComponent,
     RequestItemComponent,
-    PageLoaderComponent
+    PageLoaderComponent,
+    HKLoginPage
   ],
   providers: [
     StatusBar,

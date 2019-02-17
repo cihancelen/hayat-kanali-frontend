@@ -9,6 +9,7 @@ import { LoginPage } from "../pages/login/login";
 import { HttpService } from "../services/http.service";
 import { LoaderService } from "../services/loader.service";
 import { BloodRequestListPage } from "../pages/blood-request-list/blood-request-list";
+import { HKLoginPage } from "../pages/hk-login/hk-login.page";
 
 @Component({
   templateUrl: "app.html"
@@ -37,7 +38,7 @@ export class MyApp {
       this.rootPage = HomePage;
     }
     else {
-      this.rootPage = BloodRequestListPage;
+      this.rootPage = HKLoginPage;
     }
   }
 }
