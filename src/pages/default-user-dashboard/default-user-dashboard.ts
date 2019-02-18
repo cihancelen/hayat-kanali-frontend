@@ -19,7 +19,8 @@ export class DefaultUserDashboardPage implements OnInit {
     private localNotifications: LocalNotifications
   ) { }
 
-  requests: Array<any> = [];
+  all_requests: Array<any> = [];
+  filtered_requests: Array<any> = [];
   user_info: any = localStorage.getItem('user-info') ? JSON.parse(localStorage.getItem('user-info')) : null;
 
   cities: Array<any> = districtAndCities.districtAndCities;
@@ -40,41 +41,44 @@ export class DefaultUserDashboardPage implements OnInit {
   }
 
   getRequests() {
-    // this.firebase.database.ref('blood-requests').orderByChild('hospital/cityId_district').equalTo(this.user_info.cityId + '_' + this.user_info.district).on('value', (result) => {
-    //   this.requests = [];
-      
-    //   result.forEach(request => {
-    //     var current_value = request.val();
-    //     current_value['key'] = request.key;
+    this.firebase.database.ref('blood-requests').orderByChild('hospital/cityId').equalTo(this.city).on('value', (result) => {
 
-    //     this.requests.push(current_value);
+      this.all_requests = [];
 
-    //     if (request.val()['sendedUsers']) {
+      result.forEach(request => {
+        var current_value = request.val();
+        current_value['key'] = request.key;
 
-    //       var sended = current_value['sendedUsers'];
+        this.all_requests.push(current_value);
 
-    //       var converted_arr = Object.keys(sended).map(key => sended[key]);
-    //       var splice = converted_arr.findIndex(x => x == 'gecersiz');
-    //       converted_arr.splice(splice, 1);
+        if (request.val()['sendedUsers']) {
 
-    //       var isHaveUser = converted_arr.some(x => x == this.user_info.id);
+          var sended = current_value['sendedUsers'];
 
-    //       if (!isHaveUser) {
-    //         this.localNotifications.schedule({
-    //           id: (new Date().getDate()),
-    //           title: 'Hayat Kanalı - Kan Talebi',
-    //           text: current_value['description'],
-    //           vibrate: true,
-    //           color: 'd32f2f',
-    //           lockscreen: true,
-    //         });
+          var converted_arr = Object.keys(sended).map(key => sended[key]);
+          var splice = converted_arr.findIndex(x => x == 'gecersiz');
+          converted_arr.splice(splice, 1);
 
-    //         this.firebase.list('blood-requests/' + request.key + '/sendedUsers').push(this.user_info.id);
+          var isHaveUser = converted_arr.some(x => x == this.user_info.id);
 
-    //       }
-    //     }
-    //   });
-    // });
+          if (!isHaveUser) {
+            this.localNotifications.schedule({
+              id: (new Date().getDate()),
+              title: 'Hayat Kanalı - Kan Talebi',
+              text: current_value['description'],
+              vibrate: true,
+              color: 'd32f2f',
+              lockscreen: true,
+            });
+
+            this.firebase.list('blood-requests/' + request.key + '/sendedUsers').push(this.user_info.id);
+
+          }
+        }
+      });
+
+      this.filtered_requests = this.all_requests;
+    });
   }
 
   coming(patient) {
@@ -98,7 +102,16 @@ export class DefaultUserDashboardPage implements OnInit {
   }
 
   selectionChange() {
-    console.log(this.requests);
     this.getRequests();
+  }
+
+  filterDistrict() {
+    if (this.district === 'Hepsi') {
+      this.filtered_requests = this.all_requests;
+      return;
+    }
+
+    this.filtered_requests = this.all_requests.filter(x => x.hospital.district == this.district);
+    console.log(this.filtered_requests);
   }
 }
