@@ -1,0 +1,84 @@
+<ion-header>
+
+</ion-header>
+
+<ion-content>
+  <div class="limiter">
+    <div class="container-login100" style="background-image: url('../../assets/login/images/bg-01.jpg');">
+      <div class="wrap-login100">
+        <form class="login100-form validate-form">
+          <span class="login100-form-logo" style="background:none">
+            <img src="../../assets/imgs/hayatkanali-inverted-logo.png" alt="hayat kanalı">
+          </span>
+
+          <span class="login100-form-title p-b-34 p-t-27">
+            Kayıt Formu
+          </span>
+
+          <form [formGroup]="signupForm">
+            <div class="wrap-input100 validate-input">
+              <input autocomplete="off" class="input100" formControlName="name" type="text" name="username"
+                placeholder="Ad">
+              <span class="focus-input100" data-placeholder="&#xf207;"></span>
+              <div *ngIf="!sf.name.valid && isSubmit">
+                <div class="text-white" *ngIf="sf.email.errors.required">Ad gerekli</div>
+              </div>
+            </div>
+
+            <div class="wrap-input100 validate-input">
+              <input autocomplete="off" class="input100" formControlName="surname" type="text" name="username"
+                placeholder="Soyad">
+              <span class="focus-input100" data-placeholder="&#xf207;"></span>
+              <div *ngIf="!sf.surname.valid && isSubmit">
+                <div class="text-white" *ngIf="sf.surname.errors.required">Soyad gerekli</div>
+              </div>
+            </div>
+
+            <div class="wrap-input100 validate-input">
+              <input type="text" class="input100" style="position: absolute"
+                placeholder="{{ !sf.birthday.valid ? 'Doğum Tarihi' : '' }}">
+              <ion-datetime required #datetime max="{{maxYear}}" class="input100" cancelText="İptal"
+                formControlName="birthday" doneText="Tamam" displayFormat="DD MMMM YYYY"></ion-datetime>
+
+              <span class="focus-input100" data-placeholder="&#xf332;"></span>
+              <div *ngIf="!sf.birthday.valid && isSubmit">
+                <div class="text-white" *ngIf="sf.birthday.errors.required">Doğum tarihi gerekli</div>
+              </div>
+            </div>
+
+            <div class="wrap-input100 validate-input">
+              <input autocomplete="off" class="input100" formControlName="email" type="text" name="username"
+                placeholder="E-posta">
+              <span class="focus-input100" data-placeholder="&#xf15a;"></span>
+              <div *ngIf="!sf.email.valid && isSubmit">
+                <div class="text-white" *ngIf="sf.email.errors.required">Eposta gerekli</div>
+                <div class="text-white" *ngIf="sf.email.errors.pattern">Eposta adresi yanlış formatta.</div>
+              </div>
+            </div>
+
+
+            <div class="wrap-input100 validate-input">
+              <input class="input100" formControlName="password" type="password" name="pass" placeholder="Parola">
+              <span class="focus-input100" data-placeholder="&#xf191;"></span>
+              <div *ngIf="!sf.password.valid && isSubmit">
+                <div class="text-white" *ngIf="sf.password.errors.required">Parola gerekli</div>
+                <div class="text-white" *ngIf="sf.password.errors.minlength">En az 3 karakter olmalı</div>
+              </div>
+            </div>
+
+            <div class="container-login100-form-btn">
+              <button class="login100-form-btn" (click)="signup()">
+                Kayıt Ol
+              </button>
+            </div>
+          </form>
+
+          <div class="text-center m-t-60 p-10" style="font-size:17px; color:white; cursor: pointer;"
+            (click)="routeLoginPage()">
+            Zaten üye misin?
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ion-content>

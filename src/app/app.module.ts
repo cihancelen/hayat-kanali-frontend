@@ -47,6 +47,8 @@ import { PageLoaderComponent } from '../components/page-loader/page-loader.compo
 import { LoaderService } from '../services/loader.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HKLoginPage } from '../pages/hk-login/hk-login.page';
+import { HKSingupPage } from '../pages/hk-signup/hk-signup.page';
+import { ParamsModal } from '../pages/params-modal/params.modal';
 
 @NgModule({
   declarations: [
@@ -69,7 +71,9 @@ import { HKLoginPage } from '../pages/hk-login/hk-login.page';
     RequestItemComponent,
     ActivePipe,
     PageLoaderComponent,
-    HKLoginPage
+    HKLoginPage,
+    HKSingupPage,
+    ParamsModal
   ],
   imports: [
     BrowserModule,
@@ -106,7 +110,9 @@ import { HKLoginPage } from '../pages/hk-login/hk-login.page';
     GeneralToolbarComponent,
     RequestItemComponent,
     PageLoaderComponent,
-    HKLoginPage
+    HKLoginPage,
+    HKSingupPage,
+    ParamsModal
   ],
   providers: [
     StatusBar,

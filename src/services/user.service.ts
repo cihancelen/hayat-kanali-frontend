@@ -13,4 +13,8 @@ export class UserService {
     return this.httpService.post('user/UserInfo/', user);
   }
 
+  updateUserParams(user:any){
+    return this.httpService.post('user/UpdateUserParams', user);
+  }
+  
 }

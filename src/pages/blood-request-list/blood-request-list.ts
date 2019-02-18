@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { LoginPage } from '../login/login';
+import { HKLoginPage } from '../hk-login/hk-login.page';
 
 @Component({
   selector: 'page-blood-request-list',
@@ -26,6 +27,6 @@ export class BloodRequestListPage implements OnInit {
   }
 
   goToLoginPage() {
-    this.navCtrl.setRoot(LoginPage);
+    this.navCtrl.setRoot(HKLoginPage);
   }
 }

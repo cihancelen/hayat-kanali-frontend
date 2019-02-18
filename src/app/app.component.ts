@@ -1,15 +1,12 @@
 import { Component } from "@angular/core";
-import { Platform, NavController } from "ionic-angular";
+import { Platform } from "ionic-angular";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 
 import { DefaultUserDashboardPage } from "../pages/default-user-dashboard/default-user-dashboard";
 import { HomePage } from "../pages/home/home";
-import { LoginPage } from "../pages/login/login";
-import { HttpService } from "../services/http.service";
 import { LoaderService } from "../services/loader.service";
 import { BloodRequestListPage } from "../pages/blood-request-list/blood-request-list";
-import { HKLoginPage } from "../pages/hk-login/hk-login.page";
 
 @Component({
   templateUrl: "app.html"
@@ -38,7 +35,7 @@ export class MyApp {
       this.rootPage = HomePage;
     }
     else {
-      this.rootPage = HKLoginPage;
+      this.rootPage = BloodRequestListPage;
     }
   }
 }

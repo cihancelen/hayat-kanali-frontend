@@ -40,41 +40,41 @@ export class DefaultUserDashboardPage implements OnInit {
   }
 
   getRequests() {
-    this.firebase.database.ref('blood-requests').orderByChild('hospital/cityId_district').equalTo(this.user_info.cityId + '_' + this.user_info.district).on('value', (result) => {
-      this.requests = [];
+    // this.firebase.database.ref('blood-requests').orderByChild('hospital/cityId_district').equalTo(this.user_info.cityId + '_' + this.user_info.district).on('value', (result) => {
+    //   this.requests = [];
       
-      result.forEach(request => {
-        var current_value = request.val();
-        current_value['key'] = request.key;
+    //   result.forEach(request => {
+    //     var current_value = request.val();
+    //     current_value['key'] = request.key;
 
-        this.requests.push(current_value);
+    //     this.requests.push(current_value);
 
-        if (request.val()['sendedUsers']) {
+    //     if (request.val()['sendedUsers']) {
 
-          var sended = current_value['sendedUsers'];
+    //       var sended = current_value['sendedUsers'];
 
-          var converted_arr = Object.keys(sended).map(key => sended[key]);
-          var splice = converted_arr.findIndex(x => x == 'gecersiz');
-          converted_arr.splice(splice, 1);
+    //       var converted_arr = Object.keys(sended).map(key => sended[key]);
+    //       var splice = converted_arr.findIndex(x => x == 'gecersiz');
+    //       converted_arr.splice(splice, 1);
 
-          var isHaveUser = converted_arr.some(x => x == this.user_info.id);
+    //       var isHaveUser = converted_arr.some(x => x == this.user_info.id);
 
-          if (!isHaveUser) {
-            this.localNotifications.schedule({
-              id: (new Date().getDate()),
-              title: 'Hayat Kanalı - Kan Talebi',
-              text: current_value['description'],
-              vibrate: true,
-              color: 'd32f2f',
-              lockscreen: true,
-            });
+    //       if (!isHaveUser) {
+    //         this.localNotifications.schedule({
+    //           id: (new Date().getDate()),
+    //           title: 'Hayat Kanalı - Kan Talebi',
+    //           text: current_value['description'],
+    //           vibrate: true,
+    //           color: 'd32f2f',
+    //           lockscreen: true,
+    //         });
 
-            this.firebase.list('blood-requests/' + request.key + '/sendedUsers').push(this.user_info.id);
+    //         this.firebase.list('blood-requests/' + request.key + '/sendedUsers').push(this.user_info.id);
 
-          }
-        }
-      });
-    });
+    //       }
+    //     }
+    //   });
+    // });
   }
 
   coming(patient) {

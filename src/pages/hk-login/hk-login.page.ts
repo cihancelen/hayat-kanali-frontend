@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DefaultUserDashboardPage } from '../default-user-dashboard/default-user-dashboard';
 import { HomePage } from '../home/home';
 import { patterns } from '../../classes/regex-pattern';
+import { HKSingupPage } from '../hk-signup/hk-signup.page';
 
 @Component({
   templateUrl: 'hk-login.page.html',
@@ -87,7 +88,7 @@ export class HKLoginPage implements OnInit {
   get lf() { return this.loginForm.controls }
 
   routeSignUp() {
-
+    this.navCtrl.setRoot(HKSingupPage);
   }
 
 }

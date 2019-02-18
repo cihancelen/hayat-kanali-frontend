@@ -1,0 +1,77 @@
+<ion-header>
+
+</ion-header>
+
+<ion-content>
+
+  <h2 text-center>Kullanıcı Bilgileri</h2>
+
+  <form [formGroup]="paramsForm">
+    <ion-grid ion-list>
+      <ion-row>
+
+        <ion-col ion-item>
+          <ion-label floating>TC Kimlik No</ion-label>
+          <ion-input type="text" formControlName="identity" minlength="11" maxlength="11"></ion-input>
+        </ion-col>
+
+      </ion-row>
+
+      <ion-row>
+        <ion-col ion-item>
+          <ion-label floating>Telefon Numarası</ion-label>
+          <ion-input formControlName="phone"></ion-input>
+        </ion-col>
+      
+        <ion-col ion-item>
+          <ion-label floating>Kan Grubu</ion-label>
+          <ion-select formControlName="bloodGroupId" cancelText="İptal" okText="Tamam">
+            <ion-option selected value="0">Lütfen bir kan grubu seçiniz.</ion-option>
+            <ion-option *ngFor="let item of bloodGroups" value="{{ item.id }}">{{ item.name }}</ion-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+
+      <ion-row margin-top>
+        <ion-col ion-item>
+          <ion-label>Sigara Alkol Kullanımı</ion-label>
+          <ion-checkbox formControlName="usingSmokeAndAlcohol"></ion-checkbox>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col ion-item>
+          <ion-label floating>Son kan verme tarihi</ion-label>
+          <ion-datetime #datetime cancelText="İptal" formControlName="lastBloodDonation"
+            doneText="Tamam" displayFormat="DD MMMM YYYY"></ion-datetime>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col ion-item>
+          <ion-label floating>İl</ion-label>
+          <ion-select  [(ngModel)]="cityId" formControlName="cityId" (ionChange)="findDistrict(cityId)" cancelText="İptal" okText="Tamam">
+            <ion-option selected value="0" disabled>Lütfen bir il seçiniz.</ion-option>
+            <ion-option *ngFor="let item of citiesAndDistricts" value="{{ item.plaka }}">{{ item.il }}</ion-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col ion-item>
+          <ion-label floating>İlçe</ion-label>
+          <ion-select formControlName="district" cancelText="İptal" okText="Tamam">
+            <ion-option selected value="0" disabled>Lütfen bir ilçe seçiniz.</ion-option>
+            <ion-option *ngFor="let item of districtByCity?.ilceleri" value="{{ item }}">{{ item }}</ion-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <button (click)="saveParams()" margin ion-button style="position: absolute; right: -4px" class="bg-primary">Kaydet</button>
+      </ion-row>
+
+    </ion-grid>
+  </form>
+
+</ion-content>
