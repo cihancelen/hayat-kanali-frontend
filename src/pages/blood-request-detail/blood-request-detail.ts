@@ -46,10 +46,12 @@ export class BloodRequestDetailPage implements OnInit {
     })
   }
 
-  came(item) {
-    this.firebase.object('blood-requests/' + this.navParams.data).update({ suppliedUnit: this.bloodRequest.suppliedUnit + 1, waitingUnit: this.bloodRequest.waitingUnit - 1 });
+  async came(item) {
+    await this.firebase.object('blood-requests/' + this.navParams.data).update({ suppliedUnit: this.bloodRequest.suppliedUnit + 1, waitingUnit: this.bloodRequest.waitingUnit - 1 });
 
-    this.firebase.object('blood-requests/' + this.navParams.data).valueChanges().subscribe((data: any) => {
+    await this.firebase.object('blood-requests/' + this.navParams.data + '/userRequests/' + item.id).update({ isActive: true });
+    await this.firebase.object('blood-requests/' + this.navParams.data + '/userRequests/' + item.id + '/lastDonataTime').set(new Date());
+    await this.firebase.object('blood-requests/' + this.navParams.data).valueChanges().subscribe((data: any) => {
 
       if (parseInt(data.unitQuantity) == data.suppliedUnit) {
         data.isActive = false;
@@ -57,7 +59,16 @@ export class BloodRequestDetailPage implements OnInit {
         this.firebase.object('blood-requests/' + this.navParams.data).update({ isActive: false });
       }
 
-    })
+      const obj = {
+        user_id: item.id,
+        reuqest_id: this.navParams.data,
+        sended: false
+      };
+
+      this.firebase.database.ref(`user-messages/${item.id}/`).push(obj);
+    });
+
+
 
   }
 

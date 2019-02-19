@@ -35,6 +35,11 @@
         <ion-icon name="mail" margin-left margin-right></ion-icon>
         Kan Talep Listesi
       </button>
+
+      <button ion-item no-padding (click)="goUserComingList()" *ngIf="isUser">
+        <ion-icon name="redo" margin-left margin-right></ion-icon>
+        Gideceklerim Sayfası
+      </button>
     </ion-list>
   </ion-content>
 

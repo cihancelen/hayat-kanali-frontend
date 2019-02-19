@@ -49,6 +49,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HKLoginPage } from '../pages/hk-login/hk-login.page';
 import { HKSingupPage } from '../pages/hk-signup/hk-signup.page';
 import { ParamsModal } from '../pages/params-modal/params.modal';
+import { UserComingListPage } from '../pages/user-coming-list/user-coming-list.page';
+import { UserRequestPipe } from '../pipes/user-request.pipe';
+import { DefaultUserRequestDetailPage } from '../default-user-request-detail/default-user-request-detail.page';
+import { BloodRequestDataService } from '../services/blood-request-data.service';
 
 @NgModule({
   declarations: [
@@ -73,7 +77,10 @@ import { ParamsModal } from '../pages/params-modal/params.modal';
     PageLoaderComponent,
     HKLoginPage,
     HKSingupPage,
-    ParamsModal
+    ParamsModal,
+    UserComingListPage,
+    UserRequestPipe,
+    DefaultUserRequestDetailPage
   ],
   imports: [
     BrowserModule,
@@ -112,7 +119,9 @@ import { ParamsModal } from '../pages/params-modal/params.modal';
     PageLoaderComponent,
     HKLoginPage,
     HKSingupPage,
-    ParamsModal
+    ParamsModal,
+    UserComingListPage,
+    DefaultUserRequestDetailPage
   ],
   providers: [
     StatusBar,
@@ -129,7 +138,9 @@ import { ParamsModal } from '../pages/params-modal/params.modal';
     ActivePipe,
     LocalNotifications,
     BackgroundMode,
-    LoaderService
+    LoaderService,
+    UserRequestPipe,
+    BloodRequestDataService
   ]
 })
 export class AppModule { }

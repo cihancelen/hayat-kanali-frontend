@@ -4,6 +4,9 @@ import { NotificationService } from '../../services/notification.service';
 import { BackgroundMode } from "@ionic-native/background-mode";
 import { districtAndCities } from '../../classes/district-and-cities';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { NavController } from 'ionic-angular';
+import { DefaultUserRequestDetailPage } from '../../default-user-request-detail/default-user-request-detail.page';
+import { BloodRequestDataService } from '../../services/blood-request-data.service';
 
 @Component({
   selector: 'page-default-user-dashboard',
@@ -12,11 +15,11 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 export class DefaultUserDashboardPage implements OnInit {
 
   constructor(
-    private database: AngularFireDatabase,
-    private notificationService: NotificationService,
     private firebase: AngularFireDatabase,
     private backgroundMode: BackgroundMode,
-    private localNotifications: LocalNotifications
+    private localNotifications: LocalNotifications,
+    private navCtrl: NavController,
+    private bloodRequestDataService: BloodRequestDataService
   ) { }
 
   all_requests: Array<any> = [];
@@ -49,7 +52,16 @@ export class DefaultUserDashboardPage implements OnInit {
         var current_value = request.val();
         current_value['key'] = request.key;
 
-        this.all_requests.push(current_value);
+        if (current_value.patient.bloodGroup === this.user_info.bloodGroup) {
+          if (current_value.userRequests) {
+            console.log(current_value.userRequests[this.user_info.id].isActive);
+            if (!current_value.userRequests[this.user_info.id].isActive)
+              this.all_requests.push(current_value);
+
+          }
+          else
+            this.all_requests.push(current_value);
+        }
 
         if (request.val()['sendedUsers']) {
 
@@ -79,22 +91,32 @@ export class DefaultUserDashboardPage implements OnInit {
 
       this.filtered_requests = this.all_requests;
     });
+
+    this.firebase.database.ref('user-messages/' + this.user_info.id).on('value', (result) => {
+      result.forEach(message => {
+
+        var value = message.val();
+
+        if (!value.sended) {
+          this.localNotifications.schedule({
+            id: (new Date().getDate()),
+            title: 'Hayat Kanalı',
+            text: 'Kan bağışı yaptığınız için teşekkür ederiz.',
+            vibrate: true,
+            color: 'd32f2f',
+            lockscreen: true
+          });
+
+          this.firebase.object('user-messages/' + this.user_info.id + '/' + message.key).update({ sended: true });
+          console.log('gondereild.i');
+        }
+
+      });
+    });
   }
 
-  coming(patient) {
-    this.user_info.isCome = false;
-
-    this.database.list('blood-requests/' + patient.key + '/userRequests/')
-      .push(this.user_info).then(() => {
-
-        this.database.list('blood-requests/' + patient.key + '/userRequests').valueChanges().subscribe(data => {
-
-          this.database.object('blood-requests/' + patient.key).update({ waitingUnit: data.length });
-
-        });
-
-        this.notificationService.notification('Gideceginiz hastane ' + patient.hospital.name + ' dir.');
-      });
+  goToDetail(request) {
+    this.navCtrl.push(DefaultUserRequestDetailPage, request);
   }
 
   get findDistricts() {
@@ -111,7 +133,6 @@ export class DefaultUserDashboardPage implements OnInit {
       return;
     }
 
-    this.filtered_requests = this.all_requests.filter(x => x.hospital.district == this.district);
-    console.log(this.filtered_requests);
+    this.filtered_requests = this.all_requests.filter(x => x.hospital.district == this.district);
   }
 }

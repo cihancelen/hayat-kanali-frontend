@@ -18,8 +18,8 @@ export class HttpService {
     private loaderService: LoaderService
   ) {
     let token = localStorage.getItem('token');
-    
-    if(token){
+
+    if (token) {
       this.changeHeader(token);
     }
   }
@@ -60,6 +60,8 @@ export class HttpService {
   }
 
   login(email: string, password: string, login_type = ''): Observable<any> {
+    this.loaderService.setShowLoader(true);
+
     let user = 'grant_type=password&username=' + email + '&password=' + password + '&login_type=' + login_type;
     this.changeHeader();
 
@@ -69,6 +71,9 @@ export class HttpService {
         catchError(err => {
           this.print_error(err.json())
           return new Observable;
+        }),
+        finalize(() => {
+          this.loaderService.setShowLoader(false);
         })
       );
 
@@ -76,9 +81,12 @@ export class HttpService {
   }
 
   register(data: any): Observable<any> {
+    this.loaderService.setShowLoader(true);
+
     return this.http.post(this.url + 'auth/registerUser', data)
       .pipe(
-        map(x => x.json())
+        map(x => x.json()),
+        finalize(() => this.loaderService.setShowLoader(false))
       );
   }
 

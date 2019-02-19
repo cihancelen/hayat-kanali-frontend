@@ -1,0 +1,65 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Kan Talep Detayı</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content class="bg-light" padding-top margin-top>
+
+    <ion-card no-padding col-12 col-md-8 col-lg-6 offset-0 offset-md-2 offset-lg-3>
+        <ion-card-header class="bg-primary text-white">
+            <div class="font-125" float-left>{{ request.patient.name }} {{ request.patient.surname }}</div>
+            <div class="font-125" float-right>{{ request.unitQuantity }} Ünite <span
+                    class="bold">{{ request.patient.bloodGroup }}</span></div>
+        </ion-card-header>
+
+        <ion-card-content>
+            <ion-list no-margin style="border-bottom: none">
+                <ion-row>
+                    <ion-col ion-item>
+                        <h3 text-center class="font-125">Kan Talep Formu</h3>
+                    </ion-col>
+                </ion-row>
+
+                <ion-item>
+                    <ion-label floating>Hasta adı</ion-label>
+                    <ion-input [(ngModel)]="request.patient.name"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label floating></ion-label>
+                    <ion-input [(ngModel)]="request.patient.phone"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label floating>Açıklama</ion-label>
+                    <ion-textarea rows="5" [(ngModel)]="request.description"></ion-textarea>
+                </ion-item>
+
+                <ion-row>
+                    <ion-item col-auto>
+                        <ion-label floating>Beklenilen Kan</ion-label>
+                        <ion-input [(ngModel)]="request.waitingUnit"></ion-input>
+                    </ion-item>
+
+                    <ion-item col-auto>
+                        <ion-label floating>Temin Edilen Kan</ion-label>
+                        <ion-input [(ngModel)]="request.suppliedUnit"></ion-input>
+                    </ion-item>
+
+                    <ion-item col-auto>
+                        <ion-label floating>Ünite Sayısı</ion-label>
+                        <ion-input [(ngModel)]="request.unitQuantity"></ion-input>
+                    </ion-item>
+                </ion-row>
+
+                <button ion-button [disabled]="isDisabled" (click)="isClick ? cancel() : coming()">{{ isClick ? 'İptal Et' : 'Geliyorum' }}</button>
+
+            </ion-list>
+
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>

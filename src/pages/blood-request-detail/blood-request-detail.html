@@ -46,7 +46,8 @@
         <ion-row>
           <ion-col ion-item no-padding>
             <ion-label floating>Cinsiyet</ion-label>
-            <ion-select class="border-bottom" [(ngModel)]="bloodRequest?.patient.gender" cancelText="İptal" okText="Tamam">
+            <ion-select class="border-bottom" [(ngModel)]="bloodRequest?.patient.gender" cancelText="İptal"
+              okText="Tamam">
               <ion-option value="Erkek">Erkek</ion-option>
               <ion-option value="Kadın">Kadın</ion-option>
             </ion-select>
@@ -54,14 +55,15 @@
 
           <ion-col ion-item no-padding>
             <ion-label floating>Doğum Tarihi</ion-label>
-            <ion-datetime class="border-bottom" [(ngModel)]="bloodRequest?.patient.birthday" required #datetime cancelText="İptal"
-              doneText="Tamam" displayFormat="DD MMMM YYYY"></ion-datetime>
+            <ion-datetime class="border-bottom" [(ngModel)]="bloodRequest?.patient.birthday" required #datetime
+              cancelText="İptal" doneText="Tamam" displayFormat="DD MMMM YYYY"></ion-datetime>
           </ion-col>
         </ion-row>
 
         <ion-item no-padding>
           <ion-label floating>Kan Grubu</ion-label>
-          <ion-select class="border-bottom" [(ngModel)]="bloodRequest?.patient.bloodGroupId" cancelText="İptal" okText="Tamam">
+          <ion-select class="border-bottom" [(ngModel)]="bloodRequest?.patient.bloodGroupId" cancelText="İptal"
+            okText="Tamam">
             <ion-option *ngFor="let item of bloodGroups" value="{{item.id}}">{{ item.name }}</ion-option>
           </ion-select>
         </ion-item>
@@ -98,9 +100,9 @@
             <ion-col>
               <span>{{ item.email }}</span>
             </ion-col>
-            
+
             <ion-col>
-              <button float-right round no-margin no-margin ion-button (click)="came(item)">
+              <button float-right round no-margin no-margin ion-button (click)="came(item)" [disabled]="item.isActive">
                 Verdi
               </button>
             </ion-col>

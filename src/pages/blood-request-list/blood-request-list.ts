@@ -19,6 +19,9 @@ export class BloodRequestListPage implements OnInit {
   isLogin: boolean = false;
 
   ngOnInit() {
+    if(!localStorage.getItem('user-info'))
+      localStorage.removeItem('token');
+    
     this.isLogin = localStorage.getItem('token') ? true : false;
 
     this.firebase.list('blood-requests').valueChanges().subscribe(data => {
