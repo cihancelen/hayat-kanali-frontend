@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, IonicPage } from 'ionic-angular';
 import { OpenDataService } from '../../services/open.data.service';
 import { HttpService } from '../../services/http.service';
 import { UserService } from '../../services/user.service';
@@ -12,7 +12,7 @@ import { patterns } from '../../classes/regex-pattern';
 import { HKSingupPage } from '../hk-signup/hk-signup.page';
 
 @Component({
-  templateUrl: 'hk-login.page.html',
+  templateUrl: 'hk-hospital-login.page.html',
   styleUrls: [
     `./assets/login/vendor/bootstrap/css/bootstrap.min.css`,
     `./assets/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css`,
@@ -27,7 +27,7 @@ import { HKSingupPage } from '../hk-signup/hk-signup.page';
   ]
 })
 
-export class HKLoginPage implements OnInit {
+export class HKHospitalLogin implements OnInit {
 
   constructor(
     private navCtrl: NavController,
@@ -39,7 +39,7 @@ export class HKLoginPage implements OnInit {
   ) { }
 
   loginForm: FormGroup;
-  loginType: string = 'default-user';
+  loginType: string = 'hospital';
   isSubmit: boolean = false;
 
   ngOnInit() {    

@@ -23,39 +23,46 @@
                     </ion-col>
                 </ion-row>
 
-                <ion-item>
-                    <ion-label floating>Hasta adı</ion-label>
-                    <ion-input [(ngModel)]="request.patient.name"></ion-input>
-                </ion-item>
+                <ion-row>
+                    <ion-item col-6>
+                        <ion-label floating>Hasta adı</ion-label>
+                        <ion-input readonly [(ngModel)]="request.patient.name"></ion-input>
+                    </ion-item>
+                    <ion-item col-6>
+                        <ion-label floating>Hasta soyadı</ion-label>
+                        <ion-input readonly [(ngModel)]="request.patient.surname"></ion-input>
+                    </ion-item>
+                </ion-row>
 
                 <ion-item>
                     <ion-label floating></ion-label>
-                    <ion-input [(ngModel)]="request.patient.phone"></ion-input>
+                    <ion-input readonly [(ngModel)]="request.patient.phone"></ion-input>
                 </ion-item>
 
                 <ion-item>
                     <ion-label floating>Açıklama</ion-label>
-                    <ion-textarea rows="5" [(ngModel)]="request.description"></ion-textarea>
+                    <ion-textarea readonly rows="3" [(ngModel)]="request.description"></ion-textarea>
                 </ion-item>
 
                 <ion-row>
-                    <ion-item col-auto>
+                    <ion-item col-4>
                         <ion-label floating>Beklenilen Kan</ion-label>
-                        <ion-input [(ngModel)]="request.waitingUnit"></ion-input>
+                        <ion-input readonly [(ngModel)]="request.waitingUnit"></ion-input>
                     </ion-item>
 
-                    <ion-item col-auto>
+                    <ion-item col-4>
                         <ion-label floating>Temin Edilen Kan</ion-label>
-                        <ion-input [(ngModel)]="request.suppliedUnit"></ion-input>
+                        <ion-input readonly [(ngModel)]="request.suppliedUnit"></ion-input>
                     </ion-item>
 
-                    <ion-item col-auto>
+                    <ion-item col-4>
                         <ion-label floating>Ünite Sayısı</ion-label>
-                        <ion-input [(ngModel)]="request.unitQuantity"></ion-input>
+                        <ion-input readonly [(ngModel)]="request.unitQuantity"></ion-input>
                     </ion-item>
                 </ion-row>
 
-                <button ion-button [disabled]="isDisabled" (click)="isClick ? cancel() : coming()">{{ isClick ? 'İptal Et' : 'Geliyorum' }}</button>
+                <button ion-button float-right margin-top margin-bottom [disabled]="isDisabled"
+                    (click)="isClick ? cancel() : coming()">{{ isClick ? 'İptal Et' : 'Geliyorum' }}</button>
 
             </ion-list>
 

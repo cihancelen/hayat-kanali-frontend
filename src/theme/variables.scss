@@ -170,7 +170,40 @@ ion-segment-button {
 }
 
 @media (max-width: 500px) {
-  .hidden-500{
+  .hidden-500 {
     display: none;
   }
-} 
+}
+
+.overflow-visible {
+  overflow: visible;
+}
+
+.hk-table {
+  width: 100% !important;
+  font-size: 120%;
+  th,
+  td {
+    padding: 20px;
+    text-align: left;
+  }
+
+  tr {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    transition: 0.1s;
+
+    &:not([not-hover]):hover {
+      background: #faf9f9;
+      border-radius: 3px;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12), 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+      cursor: pointer;
+      transform: scale(1.01, 1.03);
+      transition: 0.2s;
+    }
+  }
+}
+
+[center]{
+  text-align: center !important;
+}

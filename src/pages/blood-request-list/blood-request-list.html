@@ -2,7 +2,7 @@
 
   <ion-navbar>
     <ion-title>Kan Talepleri Listesi</ion-title>
-    
+
     <ion-buttons end *ngIf="!isLogin">
       <button ion-button icon-only (click)="goToLoginPage()">
         <ion-icon name="log-in"></ion-icon> <span class="hidden-500">Giriş Yap yada Kayıt Ol</span>
@@ -14,27 +14,33 @@
 
 <ion-content padding class="bg-light">
 
-  <ion-card no-padding>
+  <ion-card no-padding class="overflow-visible">
     <ion-card-header class="bg-primary">
       <p class="font-125 text-white" text-center no-padding no-margin>Kan Talepleri</p>
     </ion-card-header>
     <ion-card-content no-padding>
 
-      <ion-list class="border-1">
-        <button ion-item *ngFor="let request of requests  | activePipe: {isActive: true}">
+      <table class="hk-table">
+        <thead>
+          <tr not-hover>
+            <th>Hastane Adı</th>
+            <th>Hasta Adı</th>
+            <th>Talep Açıklaması</th>
+            <th center>Beklenilen Ünite Sayısı</th>
+            <th center>Karşılanılan Ünite Sayısı</th>
+          </tr>
+        </thead>
 
-          <ion-row>
-            <ion-col>
-              <span>{{ request.patient.name }} {{ request.patient.surname }}</span>
-            </ion-col>
-
-            <ion-col>
-              {{ request.description }}
-            </ion-col>
-          </ion-row>
-
-        </button>
-      </ion-list>
+        <tbody>
+          <tr *ngFor="let request of requests  | activePipe: {isActive: true}">
+            <td>{{ request.hospital.name }}</td>
+            <td>{{ request.patient.name }} {{ request.patient.surname }}</td>
+            <td>{{ request.description }}</td>
+            <td center>{{ request.unitQuantity }}</td>
+            <td center>{{ request.suppliedUnit }}</td>
+          </tr>
+        </tbody>
+      </table>
 
     </ion-card-content>
   </ion-card>

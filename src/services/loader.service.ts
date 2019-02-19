@@ -6,7 +6,7 @@ export class LoaderService {
 
     constructor() { }
 
-    private isShowLoader: boolean = false;
+    public isShowLoader: boolean = false;
 
     setShowLoader(cond: boolean) {
         this.isShowLoader = cond;

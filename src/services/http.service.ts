@@ -37,6 +37,7 @@ export class HttpService {
       .pipe(
         map(data => data.json()),
         catchError(err => {
+          this.loaderService.setShowLoader(false);
           return new ErrorObservable(err);
         }),
         finalize(() => {
@@ -70,6 +71,7 @@ export class HttpService {
         map(x => x.json()),
         catchError(err => {
           this.print_error(err.json())
+          this.loaderService.setShowLoader(false);
           return new Observable;
         }),
         finalize(() => {

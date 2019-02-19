@@ -1,10 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { request } from 'http';
 import { NavParams } from 'ionic-angular';
 import { ComponentFactoryBoundToModule } from '@angular/core/src/linker/component_factory_resolver';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { NotificationService } from '../services/notification.service';
-import { async } from 'rxjs/internal/scheduler/async';
 
 @Component({
     templateUrl: 'default-user-request-detail.page.html'
