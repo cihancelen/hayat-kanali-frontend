@@ -26,7 +26,7 @@ export class BloodRequestDetailPage implements OnInit {
 
   userRequests: Array<any> = [];
 
-  ngOnInit() {
+  ngOnInit() {    
     this.firebase.object('blood-requests/' + this.navParams.data).valueChanges().subscribe(data => {
       this.bloodRequest = data;
 
@@ -49,7 +49,7 @@ export class BloodRequestDetailPage implements OnInit {
   async came(item) {
     await this.firebase.object('blood-requests/' + this.navParams.data).update({ suppliedUnit: this.bloodRequest.suppliedUnit + 1, waitingUnit: this.bloodRequest.waitingUnit - 1 });
 
-    await this.firebase.object('blood-requests/' + this.navParams.data + '/userRequests/' + item.id).update({ isActive: true });
+    await this.firebase.object('blood-requests/' + this.navParams.data + '/userRequests/' + item.id).update({ isActive: false });
     await this.firebase.object('blood-requests/' + this.navParams.data + '/userRequests/' + item.id + '/lastDonataTime').set(new Date());
     await this.firebase.object('blood-requests/' + this.navParams.data).valueChanges().subscribe((data: any) => {
 
@@ -66,6 +66,7 @@ export class BloodRequestDetailPage implements OnInit {
       };
 
       this.firebase.database.ref(`user-messages/${item.id}/`).push(obj);
+      this.firebase.object(`users-coming/${item.id}/${this.navParams.data}/`).update({ isCamed: true });
     });
 
 

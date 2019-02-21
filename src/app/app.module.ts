@@ -54,6 +54,7 @@ import { UserRequestPipe } from '../pipes/user-request.pipe';
 import { DefaultUserRequestDetailPage } from '../default-user-request-detail/default-user-request-detail.page';
 import { BloodRequestDataService } from '../services/blood-request-data.service';
 import { HKHospitalLogin } from '../pages/hk-hospital-login/hk-hospital-login.page';
+import { RequestDetailPage } from '../pages/request-detail/request-detail.page';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { HKHospitalLogin } from '../pages/hk-hospital-login/hk-hospital-login.pa
     UserComingListPage,
     UserRequestPipe,
     DefaultUserRequestDetailPage,
-    HKHospitalLogin
+    HKHospitalLogin,
+    RequestDetailPage
   ],
   imports: [
     BrowserModule,
@@ -124,7 +126,8 @@ import { HKHospitalLogin } from '../pages/hk-hospital-login/hk-hospital-login.pa
     ParamsModal,
     UserComingListPage,
     DefaultUserRequestDetailPage,
-    HKHospitalLogin
+    HKHospitalLogin,
+    RequestDetailPage
   ],
   providers: [
     StatusBar,

@@ -29,8 +29,6 @@ export class DefaultUserRequestDetailPage implements OnInit {
 
         this.firebase.object(`donors/${this.user_info.id}`).valueChanges().subscribe((result) => {
             if (result) {
-                console.log(result[this.user_info.id].user_id);
-
                 if (result[this.user_info.id].user_id === this.user_info.id && result[this.user_info.id].requestKey !== this.request.key) {
                     this.isDisabled = true;
                 }
@@ -66,6 +64,12 @@ export class DefaultUserRequestDetailPage implements OnInit {
 
             this.firebase.database.ref('blood-requests/' + this.request.key).update({ waitingUnit: this.request.waitingUnit + 1 });
 
+            this.firebase.database.ref(`users-coming/${this.user_info.id}/${this.request.key}`).set({
+                user_id: this.user_info.id,
+                request_key: this.request.key,
+                isCamed: false
+            });
+
             this.notificationService.notification('Gideceğiniz hastane ' + this.request.hospital.name + ' dir. 2 saat içinde herhangi bir talebe cevap veremezsiniz. ');
         });
     }
@@ -74,6 +78,10 @@ export class DefaultUserRequestDetailPage implements OnInit {
 
     async cancel() {
         this.firebase.object('donors/' + this.user_info.id).remove();
+
+        this.firebase.database.ref(`users-coming/${this.user_info.id}/${this.request.key}`).remove(() => {
+            console.log('%c silindi', 'color:red; font-weight:bold');
+        });
 
         await this.firebase.object(`blood-requests/${this.request.key}/userRequests/${this.user_info.id}`).remove().then(() => {
             this.isClick = false;

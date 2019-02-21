@@ -14,35 +14,55 @@
 
 <ion-content padding class="bg-light">
 
-  <ion-card no-padding class="overflow-visible">
-    <ion-card-header class="bg-primary">
-      <p class="font-125 text-white" text-center no-padding no-margin>Kan Talepleri</p>
-    </ion-card-header>
-    <ion-card-content no-padding>
+  <ion-grid>
+    <ion-row ion-list id="request-filter" style="box-shadow: 0 2px 4px 0 rgba(0,0,0,0.10);">
+      <ion-col ion-item>
+        <ion-label floating>İl</ion-label>
+        <ion-select [(ngModel)]="city" (ionChange)="selectionChange()" okText="Tamam" cancelText="İptal">
+          <ion-option *ngFor="let city of cities" [value]="city.plaka">{{ city.il }}</ion-option>
+        </ion-select>
+      </ion-col>
+      <ion-col ion-item>
+        <ion-label floating>İlçe</ion-label>
+        <ion-select [(ngModel)]="district" (ionChange)="filterDistrict()" okText="Tamam" cancelText="İptal">
+          <ion-option [value]="Hepsi" selected>Hepsi</ion-option>
+          <ion-option *ngFor="let ilce of findDistricts" [value]="ilce">{{ ilce }}</ion-option>
+        </ion-select>
+      </ion-col>
+      <ion-col ion-item>
+        <ion-label floating>Kan Grubu</ion-label>
+        <ion-select [(ngModel)]="selectedBloodGroup" (ionChange)="selectionChange()" okText="Tamam" cancelText="İptal">
+          <ion-option [value]="Hepsi" selected>Hepsi</ion-option>
+          <ion-option [value]="bloodGroup.name" *ngFor="let bloodGroup of bloodGroups">
+            {{ bloodGroup.name }}
+          </ion-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
 
-      <table class="hk-table">
-        <thead>
-          <tr not-hover>
-            <th>Hastane Adı</th>
-            <th>Hasta Adı</th>
-            <th>Talep Açıklaması</th>
-            <th center>Beklenilen Ünite Sayısı</th>
-            <th center>Karşılanılan Ünite Sayısı</th>
-          </tr>
-        </thead>
 
-        <tbody>
-          <tr *ngFor="let request of requests  | activePipe: {isActive: true}">
-            <td>{{ request.hospital.name }}</td>
-            <td>{{ request.patient.name }} {{ request.patient.surname }}</td>
-            <td>{{ request.description }}</td>
-            <td center>{{ request.unitQuantity }}</td>
-            <td center>{{ request.suppliedUnit }}</td>
-          </tr>
-        </tbody>
-      </table>
-
-    </ion-card-content>
-  </ion-card>
+    <ion-row>
+      <ion-col no-padding col-lg-4 col-md-6 col-12 *ngFor="let request of filtered_requests | activePipe: {isActive: true}">
+        <ion-card (click)="goToDetail(request)" class="cursor-pointer">
+          <ion-card-header class="bg-primary text-white">
+            <div class="font-125" float-left>{{ request.description }}</div>
+            <div class="font-125 bold" float-right>{{ request.patient.bloodGroup }}</div>
+          </ion-card-header>
+          <ion-card-content no-padding>
+            <table class="card-table">
+              <tr>
+                <td>Beklenilen Ünite: </td>
+                <td class="bold">{{ request.unitQuantity }}</td>
+              </tr>
+              <tr>
+                <td>Karşılanılan Ünite :</td>
+                <td class="bold">{{ request.suppliedUnit }}</td>
+              </tr>
+            </table>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

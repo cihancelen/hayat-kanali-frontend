@@ -4,32 +4,20 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="bg-light">
 
-    <ion-card col-12 col-md-8 offset-md-2 no-padding [ngStyle]="{opacity: true ? '.5' : '1'}">
-        <ion-card-header class="bg-primary text-white">
-            <div class="font-125" float-left>Cihan Çelen</div>
-            <div class="font-125 bold" float-right>7 Ünite</div>
-        </ion-card-header>
-
-        <ion-card-content padding class="position-relative">
-
-            <div class="camed-request">
-                Gidildi</div>
-
-            <div style="font-size: 110%">Ataşehir Memorial Hastanesi</div>
-            <div class="address">
-                Küçükbakkalköy Mah. Hal Cad. İbrahimtopluoğlu Sk. No:1
-                Ataşehir / İstanbul
-            </div>
-
+    <ion-card *ngIf="!currentRequest.description">
+        <ion-card-content>
+            Herhangi bir kayıt bulunamadı.
         </ion-card-content>
     </ion-card>
 
-    <ion-card col-12 col-md-8 offset-md-2 no-padding [ngStyle]="{opacity: false ? '.5' : '1'}">
+    <ion-card *ngIf="currentRequest.description" col-12 col-md-8 offset-md-2 no-padding
+        [ngStyle]="{opacity: false ? '.5' : '1'}">
         <ion-card-header class="bg-primary text-white">
-            <div class="font-125" float-left>Melisa Ok</div>
-            <div class="font-125 bold" float-right>3 Ünite</div>
+            <div class="font-125" float-left>{{ currentRequest?.patient?.name }} {{ currentRequest?.patient?.surname }}
+            </div>
+            <div class="font-125 bold" float-right>{{ currentRequest?.unitQuantity }} Ünite</div>
         </ion-card-header>
 
         <ion-card-content padding class="position-relative">
@@ -37,13 +25,29 @@
             <div *ngIf="false" class="camed-request">
                 Gidildi</div>
 
-            <div style="font-size: 110%">Ataşehir Memorial Hastanesi</div>
+            <div style="font-size: 110%">{{ currentRequest?.hospital?.name }}</div>
             <div class="address">
-                Küçükbakkalköy Mah. Hal Cad. İbrahimtopluoğlu Sk. No:1
-                Ataşehir / İstanbul
+                {{ currentRequest?.hospital?.address }}
             </div>
 
         </ion-card-content>
     </ion-card>
 
+    <ion-card col-12 col-md-8 offset-md-2 no-padding *ngFor="let sendedRequest of sendedRequests"
+        [ngStyle]="{opacity: true ? '.5' : '1'}">
+        <ion-card-header class="bg-primary text-white">
+            <div class="font-125" float-left>{{ sendedRequest.patient.name }} {{ sendedRequest.patient.surname }}</div>
+            <div class="font-125 bold" float-right>{{ sendedRequest.unitQuantity }} Ünite</div>
+        </ion-card-header>
+
+        <ion-card-content padding class="position-relative">
+
+            <div class="camed-request">
+                Gidildi</div>
+
+            <div style="font-size: 110%">{{ sendedRequest.hospital.name }}</div>
+            <div class="address">{{ sendedRequest.hospital.address }}</div>
+
+        </ion-card-content>
+    </ion-card>
 </ion-content>

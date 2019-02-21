@@ -1,24 +1,19 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
-
 // Font path is used to include ionicons,
 // roboto, and noto sans fonts
 $font-path: "../assets/fonts";
-
 // The app direction is used to include
 // rtl styles in your app. For more info, please see:
 // http://ionicframework.com/docs/theming/rtl-support/
 $app-direction: ltr;
-
 @import "ionic.globals";
-
 // Shared Variables
 // --------------------------------------------------
 // To customize the look and feel of this app, you can override
 // the Sass variables found in Ionic's source scss files.
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
-
 // Named Color Variables
 // --------------------------------------------------
 // Named colors makes it easy to reuse colors on various components.
@@ -26,128 +21,119 @@ $app-direction: ltr;
 // to match your app's branding. Ionic uses a Sass map of
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
-
-$colors: (
-  primary: #d32f2f,
-  secondary: #e57373,
-  danger: #f53d3d,
-  light: #f5f5f5,
-  dark: #222
-);
-
+$colors: ( primary: #d32f2f, secondary: #e57373, danger: #f53d3d, light: #f5f5f5, dark: #222);
 .bg-primary {
-  background: color($colors, primary) !important;
+    background: color($colors, primary) !important;
 }
+
 .bg-secondary {
-  background: color($colors, secondary) !important;
+    background: color($colors, secondary) !important;
 }
+
 .bg-danger {
-  background: color($colors, danger) !important;
+    background: color($colors, danger) !important;
 }
+
 .bg-light {
-  background: color($colors, light) !important;
+    background: color($colors, light) !important;
 }
+
 .bg-dark {
-  background: color($colors, dark) !important;
+    background: color($colors, dark) !important;
 }
 
 .bg-blue {
-  background: #3949ab;
+    background: #3949ab;
 }
 
 .bg-tourquaz {
-  background: #00897b;
+    background: #00897b;
 }
 
 .bg-green {
-  background: #4caf50;
+    background: #4caf50;
 }
 
 .bg-orange {
-  background: #fb8c00;
+    background: #fb8c00;
 }
 
 .text-primary {
-  color: color($colors, primary);
+    color: color($colors, primary);
 }
+
 .text-secondary {
-  color: color($colors, secondary) !important;
+    color: color($colors, secondary) !important;
 }
+
 .text-danger {
-  color: color($colors, danger) !important;
+    color: color($colors, danger) !important;
 }
+
 .text-light {
-  color: color($colors, light) !important;
+    color: color($colors, light) !important;
 }
+
 .text-dark {
-  color: color($colors, dark) !important;
+    color: color($colors, dark) !important;
 }
 
 .margin-right-5 {
-  margin-right: 7px !important;
+    margin-right: 7px !important;
 }
 
 .text-white {
-  color: #ffffff !important;
+    color: #ffffff !important;
 }
 
 .border-bottom {
-  border-bottom: 1px solid #dedede;
+    border-bottom: 1px solid #dedede;
 }
 
 .border-1 {
-  border: 1px solid #d5d5d5;
+    border: 1px solid #d5d5d5;
 }
 
 .height-100 {
-  height: 100% !important;
+    height: 100% !important;
 }
 
 .width-100 {
-  width: 100% !important;
+    width: 100% !important;
 }
 
 .line-height-75 {
-  line-height: 75px;
+    line-height: 75px;
 }
+
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
-
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
-
 // App Windows Variables
 // --------------------------------------------------
 // Windows only Sass variables can go here
-
 // App Theme
 // --------------------------------------------------
 // Ionic apps can have different themes applied, which can
 // then be future customized. This import comes last
 // so that the above variables are used and Ionic's
 // default are overridden.
-
 @import "ionic.theme.default";
-
 // Ionicons
 // --------------------------------------------------
 // The premium icon font for Ionic. For more info, please see:
 // http://ionicframework.com/docs/ionicons/
-
 @import "ionic.ionicons";
-
 // Fonts
 // --------------------------------------------------
-
 @import "roboto";
 @import "noto-sans";
-
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin-ext");
-
 * {
-  font-family: "Open Sans", sans-serif;
+    font-family: "Open Sans", sans-serif;
 }
 
 $toolbar-ios-text-color: white;
@@ -156,54 +142,80 @@ $toolbar-ios-title-text-color: white;
 $toolbar-md-text-color: white;
 $toolbar-md-button-color: white;
 $toolbar-md-title-text-color: white;
-
 ion-segment-button {
-  font-size: 105% !important;
+    font-size: 105% !important;
 }
 
 .toolbar-background {
-  background-color: color($colors, primary);
+    background-color: color($colors, primary);
 }
 
 .error {
-  color: #f53d3d;
+    color: #f53d3d;
 }
 
 @media (max-width: 500px) {
-  .hidden-500 {
-    display: none;
-  }
+    .hidden-500 {
+        display: none;
+    }
 }
 
 .overflow-visible {
-  overflow: visible;
+    overflow: visible;
 }
 
-.hk-table {
-  width: 100% !important;
-  font-size: 120%;
-  th,
-  td {
-    padding: 20px;
-    text-align: left;
-  }
+.hk-table-container {
+    background: white;
+    margin-top: 20px;
+    border-radius: 5px;
+    .hk-table-header {
+        position: relative;
+        border-radius: 5px;
+        width: 94%;
+        height: 60px;
+        top: -20px;
+        margin: auto;
+        background: color($colors, primary);
+        color: white;
+        padding: 0 20px;
+        box-shadow: 0 2px 10px #f53d3d78;
+        h4 {
+            line-height: 60px;
+        }
+    }
+    .hk-table {
+        width: 100% !important;
+        background: white;
+        font-size: 120%;
+        th,
+        td {
+            padding: 20px;
+            text-align: left;
+        }
+        tr {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: 0.1s;
+            &:not([not-hover]):hover {
+                background: #e7e7e7;
+                cursor: pointer;
+                transition: 0.2s;
+            }
+        }
+    }
+}
 
-  tr {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    transition: 0.1s;
+[center] {
+    text-align: center !important;
+}
 
-    &:not([not-hover]):hover {
-      background: #faf9f9;
-      border-radius: 3px;
-      border-top: 1px solid rgba(0, 0, 0, 0.1);
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12), 0 2px 4px 0 rgba(0, 0, 0, 0.08);
-      cursor: pointer;
-      transform: scale(1.01, 1.03);
-      transition: 0.2s;
+table.card-table {
+  width: 100%;
+  tr{
+    border-bottom: 1px solid #f5f5f5;
+    
+    td{
+      padding: 10px;
+      font-size: 115%;
     }
   }
-}
-
-[center]{
-  text-align: center !important;
 }

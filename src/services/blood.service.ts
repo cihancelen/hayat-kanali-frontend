@@ -12,17 +12,18 @@ export class BloodService {
 
     requests: Array<any> = [];
 
-    addBloodRequest(data: any) {
+    addBloodRequest(data: any): any {
         let x_data = {
-            patientId : data.patient.id,
-            bloodGroupId : data.patient.bloodGroupId,
+            patientId: data.patient.id,
+            bloodGroupId: data.patient.bloodGroupId,
             description: data.description,
             unitQuantity: parseInt(data.unitQuantity),
             waitingUnit: 0,
             suppliedUnit: 0
         };
-        
-        this.httpService.post('blood/addBloodRequest', x_data);
-        return this.database.list('blood-requests/');
+
+        this.httpService.post('blood/addBloodRequest', x_data).subscribe();
+        const _value = this.database.list('blood-requests/');
+        return _value;
     }
 }

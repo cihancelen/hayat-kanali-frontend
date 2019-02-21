@@ -54,8 +54,7 @@ export class DefaultUserDashboardPage implements OnInit {
 
         if (current_value.patient.bloodGroup === this.user_info.bloodGroup) {
           if (current_value.userRequests) {
-            console.log(current_value.userRequests[this.user_info.id].isActive);
-            if (!current_value.userRequests[this.user_info.id].isActive)
+            if (current_value.userRequests[this.user_info.id].isActive === false)
               this.all_requests.push(current_value);
 
           }
@@ -108,7 +107,6 @@ export class DefaultUserDashboardPage implements OnInit {
           });
 
           this.firebase.object('user-messages/' + this.user_info.id + '/' + message.key).update({ sended: true });
-          console.log('gondereild.i');
         }
 
       });
