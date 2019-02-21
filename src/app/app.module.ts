@@ -90,7 +90,8 @@ import { RequestDetailPage } from '../pages/request-detail/request-detail.page';
     BrowserModule,
     IonicModule.forRoot(MyApp, {
       monthNames: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'],
-      monthShortNames: ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara']
+      monthShortNames: ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'],
+      backButtonText: ''
     }),
     HttpModule,
     AngularFireModule.initializeApp(Enviroment.firebase),
