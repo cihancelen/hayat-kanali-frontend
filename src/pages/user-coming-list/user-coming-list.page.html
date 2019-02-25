@@ -6,11 +6,11 @@
 
 <ion-content class="bg-light">
 
-    <ion-card *ngIf="!currentRequest.description">
+    <!-- <ion-card *ngIf="!currentRequest.description && sendedRequests.length > 0">
         <ion-card-content>
             Herhangi bir kayıt bulunamadı.
         </ion-card-content>
-    </ion-card>
+    </ion-card> -->
 
     <ion-card *ngIf="currentRequest.description" col-12 col-md-8 offset-md-2 no-padding
         [ngStyle]="{opacity: false ? '.5' : '1'}">

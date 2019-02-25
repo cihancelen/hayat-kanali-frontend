@@ -24,7 +24,7 @@ export class DefaultUserDashboardPage implements OnInit {
 
   all_requests: Array<any> = [];
   filtered_requests: Array<any> = [];
-  user_info: any = localStorage.getItem('user-info') ? JSON.parse(localStorage.getItem('user-info')) : null;
+  user_info: any = JSON.parse(localStorage.getItem('user-info')).id ? JSON.parse(localStorage.getItem('user-info')) : null;
 
   cities: Array<any> = districtAndCities.districtAndCities;
 
@@ -54,7 +54,7 @@ export class DefaultUserDashboardPage implements OnInit {
 
         if (current_value.patient.bloodGroup === this.user_info.bloodGroup) {
           if (current_value.userRequests) {
-            if (current_value.userRequests[this.user_info.id].isActive === false)
+            if (current_value.userRequests[this.user_info.id].isActive === false)            
               this.all_requests.push(current_value);
 
           }

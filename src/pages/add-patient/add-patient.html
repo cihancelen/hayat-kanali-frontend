@@ -18,6 +18,10 @@
 
       <ion-list *ngIf="show == 1">
 
+        <ion-item>
+          <h3>Hasta Bilgileri</h3>
+        </ion-item>
+
         <ion-item margin-top>
           <ion-label floating>TC Kimlik</ion-label>
           <ion-input type="text" [(ngModel)]="patient.identificationNo" maxlength="11"></ion-input>
@@ -38,7 +42,7 @@
         <ion-row>
           <ion-col ion-item>
             <ion-label floating>Telefon</ion-label>
-            <ion-input type="tel" [(ngModel)]="patient.phone"></ion-input>
+            <ion-input type="tel" mask="(000) 000 0000" [(ngModel)]="patient.phone"></ion-input>
           </ion-col>
 
           <ion-col ion-item>
@@ -74,7 +78,7 @@
           <ion-label floating>Hastalık</ion-label>
           <ion-input type="text" [(ngModel)]="patient.disease"></ion-input>
         </ion-item>
-        
+
         <ion-item no-padding>
           <ion-label floating>Doktor</ion-label>
           <ion-select [(ngModel)]="patient.doctorId" cancelText="İptal" okText="Tamam">
@@ -85,6 +89,10 @@
       </ion-list>
 
       <ion-list *ngIf="show == 2">
+
+        <ion-item>
+          <h3>Hasta Yakını Bilgileri</h3>
+        </ion-item>
 
         <ion-item margin-top>
           <ion-label floating>TC Kimlik</ion-label>

@@ -34,7 +34,7 @@ export class BloodRequestListPage implements OnInit {
   selectedBloodGroup: any = 'Hepsi';
 
   ngOnInit() {
-    this.openDataService.getBloodGroups().toPromise().then((result) => {
+    this.openDataService.bloodGroups.toPromise().then((result) => {
       this.bloodGroups = result;
     });
     this.getRequests();

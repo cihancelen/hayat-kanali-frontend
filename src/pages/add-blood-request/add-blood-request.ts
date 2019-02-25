@@ -56,14 +56,16 @@ export class AddBloodRequestPage implements OnInit {
 
   selectPatient() {
     this.selectedPatient = this.patients.find(x => x.id == this.p);
+
+    this.hospitalService.getRelativeByRelativeId(this.selectedPatient.relativeId).subscribe(result =>{
+      this.selectedPatient.relative = result;
+    })
   }
 
   addBloodRequest() {
     this.isSubmit = true;
 
     if (this.addBloodRequestForm.valid) {
-      this.hospital.cityId_district = `${this.hospital.cityId}_${this.hospital.district}`;
-
       var data = {
         patient: this.selectedPatient,
         unitQuantity: this.unitQuantity,

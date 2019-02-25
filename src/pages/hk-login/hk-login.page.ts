@@ -10,6 +10,7 @@ import { DefaultUserDashboardPage } from '../default-user-dashboard/default-user
 import { HomePage } from '../home/home';
 import { patterns } from '../../classes/regex-pattern';
 import { HKSingupPage } from '../hk-signup/hk-signup.page';
+import { BloodRequestListPage } from '../blood-request-list/blood-request-list';
 
 @Component({
   templateUrl: 'hk-login.page.html',
@@ -89,6 +90,10 @@ export class HKLoginPage implements OnInit {
 
   routeSignUp() {
     this.navCtrl.setRoot(HKSingupPage);
+  }
+
+  routeDefaultPage(){
+    this.navCtrl.setRoot(BloodRequestListPage);
   }
 
 }

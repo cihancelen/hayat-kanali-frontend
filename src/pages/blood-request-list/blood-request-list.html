@@ -40,12 +40,11 @@
       </ion-col>
     </ion-row>
 
-
     <ion-row>
       <ion-col no-padding col-lg-4 col-md-6 col-12 *ngFor="let request of filtered_requests | activePipe: {isActive: true}">
         <ion-card (click)="goToDetail(request)" class="cursor-pointer">
           <ion-card-header class="bg-primary text-white">
-            <div class="font-125" float-left>{{ request.description }}</div>
+            <div class="font-125" float-left>{{ request.description.length > 25 ? request.description.substr(0,20) + '...' : request.description }}</div>
             <div class="font-125 bold" float-right>{{ request.patient.bloodGroup }}</div>
           </ion-card-header>
           <ion-card-content no-padding>

@@ -55,6 +55,7 @@ import { DefaultUserRequestDetailPage } from '../default-user-request-detail/def
 import { BloodRequestDataService } from '../services/blood-request-data.service';
 import { HKHospitalLogin } from '../pages/hk-hospital-login/hk-hospital-login.page';
 import { RequestDetailPage } from '../pages/request-detail/request-detail.page';
+import {NgxMaskIonicModule} from 'ngx-mask-ionic'
 
 @NgModule({
   declarations: [
@@ -100,7 +101,8 @@ import { RequestDetailPage } from '../pages/request-detail/request-detail.page';
     AngularFireFunctionsModule,
     AngularFirestoreModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskIonicModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

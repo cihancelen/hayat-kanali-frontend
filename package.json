@@ -45,6 +45,8 @@
     "firebase-functions": "^2.1.0",
     "ionic-angular": "3.9.2",
     "ionicons": "3.0.0",
+    "ngx-mask": "^7.3.6",
+    "ngx-mask-ionic": "^1.1.2",
     "rxjs": "^6.3.3",
     "rxjs-compat": "^6.3.3",
     "sw-toolbox": "3.6.0",

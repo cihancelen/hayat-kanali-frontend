@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { patterns } from '../../classes/regex-pattern';
-import { NavController, ModalController } from 'ionic-angular';
+import { NavController, ModalController, ViewController } from 'ionic-angular';
 import { HKLoginPage } from '../hk-login/hk-login.page';
 import { HttpService } from '../../services/http.service';
 import { OpenDataService } from '../../services/open.data.service';
 import { ParamsModal } from '../params-modal/params.modal';
 import { DefaultUserDashboardPage } from '../default-user-dashboard/default-user-dashboard';
+import { UserService } from '../../services/user.service';
 
 @Component({
   templateUrl: 'hk-signup.page.html',
@@ -31,7 +32,9 @@ export class HKSingupPage implements OnInit {
     private navCtrl: NavController,
     private httpService: HttpService,
     private openDataService: OpenDataService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private userService: UserService,
+    private viewCtrl: ViewController
   ) { }
 
   signupForm: FormGroup;
@@ -65,15 +68,13 @@ export class HKSingupPage implements OnInit {
 
       this.httpService.register(obj).toPromise().then((result) => {
 
-        this.modalCtrl.create(ParamsModal, result, { enableBackdropDismiss: false }).present().then(() => {
+        const modal = this.modalCtrl.create(ParamsModal, result, { enableBackdropDismiss: false }).present().then(() => {
           this.httpService.login(obj.email, obj.password, 'default-user').toPromise().then(result => {
 
-            localStorage.setItem('user-info', JSON.stringify(result));
+            localStorage.setItem('token', JSON.stringify(result));
 
-            this.navCtrl.setRoot(DefaultUserDashboardPage);
-          })
+          });
         });
-
       });
     }
   }

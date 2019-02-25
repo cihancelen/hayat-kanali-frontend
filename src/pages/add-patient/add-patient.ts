@@ -50,8 +50,8 @@ export class AddPatientPage implements OnInit {
   };
   
 
-  ngOnInit() {
-    this.openDataService.getBloodGroups().subscribe(data =>{
+  ngOnInit() {   
+    this.openDataService.bloodGroups.subscribe(data =>{
       this.bloodGroups = data;
     });
 

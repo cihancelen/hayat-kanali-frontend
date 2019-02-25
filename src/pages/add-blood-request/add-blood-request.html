@@ -24,7 +24,7 @@
             <ion-label floating>Hasta</ion-label>
             <ion-select formControlName="patient" (ionChange)="selectPatient(p)" [(ngModel)]="p" class="border-bottom" cancelText="İptal" okText="Tamam">
               <ion-option selected value="0" disabled>Lütfen hastayı seçiniz.</ion-option>
-              <ion-option *ngFor="let patient of patients" value="{{ patient.id }}">{{ patient.name }}</ion-option>
+              <ion-option *ngFor="let patient of patients" value="{{ patient.id }}">{{ patient.name }} {{ patient.surname }}</ion-option>
             </ion-select>
           </ion-item>
 

@@ -8,7 +8,7 @@ export class BloodRequestDataService {
     constructor(
         private firebase: AngularFireDatabase
     ) {
-        this.getBloodRequests();
+        // this.getBloodRequests();
     }
 
     private bloodRequestsSource = new BehaviorSubject<Array<any>>([]);
@@ -18,6 +18,8 @@ export class BloodRequestDataService {
 
 
     private getBloodRequests(): void {
+        if (!this.user_info) return;
+        
         this.firebase.database.ref('blood-requests').orderByChild('hospital/cityId').equalTo(this.user_info.cityId)
             .on('value', (result) => {
 
@@ -36,8 +38,8 @@ export class BloodRequestDataService {
     }
 
     isUserDonation() {
-        this.bloodRequests.subscribe((request) =>{
-            request.forEach(elem =>{
+        this.bloodRequests.subscribe((request) => {
+            request.forEach(elem => {
                 console.log(elem);
             })
         });

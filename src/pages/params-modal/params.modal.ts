@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OpenDataService } from '../../services/open.data.service';
 import { districtAndCities } from '../../classes/district-and-cities';
-import { NavParams, ViewController } from 'ionic-angular';
+import { NavParams, ViewController, NavController } from 'ionic-angular';
 import { UserService } from '../../services/user.service';
+import { DefaultUserDashboardPage } from '../default-user-dashboard/default-user-dashboard';
 
 @Component({
   selector: 'params-modal',
@@ -17,7 +18,8 @@ export class ParamsModal implements OnInit {
     private openDataService: OpenDataService,
     private navParams: NavParams,
     private userService: UserService,
-    private viewCtrl: ViewController
+    private viewCtrl: ViewController,
+    private navCtrl: NavController
   ) { }
 
   isSubmit: boolean = false;
@@ -28,9 +30,9 @@ export class ParamsModal implements OnInit {
   districtByCity: Array<any> = [];
 
   ngOnInit() {
-    this.openDataService.getBloodGroups().toPromise().then((result) => {
+    this.openDataService.bloodGroups.subscribe((result) => {
       this.bloodGroups = result;
-    });
+    })
 
     this.paramsForm = this.formBuilder.group({
       'identity': ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
@@ -57,16 +59,19 @@ export class ParamsModal implements OnInit {
         identificationNo: this.paramsForm.value.identity,
         phone: this.paramsForm.value.phone,
         bloodGroupId: this.paramsForm.value.bloodGroupId,
-        usingSmokeAndAlcohol: this.paramsForm.value.usingSmokeAndAlcohol,
+        usingSmokeAndAlcohol: !this.paramsForm.value.usingSmokeAndAlcohol ? false: this.paramsForm.value.usingSmokeAndAlcohol,
         lastBloodDonation: this.paramsForm.value.lastBloodDonation,
         cityId: this.paramsForm.value.cityId,
         district: this.paramsForm.value.district
       };
 
-      this.userService.updateUserParams(obj).toPromise().then((result) =>{
+      this.userService.updateUserParams(obj).toPromise().then((result) => {
+        console.log(result);
         localStorage.setItem('user-info', JSON.stringify(result));
-        
+
         this.viewCtrl.dismiss();
+
+        this.navCtrl.setRoot(DefaultUserDashboardPage);
       });
     }
   }

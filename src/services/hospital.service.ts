@@ -9,15 +9,15 @@ export class HospitalService {
         private httpService: HttpService
     ) { }
 
-    getHospitalInfo(hospital){
+    getHospitalInfo(hospital) {
         return this.httpService.post('hospital/hospitalInfo', hospital);
     }
 
-    addClinic(clinic){
+    addClinic(clinic) {
         return this.httpService.post('clinic/addClinic', clinic);
     }
 
-    addEmployee(employee){
+    addEmployee(employee) {
         return this.httpService.post('employee/addEmployee', employee);
     }
 
@@ -29,11 +29,15 @@ export class HospitalService {
         return this.httpService.get('hospital/' + hospitalId);
     }
 
-    addPatient(patient): Observable<any>{
+    addPatient(patient): Observable<any> {
         return this.httpService.post('patient/addPatient', patient);
     }
 
-    addRelative(relative): Observable<any>{
+    addRelative(relative): Observable<any> {
         return this.httpService.post('patient/addRelative', relative);
+    }
+
+    getRelativeByRelativeId(relativeId): Observable<any> {
+        return this.httpService.get(`patient/getRelativeByRelativeId/${relativeId}`);
     }
 }

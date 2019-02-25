@@ -35,7 +35,7 @@
             </div>
 
             <div class="wrap-input100 validate-input">
-              <input type="text" class="input100" style="position: absolute"
+              <input tabindex="-1" type="text" class="input100" style="position: absolute"
                 placeholder="{{ !sf.birthday.valid ? 'Doğum Tarihi' : '' }}">
               <ion-datetime required #datetime max="{{maxYear}}" class="input100" cancelText="İptal"
                 formControlName="birthday" doneText="Tamam" displayFormat="DD MMMM YYYY"></ion-datetime>
