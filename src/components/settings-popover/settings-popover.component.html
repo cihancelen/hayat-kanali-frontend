@@ -1,0 +1,23 @@
+<ion-list>
+    <ion-item padding-left>
+        <ion-label floating>Kan grubunuz</ion-label>
+        <ion-input readonly [(ngModel)]="user_info.bloodGroup"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label floating>İl</ion-label>
+        <ion-select [(ngModel)]="user_info.cityId" okText="Tamam" cancelText="İptal">
+            <ion-option *ngFor="let city of cities" [value]="city.plaka">{{ city.il }}</ion-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item>
+        <ion-label floating>İlçe</ion-label>
+        <ion-select [(ngModel)]="user_info.district" okText="Tamam" cancelText="İptal">
+            <ion-option *ngFor="let ilce of findDistricts" [value]="ilce">{{ ilce }}</ion-option>
+        </ion-select>
+    </ion-item>
+
+    <button (click)="updateUserInfo()" ion-button block class="bg-primary text-white"
+        [disabled]="!user_info.cityId || !user_info.district">Güncelle</button>
+</ion-list>

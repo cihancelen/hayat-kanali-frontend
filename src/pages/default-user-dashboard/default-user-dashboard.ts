@@ -72,7 +72,7 @@ export class DefaultUserDashboardPage implements OnInit {
 
           var isHaveUser = converted_arr.some(x => x == this.user_info.id);
 
-          if (!isHaveUser) {
+          if (!isHaveUser && current_value.hospital.district === this.user_info.district) {
             this.localNotifications.schedule({
               id: (new Date().getDate()),
               title: 'Hayat Kanalı - Kan Talebi',

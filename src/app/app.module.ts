@@ -56,6 +56,7 @@ import { BloodRequestDataService } from '../services/blood-request-data.service'
 import { HKHospitalLogin } from '../pages/hk-hospital-login/hk-hospital-login.page';
 import { RequestDetailPage } from '../pages/request-detail/request-detail.page';
 import {NgxMaskIonicModule} from 'ngx-mask-ionic'
+import { SettingPopoverComponent } from '../components/settings-popover/setting-popover.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import {NgxMaskIonicModule} from 'ngx-mask-ionic'
     UserRequestPipe,
     DefaultUserRequestDetailPage,
     HKHospitalLogin,
-    RequestDetailPage
+    RequestDetailPage,
+    SettingPopoverComponent
   ],
   imports: [
     BrowserModule,
@@ -130,7 +132,8 @@ import {NgxMaskIonicModule} from 'ngx-mask-ionic'
     UserComingListPage,
     DefaultUserRequestDetailPage,
     HKHospitalLogin,
-    RequestDetailPage
+    RequestDetailPage,
+    SettingPopoverComponent
   ],
   providers: [
     StatusBar,

@@ -8,69 +8,97 @@
 
 <ion-content class="bg-light" padding-top margin-top>
 
-  <ion-grid>
-      <ion-row>
-        <ion-card no-padding col-12 col-md-8 col-lg-6 offset-0 offset-md-2 offset-lg-3>
-            <ion-card-header class="bg-primary text-white">
-                <div class="font-125" float-left>{{ request.patient.name }} {{ request.patient.surname }}</div>
-                <div class="font-125" float-right>{{ request.unitQuantity }} Ünite <span
-                        class="bold">{{ request.patient.bloodGroup }}</span></div>
-            </ion-card-header>
-    
-            <ion-card-content>
-                <ion-list no-margin style="border-bottom: none">
-                    <ion-row>
-                        <ion-col ion-item>
-                            <h3 text-center class="font-125">Kan Talep Formu</h3>
-                        </ion-col>
-                    </ion-row>
-    
-                    <ion-row>
-                        <ion-item col-6>
-                            <ion-label floating>Hasta adı</ion-label>
-                            <ion-input readonly [(ngModel)]="request.patient.name"></ion-input>
+    <ion-grid>
+        <ion-row>
+            <ion-card no-padding col-12 col-md-8 col-lg-6 offset-0 offset-md-2 offset-lg-3>
+                <ion-card-header class="bg-primary text-white">
+                    <div class="font-125" float-left>{{ request.patient.name }} {{ request.patient.surname }}</div>
+                    <div class="font-125" float-right>{{ request.unitQuantity }} Ünite <span
+                            class="bold">{{ request.patient.bloodGroup }}</span></div>
+                </ion-card-header>
+
+                <ion-card-content>
+                    <ion-list no-margin style="border-bottom: none">
+                        <ion-row>
+                            <ion-col ion-item>
+                                <h3 text-center class="font-125">Kan Talep Formu</h3>
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-row>
+                            <ion-item col-6>
+                                <ion-label floating>Hasta adı</ion-label>
+                                <ion-input readonly [(ngModel)]="request.patient.name"></ion-input>
+                            </ion-item>
+                            <ion-item col-6>
+                                <ion-label floating>Hasta soyadı</ion-label>
+                                <ion-input readonly [(ngModel)]="request.patient.surname"></ion-input>
+                            </ion-item>
+                        </ion-row>
+
+                        <ion-item>
+                            <ion-label floating>Hastane Adı</ion-label>
+                            <ion-input readonly [(ngModel)]="request.hospital.name"></ion-input>
                         </ion-item>
-                        <ion-item col-6>
-                            <ion-label floating>Hasta soyadı</ion-label>
-                            <ion-input readonly [(ngModel)]="request.patient.surname"></ion-input>
+
+                        <ion-item>
+                            <ion-label floating>Hastane Telefonu</ion-label>
+                            <ion-input readonly [(ngModel)]="request.hospital.phone"></ion-input>
                         </ion-item>
-                    </ion-row>
-    
-                    <ion-item>
-                        <ion-label floating></ion-label>
-                        <ion-input readonly [(ngModel)]="request.patient.phone"></ion-input>
-                    </ion-item>
-    
-                    <ion-item>
-                        <ion-label floating>Açıklama</ion-label>
-                        <ion-textarea readonly rows="3" [(ngModel)]="request.description"></ion-textarea>
-                    </ion-item>
-    
-                    <ion-row>
-                        <ion-item col-4>
-                            <ion-label floating>Beklenilen Kan</ion-label>
-                            <ion-input readonly [(ngModel)]="request.waitingUnit"></ion-input>
+
+                        <ion-item>
+                            <ion-label floating>Açıklama</ion-label>
+                            <ion-textarea readonly rows="3" [(ngModel)]="request.description"></ion-textarea>
                         </ion-item>
-    
-                        <ion-item col-4>
-                            <ion-label floating>Temin Edilen Kan</ion-label>
-                            <ion-input readonly [(ngModel)]="request.suppliedUnit"></ion-input>
-                        </ion-item>
-    
-                        <ion-item col-4>
-                            <ion-label floating>Ünite Sayısı</ion-label>
-                            <ion-input readonly [(ngModel)]="request.unitQuantity"></ion-input>
-                        </ion-item>
-                    </ion-row>
-    
-                    <button ion-button float-right margin-top margin-bottom [disabled]="isDisabled"
-                        (click)="isClick ? cancel() : coming()">{{ isClick ? 'İptal Et' : 'Geliyorum' }}</button>
-    
-                </ion-list>
-    
-            </ion-card-content>
-        </ion-card>
-      </ion-row>
-  </ion-grid>
+
+                        <ion-row>
+                            <ion-item col-4>
+                                <ion-label floating>Beklenilen Kan</ion-label>
+                                <ion-input readonly [(ngModel)]="request.waitingUnit"></ion-input>
+                            </ion-item>
+
+                            <ion-item col-4>
+                                <ion-label floating>Temin Edilen Kan</ion-label>
+                                <ion-input readonly [(ngModel)]="request.suppliedUnit"></ion-input>
+                            </ion-item>
+
+                            <ion-item col-4>
+                                <ion-label floating>Ünite Sayısı</ion-label>
+                                <ion-input readonly [(ngModel)]="request.unitQuantity"></ion-input>
+                            </ion-item>
+                        </ion-row>
+
+                        <ion-row>
+                            <ion-col ion-item>
+                                <h3 text-center class="font-125">Hasta yakını bilgileri</h3>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-item col-6>
+                                <ion-label floating>Ad</ion-label>
+                                <ion-input readonly [(ngModel)]="request.patient.relative.name"></ion-input>
+                            </ion-item>
+                            <ion-item col-6>
+                                <ion-label floating>Ad</ion-label>
+                                <ion-input readonly [(ngModel)]="request.patient.relative.surname"></ion-input>
+                            </ion-item>
+                        </ion-row>
+
+                        <ion-row>
+                            <ion-item>
+                                <ion-label floating>Telefon Numarası</ion-label>
+                                <ion-input readonly [(ngModel)]="request.patient.relative.phone"></ion-input>
+                            </ion-item>
+                        </ion-row>
+
+                        <button ion-button float-right margin-top margin-bottom [disabled]="isDisabled"
+                            (click)="isClick ? cancel() : coming()">{{ isClick ? 'İptal Et' : 'Geliyorum' }}</button>
+
+                    </ion-list>
+
+                </ion-card-content>
+            </ion-card>
+        </ion-row>
+    </ion-grid>
 
 </ion-content>

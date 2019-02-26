@@ -34,7 +34,17 @@
                                 </ion-item>
                             </ion-row>
 
-                            <!-- Buraya hasta yakını bilgleri gelecek!!!!! -->
+                            <ion-row>
+                                <ion-col ion-item col-12>
+                                    <ion-label floating>Hastane Adı</ion-label>
+                                    <ion-input readonly [(ngModel)]="request.hospital.name"></ion-input>
+                                </ion-col>
+
+                                <ion-col ion-item col-12>
+                                    <ion-label floating>Telefon Numarası</ion-label>
+                                    <ion-input readonly [(ngModel)]="request.hospital.phone"></ion-input>
+                                </ion-col>
+                            </ion-row>
 
                             <ion-item>
                                 <ion-label floating>Açıklama</ion-label>
